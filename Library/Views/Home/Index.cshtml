@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Biblioteca";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1>Biblioteca Universitaria</h1>
+        <p>¡Bienvenido! Escriba el libro que desee buscar para obtener un préstamo por tres días.</p>
+        <div class="vertical-space"></div>
+        <form role="search">
+            <div class="form-group col-lg-12 center-block">
+                <input type="text" class="form-control input-lg" placeholder="Escribir título o autor del libro..." autofocus>
+            </div>
+            <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-search"></span> Buscar </button>
+        </form>      
+    </div>
+</div>

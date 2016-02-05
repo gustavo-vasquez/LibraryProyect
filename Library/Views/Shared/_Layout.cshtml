@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="university.ico" rel="icon" type="image/x-icon" />
+    @Styles.Render("~/Content/bootstrap.paper.min.css")
+    @Styles.Render("~/Content/general/layout.css")    
+</head>
+
+<body class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")" title="Biblioteca Universitaria"><img src="~/Images/library.png" class="library" /></a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-effect" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Mapa<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Acerca de</a></li>
+                    <li><a href="#">Índice de libros</a></li>
+                    <li><a href="#">Registrarse</a></li>
+                </ul>
+                <form class="navbar-form navbar-right nav" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm" placeholder="Email"> |
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm" placeholder="Contraseña">
+                    </div>
+                    <div class="checkbox">
+                        <label class="small">
+                            <input type="checkbox"> Recordarme &nbsp;
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-default">Iniciar sesión</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content">
+        @RenderBody()
+    </div>
+
+    <div id="footer">
+        <hr />
+        © Biblioteca Universitaria 2016. Todos los derechos reservados
+    </div>
+
+    @Scripts.Render("~/Scripts/jquery-1.9.1.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+</body>
+</html>

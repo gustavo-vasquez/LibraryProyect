@@ -1,0 +1,17 @@
+﻿.container {
+    min-height: 600px;
+}
+
+.library {    
+    width: 40px;
+    height: 40px;
+    margin-top: -9px;
+}
+
+.vertical-space {
+    height: 50px;
+}
+
+.navbar-effect ul li:hover {
+    text-decoration: underline;
+}
