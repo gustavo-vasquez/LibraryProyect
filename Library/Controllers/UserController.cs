@@ -6,34 +6,34 @@ using System.Web.Mvc;
 
 namespace Library.Controllers
 {
-    public class HomeController : Controller
+    public class UserController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /User/
 
-        public ActionResult Index()
+        public ActionResult Register()
         {
             return View();
         }
 
-        public ActionResult Map()
-        {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            return View();
-        }
-
-        public ActionResult Books()
-        {
-            return View();
-        }
-
-        public ActionResult BookDetails()
+        public ActionResult Login()
         {
             return PartialView();
+        }
+
+        public ActionResult Admin()
+        {
+            return View();
+        }
+
+        public ActionResult Employee()
+        {
+            return View();
+        }
+
+        public ActionResult Student()
+        {
+            return View();
         }
 
     }
