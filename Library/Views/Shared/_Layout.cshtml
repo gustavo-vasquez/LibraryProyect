@@ -6,9 +6,7 @@
     <title>@ViewBag.Title</title>
     <link href="university.ico" rel="icon" type="image/x-icon" />
     @Styles.Render("~/Content/bootstrap.paper.min.css")
-    @Styles.Render("~/Content/general/layout.css")    
-    @Scripts.Render("~/Scripts/jquery-1.9.1.min.js")
-    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Styles.Render("~/Content/general/layout.css")
 </head>
 
 <body class="container">
@@ -27,7 +25,7 @@
             <div class="collapse navbar-collapse navbar-effect" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="@Url.Action("Map","Home")">Mapa<span class="sr-only">(current)</span></a></li>
-                    <li><a href="@Url.Action("About","Home")">Acerca de</a></li>
+                    <li><a href="@Url.Action("About", "Home")">Acerca de</a></li>
                     <li><a href="@Url.Action("Books","Home")">Índice de libros</a></li>
                     <li><a href="@Url.Action("Register","User")">Registrarse</a></li>
                 </ul>
@@ -39,13 +37,15 @@
     <div id="content">
         @RenderBody()
     </div>
-    <div class="text-right"><a href="#top" class="btn btn-link">Ir arriba</a></div>
+    <div id="goTop" class="text-right"><a href="#top" class="btn btn-link">Ir arriba</a></div>
 
     <div id="footer">
         <hr />
         © Biblioteca Universitaria 2016. Todos los derechos reservados
     </div>
 
-
+    @Scripts.Render("~/Scripts/jquery-1.9.1.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/general/layout.js")
 </body>
 </html>

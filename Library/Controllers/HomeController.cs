@@ -22,7 +22,8 @@ namespace Library.Controllers
         }
 
         public ActionResult About()
-        {
+        {                        
+            //throw new HttpException(400, "error de bad request");
             return View();
         }
 

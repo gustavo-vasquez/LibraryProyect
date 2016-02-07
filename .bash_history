@@ -13,3 +13,8 @@ git checkout -b initial
 git push library initial
 git checkout master
 exit
+git status
+git add .
+git commit -m "Creadas algunas vistas y paginas de error"
+git push library master
+exit

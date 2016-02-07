@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Scripts.Render("~/Scripts/user/register.js")
+
 <div class="container-fluid">
     <h2>Registrate ingresando tus datos</h2>
 
@@ -12,104 +14,112 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">Rango:</label>
                 <div class="col-lg-10">
-                    <select class="form-control" id="select">
-                        <option value="0" selected>Elegir tipo de usuario...</option>
+                    <select class="form-control" id="slctUser" onchange="selectItem();">          
+                        <option value="0" selected>Elija tipo de usuario...</option>              
                         <option value="1">Estudiante</option>
                         <option value="2">Empleado</option>
-                        <option value="3">Administrador</option>                        
+                        <option value="3">Administrador</option>                     
                     </select>
                     <span class="help-block">NOTA: Todos los campos son obligatorios.</span>
                 </div>                
             </div>
             <div class="vertical-space"></div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Nombre:</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su nombre..." autocomplete="off">
+            <div id="formFields" class="hide">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Nombre:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su nombre..." autocomplete="off">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Apellido:</label>
-                <div class="col-lg-10">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Ingrese su apellido..." autocomplete="off">                    
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Apellido:</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Ingrese su apellido..." autocomplete="off">
+                    </div>
                 </div>
-            </div>            
-            <div class="form-group">
-                <label class="col-lg-2 control-label">DNI:</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su dni..." autocomplete="off">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">DNI:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su dni..." autocomplete="off">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Fecha de nacimiento:</label>
-                <div class="col-lg-10 form-horizontal form-inline">
-                    <input type="text" class="form-control" style="width: 80px;" id="inputEmail" placeholder="DD" autocomplete="off">
-                    <input type="text" class="form-control" style="width: 80px;" placeholder="MM" autocomplete="off">
-                    <input type="text" class="form-control" style="width: 80px;" placeholder="AAAA" autocomplete="off">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Fecha de nacimiento:</label>
+                    <div class="col-lg-10 form-horizontal form-inline">
+                        <input type="text" class="form-control" maxlength="2" style="width: 80px;" placeholder="DD" autocomplete="off">
+                        <input type="text" class="form-control" maxlength="2" style="width: 80px;" placeholder="MM" autocomplete="off">
+                        <input type="text" class="form-control" maxlength="4" style="width: 80px;" placeholder="AAAA" autocomplete="off">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Teléfono:</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su teléfono..." autocomplete="off">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Teléfono:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su teléfono..." autocomplete="off">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Email:</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su email..." autocomplete="off">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Email:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su email..." autocomplete="off">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Contraseña:</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su contraseña..." autocomplete="off">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Contraseña:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su contraseña..." autocomplete="off">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Carrera:</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su carrera universitaria..." autocomplete="off">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Estado</label>
-                <div class="col-lg-10">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                            Nuevo ingresante
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                            Estudiante recibido
-                        </label>
+                <div id="divCareer" class="form-group">
+                    <label class="col-lg-2 control-label">Carrera:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su carrera universitaria..." autocomplete="off">
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Agrupación política:</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su agrupación política..." autocomplete="off">
+                <div id="divCondition" class="form-group">
+                    <label class="col-lg-2 control-label">Condición:</label>
+                    <div class="col-lg-10">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                Nuevo ingresante
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                Estudiante recibido
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Validación de captcha:</label>
-                <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="textArea"></textarea>
-                    <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                <div id="divAntique" class="form-group">
+                    <label class="col-lg-2 control-label">Antigüedad:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese sus años de antigüedad..." autocomplete="off">
+                    </div>
                 </div>
-            </div>            
-            
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="reset" class="btn btn-default">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                <div id="divPolitic" class="form-group">
+                    <label class="col-lg-2 control-label">Agrupación política:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su agrupación política..." autocomplete="off">
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Validación de captcha:</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="3" id="textArea"></textarea>
+                        <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </div>
+                </div>
+            </div>          
         </fieldset>
     </form>    
 </div>

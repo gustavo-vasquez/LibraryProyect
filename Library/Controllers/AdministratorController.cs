@@ -6,33 +6,28 @@ using System.Web.Mvc;
 
 namespace Library.Controllers
 {
-    public class UserController : Controller
+    public class AdministratorController : Controller
     {
         //
-        // GET: /User/
+        // GET: /Administrator/
 
-        public ActionResult Register()
+        public ActionResult Create()
         {
             return View();
         }
 
-        public ActionResult Login()
-        {
-            return PartialView();
-        }
-
-        public ActionResult Admin()
+        public ActionResult Edit()
         {
             return View();
         }
 
-        public ActionResult Employee()
+        public ActionResult Delete()
         {
             return View();
         }
 
-        public ActionResult Student()
-        {            
+        public ActionResult Historical()
+        {
             return View();
         }
 
