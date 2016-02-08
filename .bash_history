@@ -18,3 +18,10 @@ git add .
 git commit -m "Creadas algunas vistas y paginas de error"
 git push library master
 exit
+git status
+git add .
+git status
+git comit -m "Creados los controllers para los distintos usuarios"
+git commit -m "Creados los controllers para los distintos usuarios"
+git push library master
+exit

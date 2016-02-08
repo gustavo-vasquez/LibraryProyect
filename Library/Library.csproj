@@ -132,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GridTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,7 @@
     <Content Include="Images\mapa_unlam.jpg" />
     <Content Include="Scripts\general\layout.js" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
+    <Content Include="Scripts\user\profile.js" />
     <Content Include="Scripts\user\register.js" />
     <Content Include="university.ico" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -186,10 +188,14 @@
     <Content Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\InternalServer.cshtml" />
+    <Content Include="Views\Student\Profile.cshtml" />
+    <Content Include="Views\Student\Loans.cshtml" />
+    <Content Include="Views\Student\Sanctions.cshtml" />
+    <Content Include="Views\Employee\Loans_Granted.cshtml" />
+    <Content Include="Views\Employee\Applied_Sanctions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

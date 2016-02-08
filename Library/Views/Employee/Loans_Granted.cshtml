@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Library.Models.GridTest>
+
+@{
+    ViewBag.Title = "Loans_Granted";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "grillaFutbol");
+}
+
+<div class="container-fluid">
+    <h2>Préstamos otorgados</h2>
+
+    <div class="col-lg-6">
+        <select class="form-control" id="select">
+            <option>Más recientes primero</option>
+            <option>Más antiguos primero</option>
+        </select>
+    </div>
+    <div class="vertical-space"></div>
+
+    <style>
+        .table th {
+            text-align: center;
+        }
+    </style>
+
+    <div class="col-lg-7">
+        @grilla.GetHtml(
+        htmlAttributes: new { id = "grillaFutbol" },
+        tableStyle: "table table-hover active table-bordered text-center",
+        headerStyle: "success",
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.All,
+        firstText: "<< Primero",
+        previousText: "< Anterior",
+        nextText: "Siguiente >",
+        lastText: "Último >>",
+
+        columns: new[]
+        {
+            grilla.Column("posicion", canSort: false, header: "Posiciones"),
+            grilla.Column("equipo", canSort: false, header: "Equipos"),
+        })
+    </div>
+</div>
