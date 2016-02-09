@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Library.Models.GridTest>
+
+@{
+    ViewBag.Title = "ControlPanel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "grillaFutbol");
+}
+
+<div class="container-fluid">
+    <h3 class="text-center text-uppercase">Libros existentes en la biblioteca</h3>    
+    <div class="vertical-space"></div>
+    
+    <div class="row">
+        <button class="btn btn-success col-lg-2"><span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir nuevo libro</button>                
+        <div class="well well-sm col-lg-1 col-lg-offset-4" style="font-weight: normal;">Ordenar por: </div>
+        <div class="col-lg-3">
+            <select id="select" class="form-control">
+                <option>Más recientes primero</option>
+                <option>Más antiguos primero</option>
+            </select>
+        </div>
+        <ul class="breadcrumb col-lg-2 text-center">
+            <li class="text-primary">Total libros: 100</li>
+        </ul>
+    </div>
+    
+    <hr />
+
+    <div class="container-fluid">
+        <style>
+            .table th {
+                text-align: center;
+            }
+        </style>
+
+        <div class="col-lg-7">
+            @grilla.GetHtml(
+        htmlAttributes: new { id = "grillaFutbol" },
+        tableStyle: "table table-hover active table-bordered text-center",
+        headerStyle: "success",
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.All,
+        firstText: "<< Primero",
+        previousText: "< Anterior",
+        nextText: "Siguiente >",
+        lastText: "Último >>",
+
+        columns: new[]
+        {
+            grilla.Column("posicion", canSort: false, header: "Posiciones"),
+            grilla.Column("equipo", canSort: false, header: "Equipos"),
+            grilla.Column(
+                header: "Acciones",
+                format: @<text>
+                                <a href="#"><span class="glyphicon glyphicon-pencil"></span> Editar</a>&nbsp;&nbsp;&nbsp;
+                                <a href="#"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>
+                        </text>)
+        })
+        </div>
+    </div>
+
+</div>

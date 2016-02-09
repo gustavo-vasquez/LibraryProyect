@@ -25,3 +25,7 @@ git comit -m "Creados los controllers para los distintos usuarios"
 git commit -m "Creados los controllers para los distintos usuarios"
 git push library master
 exit
+git add .
+git commit -m "Creadas mas vistas (faltan las vistas del administrador)"
+git push library master
+exit

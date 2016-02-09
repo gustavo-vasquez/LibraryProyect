@@ -140,6 +140,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\general\mapView.css" />
+    <Content Include="Images\book-20clip.png" />
     <Content Include="Images\books.jpg" />
     <Content Include="Images\mapa_unlam.jpg" />
     <Content Include="Scripts\general\layout.js" />
@@ -193,6 +194,9 @@
     <Content Include="Views\Student\Sanctions.cshtml" />
     <Content Include="Views\Employee\Loans_Granted.cshtml" />
     <Content Include="Views\Employee\Applied_Sanctions.cshtml" />
+    <Content Include="Views\Administrator\ControlPanel.cshtml" />
+    <Content Include="Views\Administrator\Create.cshtml" />
+    <Content Include="Views\Administrator\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
