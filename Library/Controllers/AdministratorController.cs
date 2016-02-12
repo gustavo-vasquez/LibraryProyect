@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Objects;
 
 using Library.Models;
+using Capa_Entidades;
+using Capa_Servicios;
 
 namespace Library.Controllers
 {
     public class AdministratorController : Controller
     {
+        static UserServices userService = new UserServices();
+
         //
         // GET: /Administrator/
 
@@ -45,6 +50,43 @@ namespace Library.Controllers
 
             return View(listado);
         }
+
+        public ActionResult RegisteredUsers()
+        {
+            var list = new SelectList(new[]
+                           {
+                               new { value = "recent", text = "Más recientes primero" },
+                               new { value = "first", text = "Más antiguos primero" },
+                               new { value = "AtoZ", text = "Apellido ascendente (A-Z)" },
+                               new { value = "ZtoA", text = "Apellido descendente (Z-A)" },
+                               new { value = "Administrator", text = "Administrador" },
+                               new { value = "Employee", text = "Empleado" },
+                               new { value = "Student", text = "Estudiante" },
+                           }, "value", "text", "recent");
+            ViewData["list"] = list;            
+
+            List<sp_ShowPersons_Result> listOfUsers = userService.ListOfPersons("recent");
+            return View(listOfUsers);
+        }
+
+        [HttpPost]
+        public ActionResult RegisteredUsers(string filterList)
+        {
+            var list = new SelectList(new[]
+                           {
+                               new { value = "recent", text = "Más recientes primero" },
+                               new { value = "first", text = "Más antiguos primero" },
+                               new { value = "AtoZ", text = "Apellido ascendente (A-Z)" },
+                               new { value = "ZtoA", text = "Apellido descendente (Z-A)" },
+                               new { value = "Administrator", text = "Administrador" },
+                               new { value = "Employee", text = "Empleado" },
+                               new { value = "Student", text = "Estudiante" },
+                           }, "value", "text", "recent");
+            ViewData["list"] = list;
+
+            List<sp_ShowPersons_Result> listOfUsers = userService.ListOfPersons(filterList);
+            return View(listOfUsers);
+        }        
 
     }
 }

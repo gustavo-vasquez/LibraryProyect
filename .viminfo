@@ -8,11 +8,12 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~Msle0~/\<ignored\>
+~Msle0~/\<name\>
 
 # Command Line History (newest to oldest):
 
 # Search String History (newest to oldest):
+? \<name\>
 ? \<ignored\>
 
 # Expression History (newest to oldest):
@@ -22,19 +23,39 @@
 # Input Line History (newest to oldest):
 
 # Registers:
-""1	CHAR	0
+""1	LINE	0
+	# Please adapt and uncomment the following linesname = Gustavo Vasquez
+	#	email = vasqu@GUSTAVO-PC.(none)
+"2	CHAR	0
+	:
+		
+"3	CHAR	0
 	
 	
+"-	CHAR	0
+	#
 
 # File marks:
-'0  2  0  ~/.git/MERGE_MSG
+'0  1  0  ~/.gitconfig
+'1  2  0  ~/.git/MERGE_MSG
 
 # Jumplist (newest first):
+-'  1  0  ~/.gitconfig
+-'  3  49  ~/.gitconfig
+-'  2  0  ~/.git/MERGE_MSG
+-'  6  35  ~/.git/MERGE_MSG
+-'  1  0  ~/.git/MERGE_MSG
 -'  2  0  ~/.git/MERGE_MSG
 -'  6  35  ~/.git/MERGE_MSG
 -'  1  0  ~/.git/MERGE_MSG
 
 # History of marks within files (newest to oldest):
+
+> ~/.gitconfig
+	"	1	0
+	.	3	0
+	+	3	48
+	+	3	0
 
 > ~/.git/MERGE_MSG
 	"	2	0

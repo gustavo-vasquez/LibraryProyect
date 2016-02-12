@@ -43,6 +43,10 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -50,6 +54,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -145,6 +150,7 @@
     <Content Include="Images\mapa_unlam.jpg" />
     <Content Include="Scripts\general\layout.js" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
+    <Content Include="Scripts\user\controlGrids.js" />
     <Content Include="Scripts\user\profile.js" />
     <Content Include="Scripts\user\register.js" />
     <Content Include="university.ico" />
@@ -197,6 +203,9 @@
     <Content Include="Views\Administrator\ControlPanel.cshtml" />
     <Content Include="Views\Administrator\Create.cshtml" />
     <Content Include="Views\Administrator\Edit.cshtml" />
+    <Content Include="Views\User\_Careers.cshtml" />
+    <Content Include="Views\User\_BirthDate.cshtml" />
+    <Content Include="Views\Administrator\RegisteredUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -209,6 +218,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Capa_Entidades\Capa_Entidades.csproj">
+      <Project>{32eaa9cc-2d0d-4a32-bf78-eea532a4a2b3}</Project>
+      <Name>Capa_Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capa_Servicios\Capa_Servicios.csproj">
+      <Project>{f1b3d50e-0f1d-4fa9-9d7b-4f2e92b58a9a}</Project>
+      <Name>Capa_Servicios</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

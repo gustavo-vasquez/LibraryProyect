@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibraryUniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdministratorID" />
+    </Key>
+    <Property Name="AdministratorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPerson" Type="int" Nullable="false" />
+    <Property Name="PoliticalGroup" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Salary" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Autor" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PublicationDate" Type="datetime" Nullable="false" />
+    <Property Name="Edition" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Subject" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Career">
+    <Key>
+      <PropertyRef Name="CareerID" />
+    </Key>
+    <Property Name="CareerID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Condition">
+    <Key>
+      <PropertyRef Name="ConditionID" />
+    </Key>
+    <Property Name="ConditionID" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPerson" Type="int" Nullable="false" />
+    <Property Name="Antique" Type="int" Nullable="false" />
+    <Property Name="Salary" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Loan">
+    <Key>
+      <PropertyRef Name="LoanID" />
+    </Key>
+    <Property Name="LoanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="IdStudent" Type="int" Nullable="false" />
+    <Property Name="IdEmployee" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DNI" Type="int" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+    <Property Name="Phone" Type="int" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sanction">
+    <Key>
+      <PropertyRef Name="SanctionID" />
+    </Key>
+    <Property Name="SanctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="IdBook" Type="int" Nullable="false" />
+    <Property Name="IdStudent" Type="int" Nullable="false" />
+    <Property Name="IdEmployee" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StockBook">
+    <Key>
+      <PropertyRef Name="IdBook" />
+    </Key>
+    <Property Name="IdBook" Type="int" Nullable="false" />
+    <Property Name="Stock" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPerson" Type="int" Nullable="false" />
+    <Property Name="Sanctioned" Type="bit" Nullable="false" />
+    <Property Name="IdCareer" Type="int" Nullable="false" />
+    <Property Name="IdCondition" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Administrator">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Administrator">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_IdEmployee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Loan">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_IdStudent">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Loan">
+        <PropertyRef Name="IdStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sanction_IdBook">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="Sanction" Type="Self.Sanction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Sanction">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sanction_IdEmployee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Sanction" Type="Self.Sanction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Sanction">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sanction_IdStudent">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Sanction" Type="Self.Sanction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Sanction">
+        <PropertyRef Name="IdStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockBook">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="StockBook" Type="Self.StockBook" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="StockBook">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_IdCareer">
+    <End Role="Career" Type="Self.Career" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Career">
+        <PropertyRef Name="CareerID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="IdCareer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_IdCondition">
+    <End Role="Condition" Type="Self.Condition" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condition">
+        <PropertyRef Name="ConditionID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="IdCondition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_IdPerson">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_RegisterStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="lastName" Type="varchar" Mode="In" />
+    <Parameter Name="dni" Type="int" Mode="In" />
+    <Parameter Name="birthDate" Type="datetime" Mode="In" />
+    <Parameter Name="phone" Type="int" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+    <Parameter Name="career" Type="int" Mode="In" />
+    <Parameter Name="condition" Type="char" Mode="In" />
+    <Parameter Name="salida" Type="bit" Mode="InOut" />
+  </Function>
+  <Function Name="sp_ShowPersons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="LibraryUniversityModelStoreContainer">
+    <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="Career" EntityType="Self.Career" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="Condition" EntityType="Self.Condition" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="Loan" EntityType="Self.Loan" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="Sanction" EntityType="Self.Sanction" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="StockBook" EntityType="Self.StockBook" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="Library" store:Type="Tables" />
+    <AssociationSet Name="FK_Administrator" Association="Self.FK_Administrator">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Administrator" EntitySet="Administrator" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee" Association="Self.FK_Employee">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_IdEmployee" Association="Self.FK_Loan_IdEmployee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Loan" EntitySet="Loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_IdStudent" Association="Self.FK_Loan_IdStudent">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Loan" EntitySet="Loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sanction_IdBook" Association="Self.FK_Sanction_IdBook">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="Sanction" EntitySet="Sanction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sanction_IdEmployee" Association="Self.FK_Sanction_IdEmployee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Sanction" EntitySet="Sanction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sanction_IdStudent" Association="Self.FK_Sanction_IdStudent">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Sanction" EntitySet="Sanction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockBook" Association="Self.FK_StockBook">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="StockBook" EntitySet="StockBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_IdCareer" Association="Self.FK_Student_IdCareer">
+      <End Role="Career" EntitySet="Career" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_IdCondition" Association="Self.FK_Student_IdCondition">
+      <End Role="Condition" EntitySet="Condition" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_IdPerson" Association="Self.FK_Student_IdPerson">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

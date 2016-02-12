@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibraryUniversityModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdministratorID" />
+    </Key>
+    <Property Name="AdministratorID" Type="Int32" Nullable="false" />
+    <Property Name="PoliticalGroup" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Administrator" FromRole="Administrator" ToRole="Person" />
+    <Property Name="IdPerson" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Person1" Relationship="LibraryUniversityModel.FK_Administrator1" FromRole="Administrator" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Autor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PublicationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Edition" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Sanctions" Relationship="Self.FK_Sanction_IdBook" FromRole="Book" ToRole="Sanction" />
+    <NavigationProperty Name="StockBook" Relationship="Self.FK_StockBook" FromRole="Book" ToRole="StockBook" />
+  </EntityType>
+  <EntityType Name="Career">
+    <Key>
+      <PropertyRef Name="CareerID" />
+    </Key>
+    <Property Name="CareerID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_IdCareer" FromRole="Career" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Condition">
+    <Key>
+      <PropertyRef Name="ConditionID" />
+    </Key>
+    <Property Name="ConditionID" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_IdCondition" FromRole="Condition" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="Antique" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Employee" FromRole="Employee" ToRole="Person" />
+    <NavigationProperty Name="Loans" Relationship="Self.FK_Loan_IdEmployee" FromRole="Employee" ToRole="Loan" />
+    <NavigationProperty Name="Sanctions" Relationship="Self.FK_Sanction_IdEmployee" FromRole="Employee" ToRole="Sanction" />
+    <Property Name="IdPerson" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Person1" Relationship="LibraryUniversityModel.FK_Employee1" FromRole="Employee" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Loan">
+    <Key>
+      <PropertyRef Name="LoanID" />
+    </Key>
+    <Property Name="LoanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdStudent" Type="Int32" Nullable="false" />
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Loan_IdEmployee" FromRole="Loan" ToRole="Employee" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Loan_IdStudent" FromRole="Loan" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DNI" Type="Int32" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Administrator" Relationship="Self.FK_Administrator" FromRole="Person" ToRole="Administrator" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Employee" FromRole="Person" ToRole="Employee" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_IdPerson" FromRole="Person" ToRole="Student" />
+    <NavigationProperty Name="Administrators" Relationship="LibraryUniversityModel.FK_Administrator1" FromRole="Person" ToRole="Administrator" />
+    <NavigationProperty Name="Employees" Relationship="LibraryUniversityModel.FK_Employee1" FromRole="Person" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Sanction">
+    <Key>
+      <PropertyRef Name="SanctionID" />
+    </Key>
+    <Property Name="SanctionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <Property Name="IdStudent" Type="Int32" Nullable="false" />
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_Sanction_IdBook" FromRole="Sanction" ToRole="Book" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Sanction_IdEmployee" FromRole="Sanction" ToRole="Employee" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Sanction_IdStudent" FromRole="Sanction" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="StockBook">
+    <Key>
+      <PropertyRef Name="IdBook" />
+    </Key>
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_StockBook" FromRole="StockBook" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPerson" Type="Int32" Nullable="false" />
+    <Property Name="Sanctioned" Type="Boolean" Nullable="false" />
+    <Property Name="IdCareer" Type="Int32" Nullable="false" />
+    <Property Name="IdCondition" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Career" Relationship="Self.FK_Student_IdCareer" FromRole="Student" ToRole="Career" />
+    <NavigationProperty Name="Condition" Relationship="Self.FK_Student_IdCondition" FromRole="Student" ToRole="Condition" />
+    <NavigationProperty Name="Loans" Relationship="Self.FK_Loan_IdStudent" FromRole="Student" ToRole="Loan" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Student_IdPerson" FromRole="Student" ToRole="Person" />
+    <NavigationProperty Name="Sanctions" Relationship="Self.FK_Sanction_IdStudent" FromRole="Student" ToRole="Sanction" />
+  </EntityType>
+  <Association Name="FK_Administrator">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Administrator">
+        <PropertyRef Name="AdministratorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sanction_IdBook">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="Sanction" Type="Self.Sanction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Sanction">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockBook">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="StockBook" Type="Self.StockBook" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="StockBook">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_IdCareer">
+    <End Role="Career" Type="Self.Career" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Career">
+        <PropertyRef Name="CareerID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="IdCareer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_IdCondition">
+    <End Role="Condition" Type="Self.Condition" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condition">
+        <PropertyRef Name="ConditionID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="IdCondition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_IdEmployee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Loan">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sanction_IdEmployee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Sanction" Type="Self.Sanction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Sanction">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_IdStudent">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Loan">
+        <PropertyRef Name="IdStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_IdPerson">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sanction_IdStudent">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Sanction" Type="Self.Sanction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Sanction">
+        <PropertyRef Name="IdStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LibraryUniversityEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Careers" EntityType="Self.Career" />
+    <EntitySet Name="Conditions" EntityType="Self.Condition" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Loans" EntityType="Self.Loan" />
+    <EntitySet Name="People" EntityType="Self.Person" />
+    <EntitySet Name="Sanctions" EntityType="Self.Sanction" />
+    <EntitySet Name="StockBooks" EntityType="Self.StockBook" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <AssociationSet Name="FK_Administrator" Association="Self.FK_Administrator">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Administrator" EntitySet="Administrators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sanction_IdBook" Association="Self.FK_Sanction_IdBook">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Sanction" EntitySet="Sanctions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockBook" Association="Self.FK_StockBook">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="StockBook" EntitySet="StockBooks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_IdCareer" Association="Self.FK_Student_IdCareer">
+      <End Role="Career" EntitySet="Careers" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_IdCondition" Association="Self.FK_Student_IdCondition">
+      <End Role="Condition" EntitySet="Conditions" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee" Association="Self.FK_Employee">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_IdEmployee" Association="Self.FK_Loan_IdEmployee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Loan" EntitySet="Loans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sanction_IdEmployee" Association="Self.FK_Sanction_IdEmployee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Sanction" EntitySet="Sanctions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_IdStudent" Association="Self.FK_Loan_IdStudent">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Loan" EntitySet="Loans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_IdPerson" Association="Self.FK_Student_IdPerson">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sanction_IdStudent" Association="Self.FK_Sanction_IdStudent">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Sanction" EntitySet="Sanctions" />
+    </AssociationSet>
+    <FunctionImport Name="sp_ShowPersons" ReturnType="Collection(LibraryUniversityModel.sp_ShowPersons_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <AssociationSet Name="FK_Administrator1" Association="LibraryUniversityModel.FK_Administrator1">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Administrator" EntitySet="Administrators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee1" Association="LibraryUniversityModel.FK_Employee1">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <FunctionImport Name="sp_RegisterStudent" ReturnType="Collection(String)">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="lastName" Mode="In" Type="String" />
+      <Parameter Name="dni" Mode="In" Type="Int32" />
+      <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="phone" Mode="In" Type="Int32" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="career" Mode="In" Type="Int32" />
+      <Parameter Name="condition" Mode="In" Type="String" />
+      <Parameter Name="salida" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_ShowPersons_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="DNI" Nullable="false" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="RegistrationDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Phone" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <Association Name="FK_Administrator1">
+    <End Type="LibraryUniversityModel.Person" Role="Person" Multiplicity="1" />
+    <End Type="LibraryUniversityModel.Administrator" Role="Administrator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Administrator">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee1">
+    <End Type="LibraryUniversityModel.Person" Role="Person" Multiplicity="1" />
+    <End Type="LibraryUniversityModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

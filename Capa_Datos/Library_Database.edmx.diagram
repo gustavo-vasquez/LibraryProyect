@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="67703a936dbe469d8a7c1ea3ccdcc99f" Name="Diagram1">
+        <EntityTypeShape EntityType="LibraryUniversityModel.Administrator" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Book" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Career" Width="1.5" PointX="3.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Condition" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Employee" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Loan" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Person" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Sanction" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.StockBook" Width="1.5" PointX="8.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Student" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Administrator" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Sanction_IdBook" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_StockBook" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Student_IdCareer" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Student_IdCondition" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Loan_IdEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Sanction_IdEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Loan_IdStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Student_IdPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Sanction_IdStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Administrator1" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Employee1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

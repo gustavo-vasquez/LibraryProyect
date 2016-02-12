@@ -23,7 +23,7 @@
                     <span class="help-block">NOTA: Todos los campos son obligatorios.</span>
                 </div>                
             </div>
-            <div class="vertical-space"></div>
+            
             <div id="formFields" class="hide">
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Nombre:</label>
@@ -40,17 +40,12 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label">DNI:</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su dni..." autocomplete="off">
+                        <input type="text" class="form-control" id="inputEmail" maxlength="8" placeholder="Ingrese su dni..." autocomplete="off">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Fecha de nacimiento:</label>
-                    <div class="col-lg-10 form-horizontal form-inline">
-                        <input type="text" class="form-control" maxlength="2" style="width: 80px;" placeholder="DD" autocomplete="off">
-                        <input type="text" class="form-control" maxlength="2" style="width: 80px;" placeholder="MM" autocomplete="off">
-                        <input type="text" class="form-control" maxlength="4" style="width: 80px;" placeholder="AAAA" autocomplete="off">
-                    </div>
-                </div>
+                
+                @{ Html.RenderPartial("_BirthDate"); }
+
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Teléfono:</label>
                     <div class="col-lg-10">
@@ -69,19 +64,8 @@
                         <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su contraseña..." autocomplete="off">
                     </div>
                 </div>
-
-                <div id="divCareer" class="form-group">
-                    <label class="col-lg-2 control-label">Carrera:</label>
-                    <div class="col-lg-10">
-                        <select class="form-control" id="select">
-                            <option value="0">Elegir carrera universitaria...</option>
-                            <option value="1">Repartidor de pizzas</option>
-                            <option value="2">Ladrón profesional</option>
-                            <option value="3">Estafador</option>
-                            <option value="4">Mafioso</option>
-                        </select>
-                    </div>
-                </div>
+                
+                @{ Html.RenderPartial("_Careers"); }                
 
                 <div id="divCondition" class="form-group">
                     <label class="col-lg-2 control-label">Condición:</label>

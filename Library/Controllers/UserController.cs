@@ -21,20 +21,14 @@ namespace Library.Controllers
             return PartialView();
         }
 
-        public ActionResult Admin()
-        {
-            return View();
-        }
-
-        public ActionResult Employee()
-        {
-            return View();
-        }
-
-        public ActionResult Student()
+        public ActionResult Careers()
         {            
-            return View();
+            return PartialView();
         }
 
+        public ActionResult BirthDate()
+        {
+            return PartialView();
+        }
     }
 }

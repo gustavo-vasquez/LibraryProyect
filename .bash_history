@@ -29,3 +29,10 @@ git add .
 git commit -m "Creadas mas vistas (faltan las vistas del administrador)"
 git push library master
 exit
+git add .
+git commit -m "Terminado todo el maquetado (Eso espero)"
+git config --global --edit
+git status
+git --config user.name
+git push library master
+exit

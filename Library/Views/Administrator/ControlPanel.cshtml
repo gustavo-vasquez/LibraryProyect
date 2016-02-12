@@ -6,13 +6,22 @@
     WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "grillaFutbol");
 }
 
+@Scripts.Render("~/Scripts/user/controlGrids.js")
+
 <div class="container-fluid">
     <h3 class="text-center text-uppercase">Libros existentes en la biblioteca</h3>    
     <div class="vertical-space"></div>
     
     <div class="row">
-        <button class="btn btn-success col-lg-2"><span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir nuevo libro</button>                
-        <div class="well well-sm col-lg-1 col-lg-offset-4" style="font-weight: normal;">Ordenar por: </div>
+        <a href="@Url.Action("Create", "Administrator")" class="btn btn-success col-lg-2">
+            <span class="glyphicon glyphicon-plus"></span>
+            &nbsp;Añadir nuevo libro
+        </a>                
+        <a href="@Url.Action("Registered_Users", "Administrator")" class="btn btn-primary col-lg-2" style="margin-left: 3%;">
+            <span class="glyphicon glyphicon-plus"></span>
+            &nbsp;Ver usuarios
+        </a>
+        <div class="well well-sm col-lg-1 col-lg-offset-1" style="font-weight: normal;">Ordenar por: </div>
         <div class="col-lg-3">
             <select id="select" class="form-control">
                 <option>Más recientes primero</option>
@@ -26,7 +35,7 @@
     
     <hr />
 
-    <div class="container-fluid">
+    <div>
         <style>
             .table th {
                 text-align: center;

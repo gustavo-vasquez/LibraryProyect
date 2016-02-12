@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Capa_Entidades.sp_ShowPersons_Result>
+
+@{
+    ViewBag.Title = "Usuarios registrados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grilla = new WebGrid(Model, canPage: false, ajaxUpdateContainerId: "listOfUsers");
+}
+
+@Scripts.Render("~/Scripts/user/controlGrids.js")
+
+<div class="container-fluid">
+    <h3 class="text-center text-uppercase">Listado de usuarios registrados</h3>    
+    <hr />
+
+    <div class="row">        
+        <div class="well well-sm col-lg-1" style="font-weight: normal;">Ordenar por: </div>
+        @using (Html.BeginForm("RegisteredUsers", "Administrator", FormMethod.Post))
+        {        
+            <div class="col-lg-3">
+                @Html.DropDownList("filterList", ViewData["list"] as SelectList, new { @class = "form-control" })                        
+            </div>                
+            <button type="submit" class="btn btn-sm btn-warning col-lg-1">Consultar</button>
+        }
+</div>
+    <div>
+        <ul class="breadcrumb col-lg-3 text-center">
+            <li id="totalUsers" class="text-primary"></li>
+        </ul>
+    </div>
+
+    <div class="vertical-space"></div>    
+
+    <div>
+        <style>
+            .table th {
+                text-align: center;
+            }
+        </style>
+
+        <div>
+        @grilla.GetHtml(
+        htmlAttributes: new { id = "listOfUsers" },
+        tableStyle: "table table-hover active table-bordered text-center",
+        headerStyle: "success",
+        fillEmptyRows: false,
+        mode: WebGridPagerModes.All,
+        firstText: "<< Primero",
+        previousText: "< Anterior",
+        nextText: "Siguiente >",
+        lastText: "Último >>",
+
+        columns: new[]
+        {                        
+            grilla.Column("Name", canSort: false, header: "Nombre"),
+            grilla.Column("LastName", canSort: false, header: "Apellido"),
+            grilla.Column("DNI", canSort: false, header: "Nº documento"),
+            grilla.Column("BirthDate", canSort: false, header: "Fecha de nacimiento"),
+            grilla.Column("RegistrationDate", canSort: false, header: "Fecha de registro"),
+            grilla.Column("Phone", canSort: false, header: "Teléfono"),            
+            grilla.Column("Email", canSort: false, header: "Correo electrónico")         
+        })
+        </div>
+    </div>
+
+</div>
