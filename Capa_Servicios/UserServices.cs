@@ -17,5 +17,10 @@ namespace Capa_Servicios
             List<sp_ShowPersons_Result> resultado = context.sp_ShowPersons(filter).ToList();
             return resultado;
         }
+
+        public List<sp_ListingCareers_Result> ListOfCareers()
+        {
+            return context.sp_ListingCareers().ToList();
+        }
     }
 }

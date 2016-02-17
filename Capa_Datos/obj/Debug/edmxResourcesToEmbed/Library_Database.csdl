@@ -330,10 +330,11 @@
       <Parameter Name="phone" Mode="In" Type="Int32" />
       <Parameter Name="email" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />
-      <Parameter Name="career" Mode="In" Type="Int32" />
-      <Parameter Name="condition" Mode="In" Type="String" />
+      <Parameter Name="idCareer" Mode="In" Type="Int32" />
+      <Parameter Name="idCondition" Mode="In" Type="String" />
       <Parameter Name="salida" Mode="InOut" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="sp_ListingCareers" ReturnType="Collection(LibraryUniversityModel.sp_ListingCareers_Result)" />
   </EntityContainer>
   <ComplexType Name="sp_ShowPersons_Result">
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
@@ -368,4 +369,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="sp_ListingCareers_Result">
+    <Property Type="Int32" Name="CareerID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
 </Schema>

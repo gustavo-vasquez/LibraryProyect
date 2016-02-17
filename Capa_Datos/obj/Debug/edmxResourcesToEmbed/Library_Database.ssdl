@@ -230,6 +230,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_ListingCareers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_RegisterStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="name" Type="varchar" Mode="In" />
     <Parameter Name="lastName" Type="varchar" Mode="In" />
@@ -238,8 +239,8 @@
     <Parameter Name="phone" Type="int" Mode="In" />
     <Parameter Name="email" Type="varchar" Mode="In" />
     <Parameter Name="password" Type="varchar" Mode="In" />
-    <Parameter Name="career" Type="int" Mode="In" />
-    <Parameter Name="condition" Type="char" Mode="In" />
+    <Parameter Name="idCareer" Type="int" Mode="In" />
+    <Parameter Name="idCondition" Type="char" Mode="In" />
     <Parameter Name="salida" Type="bit" Mode="InOut" />
   </Function>
   <Function Name="sp_ShowPersons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

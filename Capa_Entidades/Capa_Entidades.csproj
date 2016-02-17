@@ -70,8 +70,14 @@
     <Compile Include="Person.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sanction.cs">
+      <DependentUpon>Library.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_ListingCareers_Result.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ShowPersons_Result.cs">
@@ -82,6 +88,9 @@
     </Compile>
     <Compile Include="Student.cs">
       <DependentUpon>Library.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StudentEntity.cs">
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

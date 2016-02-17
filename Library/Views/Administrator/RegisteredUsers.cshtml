@@ -17,7 +17,7 @@
         @using (Html.BeginForm("RegisteredUsers", "Administrator", FormMethod.Post))
         {        
             <div class="col-lg-3">
-                @Html.DropDownList("filterList", ViewData["list"] as SelectList, new { @class = "form-control" })                        
+                @Html.DropDownList("filterList", ViewData["list"] as SelectList, new { @class = "form-control" })
             </div>                
             <button type="submit" class="btn btn-sm btn-warning col-lg-1">Consultar</button>
         }

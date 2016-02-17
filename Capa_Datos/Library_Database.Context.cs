@@ -48,7 +48,7 @@ namespace Capa_Entidades
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ShowPersons_Result>("sp_ShowPersons", filterParameter);
         }
     
-        public virtual ObjectResult<string> sp_RegisterStudent(string name, string lastName, Nullable<int> dni, Nullable<System.DateTime> birthDate, Nullable<int> phone, string email, string password, Nullable<int> career, string condition, ObjectParameter salida)
+        public virtual ObjectResult<string> sp_RegisterStudent(string name, string lastName, Nullable<int> dni, Nullable<System.DateTime> birthDate, Nullable<int> phone, string email, string password, Nullable<int> idCareer, string idCondition, ObjectParameter salida)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("name", name) :
@@ -78,15 +78,20 @@ namespace Capa_Entidades
                 new ObjectParameter("password", password) :
                 new ObjectParameter("password", typeof(string));
     
-            var careerParameter = career.HasValue ?
-                new ObjectParameter("career", career) :
-                new ObjectParameter("career", typeof(int));
+            var idCareerParameter = idCareer.HasValue ?
+                new ObjectParameter("idCareer", idCareer) :
+                new ObjectParameter("idCareer", typeof(int));
     
-            var conditionParameter = condition != null ?
-                new ObjectParameter("condition", condition) :
-                new ObjectParameter("condition", typeof(string));
+            var idConditionParameter = idCondition != null ?
+                new ObjectParameter("idCondition", idCondition) :
+                new ObjectParameter("idCondition", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_RegisterStudent", nameParameter, lastNameParameter, dniParameter, birthDateParameter, phoneParameter, emailParameter, passwordParameter, careerParameter, conditionParameter, salida);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_RegisterStudent", nameParameter, lastNameParameter, dniParameter, birthDateParameter, phoneParameter, emailParameter, passwordParameter, idCareerParameter, idConditionParameter, salida);
+        }
+    
+        public virtual ObjectResult<sp_ListingCareers_Result> sp_ListingCareers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListingCareers_Result>("sp_ListingCareers");
         }
     }
 }

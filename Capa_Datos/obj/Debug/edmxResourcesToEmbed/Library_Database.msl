@@ -123,5 +123,13 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_RegisterStudent" FunctionName="LibraryUniversityModel.Store.sp_RegisterStudent" />
+    <FunctionImportMapping FunctionImportName="sp_ListingCareers" FunctionName="LibraryUniversityModel.Store.sp_ListingCareers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LibraryUniversityModel.sp_ListingCareers_Result">
+          <ScalarProperty Name="CareerID" ColumnName="CareerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -36,3 +36,8 @@ git status
 git --config user.name
 git push library master
 exit
+git add .
+git status
+git commit -m "Programadas algunas grillas"
+git push library master
+exit

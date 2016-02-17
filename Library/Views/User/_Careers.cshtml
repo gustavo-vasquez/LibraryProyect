@@ -1,12 +1,17 @@
-﻿<div id="divCareer" class="form-group">
+﻿@model Library.Models.CareersList
+
+<script>
+    $(document).ready(function () {
+        $("form").removeData("validator");
+        $("form").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("form");
+    });
+</script>
+
+<div id="divCareer" class="form-group">
     <label class="col-lg-2 control-label">Carrera:</label>
-    <div class="col-lg-10">
-        <select class="form-control" id="select">
-            <option value="0">Elegir carrera universitaria...</option>
-            <option value="1">Repartidor de pizzas</option>
-            <option value="2">Ladrón profesional</option>
-            <option value="3">Estafador</option>
-            <option value="4">Mafioso</option>
-        </select>
+    <div class="col-lg-10">        
+        @Html.DropDownListFor(m => m.id, Model.careers as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.id, null, new { @class = "validationField" })
     </div>
 </div>

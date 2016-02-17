@@ -1,0 +1,105 @@
+﻿@model Capa_Entidades.Student
+
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/Scripts/jquery.validate.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+@Styles.Render("~/Content/user/student.css")
+
+
+
+@*@using (Ajax.BeginForm("Student", "User", null, new AjaxOptions() { UpdateTargetId = "formStudent", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form" }))*@
+@using (Html.BeginForm("Student", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+{
+    @Html.AntiForgeryToken()
+    <fieldset class="col-lg-7">
+
+        <div id="formFields">
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Nombre:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(s => s.Person.Name, new { @class = "form-control", placeholder = "Ingrese su nombre...", autocomplete = "off" })
+                    @Html.ValidationMessageFor(s => s.Person.Name, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Apellido:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(s => s.Person.LastName, new { @class = "form-control", placeholder = "Ingrese su apellido...", autocomplete = "off" })
+                    @Html.ValidationMessageFor(s => s.Person.LastName, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">DNI:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(s => s.Person.DNI, new { @class = "form-control", placeholder = "Ingrese su dni...", autocomplete = "off" })
+                    @Html.ValidationMessageFor(s => s.Person.DNI, null, new { @class = "validationField" })
+                </div>
+        </div>
+
+        @{Html.RenderPartial("_BirthDate");}
+
+        @{Html.RenderPartial("_Careers", new Library.Models.CareersList());}
+
+        <div class="form-group">
+                <label class="col-lg-2 control-label">Teléfono:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(s => s.Person.Phone, new { @class = "form-control", placeholder = "Ingrese su teléfono...", autocomplete = "off" })
+                    @Html.ValidationMessageFor(s => s.Person.Phone, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Email:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(s => s.Person.Email, new { @class = "form-control", placeholder = "Ingrese su email...", autocomplete = "off" })
+                    @Html.ValidationMessageFor(s => s.Person.Email, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Contraseña:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(s => s.Person.Password, new { @class = "form-control", placeholder = "Ingrese su contraseña...", autocomplete = "off" })
+                    @Html.ValidationMessageFor(s => s.Person.Password, null, new { @class = "validationField" })
+                </div>
+            </div>
+
+        <div id="divCondition" class="form-group">
+                <label class="col-lg-2 control-label">Condición:</label>
+                <div class="col-lg-10">
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(s => s.IdCondition, "entrant")
+                            Estudiante ingresante
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(s => s.IdCondition, "professional")
+                            Estudiante profesional
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Validación de captcha:</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="textArea"></textarea>
+                <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+            </div>
+        </div>
+
+        </div>
+    </fieldset>
+}
