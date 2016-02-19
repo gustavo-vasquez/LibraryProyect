@@ -41,3 +41,7 @@ git status
 git commit -m "Programadas algunas grillas"
 git push library master
 exit
+git add .
+git commit -m "Siguiendo la tarea de hacer andar estos combos de mierda"
+git push library master
+exit

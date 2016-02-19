@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Mvc;
 using System.Data.Objects;
 
 using Capa_Entidades;
@@ -21,6 +22,7 @@ namespace Capa_Servicios
         public List<sp_ListingCareers_Result> ListOfCareers()
         {
             return context.sp_ListingCareers().ToList();
-        }
+        }        
+        
     }
 }

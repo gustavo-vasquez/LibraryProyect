@@ -1,11 +1,18 @@
 ﻿/// <reference path="../jquery-1.9.1-vsdoc.js" />
 
-$(document).ready(function() {
-    // Check if body height is higher than window height :)
-    if ($("body").height() > $(window).height()) {        
-        $("#goTop").show();
-    }
-    else {
-        $("#goTop").hide();
-    }
+$(document).ready(function () {
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#goTop').fadeIn();
+        } else {
+            $('#goTop').fadeOut();
+        }
+    });
+
+    $('#goTop').click(function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        return false;
+    });
+
 });

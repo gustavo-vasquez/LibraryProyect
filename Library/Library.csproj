@@ -138,6 +138,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CareersList.cs" />
+    <Compile Include="Models\DatesList.cs" />
     <Compile Include="Models\GridTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,6 +150,7 @@
     <Content Include="Content\user\student.css" />
     <Content Include="Images\book-20clip.png" />
     <Content Include="Images\books.jpg" />
+    <Content Include="Images\icon_top.png" />
     <Content Include="Images\mapa_unlam.jpg" />
     <Content Include="Scripts\general\layout.js" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
@@ -159,8 +161,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\user\ajaxFormFix.js" />
     <Content Include="Scripts\user\controlGrids.js" />
+    <Content Include="Scripts\user\datesCombobox.js" />
     <Content Include="Scripts\user\profile.js" />
     <Content Include="Scripts\user\register.js" />
     <Content Include="university.ico" />
@@ -216,7 +218,7 @@
     <Content Include="Views\User\_Careers.cshtml" />
     <Content Include="Views\User\_BirthDate.cshtml" />
     <Content Include="Views\Administrator\RegisteredUsers.cshtml" />
-    <Content Include="Views\User\Student.cshtml" />
+    <Content Include="Views\User\_Student.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

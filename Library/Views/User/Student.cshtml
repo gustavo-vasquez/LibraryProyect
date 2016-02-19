@@ -10,8 +10,6 @@
 @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 @Styles.Render("~/Content/user/student.css")
 
-
-
 @*@using (Ajax.BeginForm("Student", "User", null, new AjaxOptions() { UpdateTargetId = "formStudent", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form" }))*@
 @using (Html.BeginForm("Student", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
 {

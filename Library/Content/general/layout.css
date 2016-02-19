@@ -15,3 +15,15 @@
 .navbar-effect ul li:hover {
     text-decoration: underline;
 }
+
+.scrollup {
+    width: 40px;
+    height: 40px;
+    text-indent: -9999px;
+    opacity: 0.3;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+    display: none;
+    background: url('../../Images/icon_top.png') no-repeat;
+}

@@ -13,11 +13,10 @@ namespace Capa_Entidades
     }
 
     public class StudentMetadata
-    {
-        [Required(ErrorMessage = "*Debe elegir una carrera.")]
+    {        
         public int IdCareer { get; set; }
-
+        
         [Required(ErrorMessage = "*Debe elegir un tipo de estudiante.")]
-        public int IdCondition { get; set; }
+        public string IdCondition { get; set; }
     }
 }

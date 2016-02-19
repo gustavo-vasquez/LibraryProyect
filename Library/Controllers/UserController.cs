@@ -28,7 +28,7 @@ namespace Library.Controllers
 
         public ActionResult Student()
         {            
-            return View();
+            return View("_Student");
         }
 
         [HttpPost]
@@ -40,18 +40,8 @@ namespace Library.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                return View(register);                                        
+                return View("_Student", register);                                        
         }
-
-        //public ActionResult Careers()
-        //{
-        //    //SelectList list = new SelectList(userService.ListOfCareers(), "Value", "Text", new SelectListItem() { Value = "0", Text = "Elegir carrera universitaria...", Selected = true });            
-        //    return PartialView();
-        //}
-
-        public ActionResult BirthDate()
-        {
-            return PartialView();
-        }
+        
     }
 }

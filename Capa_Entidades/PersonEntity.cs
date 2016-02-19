@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace Capa_Entidades
@@ -9,19 +10,7 @@ namespace Capa_Entidades
     [MetadataType(typeof(PersonMetadata))]
     public partial class Person
     {
-        //public string Document
-        //{
-        //    get { return DNI.ToString(); }
-        //    set { DNI = Convert.ToInt32(value); }
-        //}
-        [Required]
-        public string day { get; set; }
 
-        [Required]
-        public string month { get; set; }
-
-        [Required]
-        public string year { get; set; }        
     }
 
 
