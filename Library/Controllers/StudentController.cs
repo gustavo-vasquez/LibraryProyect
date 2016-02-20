@@ -13,7 +13,7 @@ namespace Library.Controllers
         //
         // GET: /Student/
 
-        public ActionResult Profile()
+        public ActionResult MyProfile()
         {
             return View();
         }

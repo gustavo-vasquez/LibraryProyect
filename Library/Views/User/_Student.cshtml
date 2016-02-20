@@ -1,35 +1,42 @@
 ﻿@model Capa_Entidades.Student
 
+@using BotDetect.Web.UI.Mvc;
+@Scripts.Render("~/Scripts/jquery.validate.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
 @{
     ViewBag.Title = "Student";    
 }
 
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
 @Styles.Render("~/Content/user/student.css")
 
-@using (Html.BeginForm("Student", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Ajax.BeginForm("Student", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "formStudent" }))
 {
     @Html.AntiForgeryToken()
     <fieldset class="col-lg-7">
 
         <div id="formFields">
+            @*<input type="text" id="Name" name="Person.Name" value="asd" />*@
             <div class="form-group">
                 <label class="col-lg-2 control-label">Nombre:</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(s => s.Person.Name, new { @class = "form-control", placeholder = "Ingrese su nombre...", autocomplete = "off" })
+                    @Html.TextBoxFor(s => s.Person.Name, new { @class = "form-control", placeholder = "Ingrese su nombre..." })
                     @Html.ValidationMessageFor(s => s.Person.Name, null, new { @class = "validationField" })
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">Apellido:</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(s => s.Person.LastName, new { @class = "form-control", placeholder = "Ingrese su apellido...", autocomplete = "off" })
+                    @Html.TextBoxFor(s => s.Person.LastName, new { @class = "form-control", placeholder = "Ingrese su apellido..." })
                     @Html.ValidationMessageFor(s => s.Person.LastName, null, new { @class = "validationField" })
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">DNI:</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(s => s.Person.DNI, new { @class = "form-control", placeholder = "Ingrese su dni...", autocomplete = "off" })
+                    @Html.TextBoxFor(s => s.Person.DNI, new { @class = "form-control", placeholder = "Ingrese su dni..." })
                     @Html.ValidationMessageFor(s => s.Person.DNI, null, new { @class = "validationField" })
                 </div>
             </div>
@@ -41,21 +48,21 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">Teléfono:</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(s => s.Person.Phone, new { @class = "form-control", placeholder = "Ingrese su teléfono...", autocomplete = "off" })
+                    @Html.TextBoxFor(s => s.Person.Phone, new { @class = "form-control", placeholder = "Ingrese su teléfono..." })
                     @Html.ValidationMessageFor(s => s.Person.Phone, null, new { @class = "validationField" })
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">Email:</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(s => s.Person.Email, new { @class = "form-control", placeholder = "Ingrese su email...", autocomplete = "off" })
+                    @Html.TextBoxFor(s => s.Person.Email, new { @class = "form-control", placeholder = "Ingrese su email..." })
                     @Html.ValidationMessageFor(s => s.Person.Email, null, new { @class = "validationField" })
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">Contraseña:</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(s => s.Person.Password, new { @class = "form-control", placeholder = "Ingrese su contraseña...", autocomplete = "off" })
+                    @Html.TextBoxFor(s => s.Person.Password, new { @class = "form-control", placeholder = "Ingrese su contraseña..." })
                     @Html.ValidationMessageFor(s => s.Person.Password, null, new { @class = "validationField" })
                 </div>
             </div>
@@ -65,13 +72,13 @@
                 <div class="col-lg-10">
                     <div class="radio">
                         <label>
-                            @Html.RadioButtonFor(s => s.IdCondition, "1", new { id = "ent" })                            
+                            @Html.RadioButtonFor(s => s.IdCondition, 1, new { id = "ent" })                            
                             Estudiante ingresante
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            @Html.RadioButtonFor(s => s.IdCondition, "2", new { id = "pro" })                            
+                            @Html.RadioButtonFor(s => s.IdCondition, 2, new { id = "pro" })                            
                             Estudiante profesional
                         </label>                        
                     </div>
@@ -82,8 +89,12 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">Validación de captcha:</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="textArea"></textarea>
-                    <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                    <div class="col-lg-7">
+                        @{ MvcCaptcha captchaBox = new MvcCaptcha("captchaStudent"); }
+                        @Html.Captcha(captchaBox)                        
+                        @Html.TextBoxFor(s => s.CaptchaTextbox, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.CaptchaTextbox, null, new { @class = "validationField" })
+                    </div>     
                 </div>
             </div>
 
@@ -97,3 +108,7 @@
         </div>
     </fieldset>
 }
+<form method="post" action="/user/student">
+    @Html.AntiForgeryToken()
+    <button type="submit">Hola</button>
+</form>

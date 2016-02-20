@@ -28,15 +28,15 @@ namespace Library.Models
 
         public IEnumerable<SelectListItem> FillDays()
         {
-            int minDay = 1;
+            int i;
             List<SelectListItem> options = new List<SelectListItem>();
 
             options.Add(new SelectListItem() { Value = "", Text = "Día...", Selected = true });
-            do
+
+            for (i = 1; i <= 31; i++)
             {
-                options.Add(new SelectListItem() { Value = minDay.ToString(), Text = minDay.ToString() });
-                minDay++;
-            } while (minDay <= 31);
+                options.Add(new SelectListItem() { Value = i.ToString(), Text = i.ToString() });
+            }                
 
             this.Days = options;
 
@@ -45,7 +45,7 @@ namespace Library.Models
 
         public IEnumerable<SelectListItem> FillMonths()
         {
-            int minMonth = 1;
+            int i;
             Hashtable names = new Hashtable();            
             names.Add(1, "Enero");
             names.Add(2, "Febrero");
@@ -63,11 +63,11 @@ namespace Library.Models
             List<SelectListItem> options = new List<SelectListItem>();
 
             options.Add(new SelectListItem() { Value = "", Text = "Mes...", Selected = true });
-            do
+
+            for (i = 1; i <= 12; i++)
             {
-                options.Add(new SelectListItem() { Value = minMonth.ToString(), Text = names[minMonth].ToString() });
-                minMonth++;
-            } while (minMonth <= 12);
+                options.Add(new SelectListItem() { Value = i.ToString(), Text = names[i].ToString() });
+            }                
 
             this.Months = options;
 
@@ -76,15 +76,15 @@ namespace Library.Models
 
         public IEnumerable<SelectListItem> FillYears()
         {
-            int minYear = 1999;
+            int i;
             List<SelectListItem> options = new List<SelectListItem>();
 
             options.Add(new SelectListItem() { Value = "", Text = "Año...", Selected = true });
-            do
+
+            for (i = 1999; i >= 1986; i--)
             {
-                options.Add(new SelectListItem() { Value = minYear.ToString(), Text = minYear.ToString() });
-                minYear--;
-            } while (minYear >= 1986);
+                options.Add(new SelectListItem() { Value = i.ToString(), Text = i.ToString() });
+            }                
 
             this.Years = options;
 

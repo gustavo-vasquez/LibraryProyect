@@ -45,3 +45,7 @@ git add .
 git commit -m "Siguiendo la tarea de hacer andar estos combos de mierda"
 git push library master
 exit
+git add .
+git commit -m "Por fin logre hacer funcionar los combos de las fechas"
+git push library master
+exit

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using Capa_Entidades;
 using Capa_Servicios;
+using BotDetect.Web.UI.Mvc;
 
 namespace Library.Controllers
 {
@@ -17,7 +18,7 @@ namespace Library.Controllers
         // GET: /User/
 
         public ActionResult Register()
-        {            
+        {
             return View();
         }
 
@@ -27,21 +28,24 @@ namespace Library.Controllers
         }
 
         public ActionResult Student()
-        {            
-            return View("_Student");
+        {
+            return PartialView("_Student", new Student());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        [CaptchaValidation("CaptchaTextbox", "captchaStudent", "Incorrect CAPTCHA code!")]
         public ActionResult Student(Student register)
         {
-                if (ModelState.IsValid)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-
-                return View("_Student", register);                                        
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return PartialView("_Student", register);
+            }            
         }
-        
     }
 }

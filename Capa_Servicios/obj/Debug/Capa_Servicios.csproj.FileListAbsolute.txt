@@ -1,11 +1,11 @@
 C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\bin\Debug\Capa_Servicios.dll
 C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\bin\Debug\Capa_Servicios.pdb
-C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\obj\Debug\Capa_Servicios.csprojResolveAssemblyReference.cache
-C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\obj\Debug\Capa_Servicios.dll
-C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\obj\Debug\Capa_Servicios.pdb
 C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\bin\Debug\Capa_Datos.dll
 C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\bin\Debug\Capa_Entidades.dll
 C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\bin\Debug\EntityFramework.dll
 C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\bin\Debug\Capa_Datos.pdb
 C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\bin\Debug\Capa_Entidades.pdb
 C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\bin\Debug\EntityFramework.xml
+C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\obj\Debug\Capa_Servicios.csprojResolveAssemblyReference.cache
+C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\obj\Debug\Capa_Servicios.dll
+C:\Users\vasqu\documents\visual studio 2013\Projects\Library\Capa_Servicios\obj\Debug\Capa_Servicios.pdb

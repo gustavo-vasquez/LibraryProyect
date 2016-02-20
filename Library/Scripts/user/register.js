@@ -5,7 +5,7 @@ $(document).ready(function () {
         switch ($("#slctUser option:selected").val()) {        
 
             case '1': $("#formStudent").removeClass("hide");                  
-                      $("#formStudent").load("/User/Student");                
+                      $("#formStudent").load("/User/Student").fadeIn();            
                       break;
 
             case '2': alert(2);
@@ -15,6 +15,7 @@ $(document).ready(function () {
                 break;
 
             default: $("#formStudent").addClass("hide");
+                     $("#formStudent").unload();
         }
     });   
 });

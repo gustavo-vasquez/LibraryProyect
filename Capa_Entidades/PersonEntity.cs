@@ -26,16 +26,15 @@ namespace Capa_Entidades
         [RegularExpression("[a-zA-Z]+ *[a-zA-Z]{1,}", ErrorMessage = "*Campo apellido sólo permite letras.")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "*Debe ingresar un dni.")]
-        [StringLength(8, ErrorMessage = "*Máximo 8 números.")]
-        [RegularExpression(@"^\d+$", ErrorMessage = "*Campo dni sólo puede contener números.")]
+        // StringLength es una mierda para los int
+        [Required(ErrorMessage = "*Debe ingresar un dni.")]                
+        [RegularExpression(@"^\d{1,8}$", ErrorMessage = "*Campo dni sólo puede contener como máximo 8 números.")]
         public int DNI { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime RegistrationDate { get; set; }
 
-        [Required(ErrorMessage = "*Debe ingresar un número de teléfono.")]
-        [StringLength(10, ErrorMessage = "*Máximo 10 números.")]
-        [RegularExpression(@"^\d+$", ErrorMessage = "*Campo teléfono sólo puede contener números.")]
+        [Required(ErrorMessage = "*Debe ingresar un número de teléfono.")]        
+        [RegularExpression(@"^\d{1,10}$", ErrorMessage = "*Campo teléfono sólo puede contener como máximo 10 números.")]
         public int Phone { get; set; }
 
         [Required(ErrorMessage = "*Debe ingresar una dirección de correo electrónico.")]
