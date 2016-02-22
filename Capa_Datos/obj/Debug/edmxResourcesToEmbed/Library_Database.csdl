@@ -322,7 +322,8 @@
       <End Role="Person" EntitySet="People" />
       <End Role="Employee" EntitySet="Employees" />
     </AssociationSet>
-    <FunctionImport Name="sp_RegisterStudent" ReturnType="Collection(String)">
+    <FunctionImport Name="sp_ListingCareers" ReturnType="Collection(LibraryUniversityModel.sp_ListingCareers_Result)" />
+    <FunctionImport Name="sp_RegisterStudent">
       <Parameter Name="name" Mode="In" Type="String" />
       <Parameter Name="lastName" Mode="In" Type="String" />
       <Parameter Name="dni" Mode="In" Type="Int32" />
@@ -332,9 +333,9 @@
       <Parameter Name="password" Mode="In" Type="String" />
       <Parameter Name="idCareer" Mode="In" Type="Int32" />
       <Parameter Name="idCondition" Mode="In" Type="String" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
       <Parameter Name="salida" Mode="InOut" Type="Boolean" />
     </FunctionImport>
-    <FunctionImport Name="sp_ListingCareers" ReturnType="Collection(LibraryUniversityModel.sp_ListingCareers_Result)" />
   </EntityContainer>
   <ComplexType Name="sp_ShowPersons_Result">
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />

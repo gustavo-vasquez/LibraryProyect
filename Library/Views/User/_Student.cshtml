@@ -72,13 +72,13 @@
                 <div class="col-lg-10">
                     <div class="radio">
                         <label>
-                            @Html.RadioButtonFor(s => s.IdCondition, 1, new { id = "ent" })                            
+                            @Html.RadioButtonFor(s => s.IdCondition, "I", new { id = "rdoEntrant" })                            
                             Estudiante ingresante
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            @Html.RadioButtonFor(s => s.IdCondition, 2, new { id = "pro" })                            
+                            @Html.RadioButtonFor(s => s.IdCondition, "P", new { id = "rdoProfessional" })
                             Estudiante profesional
                         </label>                        
                     </div>
@@ -91,7 +91,7 @@
                 <div class="col-lg-10">
                     <div class="col-lg-7">
                         @{ MvcCaptcha captchaBox = new MvcCaptcha("captchaStudent"); }
-                        @Html.Captcha(captchaBox)                        
+                        @Html.Captcha(captchaBox)
                         @Html.TextBoxFor(s => s.CaptchaTextbox, new { @class = "form-control" })
                         @Html.ValidationMessageFor(s => s.CaptchaTextbox, null, new { @class = "validationField" })
                     </div>     
@@ -108,7 +108,12 @@
         </div>
     </fieldset>
 }
-<form method="post" action="/user/student">
-    @Html.AntiForgeryToken()
-    <button type="submit">Hola</button>
-</form>
+
+@if (IsPost && ViewData["ErrorMessageSP"] != null)
+{
+    <div class="fail-Indicator alert alert-dismissible alert-danger text-center">
+        <button type="button" class="close" data-dismiss="alert"><span class="glyphicon glyphicon-remove"></span></button>
+        <h4><b>¡USUARIO NO CREADO!</b></h4>
+        <h5 style="color: white;"><i>Causa:</i>@ViewData["ErrorMessageSP"]</h5>
+    </div>
+}

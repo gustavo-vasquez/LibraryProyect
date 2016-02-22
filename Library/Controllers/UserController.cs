@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Capa_Entidades;
 using Capa_Servicios;
 using BotDetect.Web.UI.Mvc;
+using System.Globalization;
 
 namespace Library.Controllers
 {
@@ -35,16 +36,29 @@ namespace Library.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        [CaptchaValidation("CaptchaTextbox", "captchaStudent", "Incorrect CAPTCHA code!")]
-        public ActionResult Student(Student register)
+        [CaptchaValidation("CaptchaTextbox", "captchaStudent", "¡Código CAPTCHA incorrecto!")]
+        public ActionResult Student(Student data, int idDays, int idMonths, int idYears)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                DateTime birth = new DateTime(idYears, idMonths, idDays);
+                birth.ToString("dd-mm-yyyy", CultureInfo.InvariantCulture);
+                data.Person.BirthDate = birth;
+                bool IsSuccess = userService.AddStudent(data);
+
+                if (IsSuccess)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewData["ErrorMessageSP"] = "Ocurrió un error en el registro";
+                    return PartialView("_Student", data);
+                }                
             }
             else
             {
-                return PartialView("_Student", register);
+                return PartialView("_Student", data);
             }            
         }
     }

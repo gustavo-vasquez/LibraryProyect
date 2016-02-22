@@ -11,7 +11,7 @@
 <div id="divCareer" class="form-group">
     <label class="col-lg-2 control-label">Carrera:</label>
     <div class="col-lg-10">        
-        @Html.DropDownListFor(m => m.id, Model.careers as IEnumerable<SelectListItem>, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.id, null, new { @class = "validationField" })
+        @Html.DropDownListFor(m => m.idCareer, Model.careers as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.idCareer, null, new { @class = "validationField" })
     </div>
 </div>

@@ -49,3 +49,12 @@ git add .
 git commit -m "Por fin logre hacer funcionar los combos de las fechas"
 git push library master
 exit
+git add .
+git status
+git commit -m "Ahora hay captcha y POR FIN solicione el problema del int32 to string"
+git push library master
+exit
+git checkout -b seguro
+git push library seguro
+git add .
+git status

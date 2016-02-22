@@ -241,6 +241,7 @@
     <Parameter Name="password" Type="varchar" Mode="In" />
     <Parameter Name="idCareer" Type="int" Mode="In" />
     <Parameter Name="idCondition" Type="char" Mode="In" />
+    <Parameter Name="message" Type="varchar" Mode="InOut" />
     <Parameter Name="salida" Type="bit" Mode="InOut" />
   </Function>
   <Function Name="sp_ShowPersons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

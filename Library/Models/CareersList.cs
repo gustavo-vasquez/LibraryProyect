@@ -13,7 +13,7 @@ namespace Library.Models
     public class CareersList
     {
         [Required(ErrorMessage = "*Debe elegir una opción.")]        
-        public int? id { get; set; }
+        public int? idCareer { get; set; }
         public IEnumerable<SelectListItem> careers { get; set; }
 
         public CareersList()

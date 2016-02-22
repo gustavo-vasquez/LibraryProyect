@@ -48,7 +48,12 @@ namespace Capa_Entidades
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ShowPersons_Result>("sp_ShowPersons", filterParameter);
         }
     
-        public virtual ObjectResult<string> sp_RegisterStudent(string name, string lastName, Nullable<int> dni, Nullable<System.DateTime> birthDate, Nullable<int> phone, string email, string password, Nullable<int> idCareer, string idCondition, ObjectParameter salida)
+        public virtual ObjectResult<sp_ListingCareers_Result> sp_ListingCareers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListingCareers_Result>("sp_ListingCareers");
+        }
+    
+        public virtual int sp_RegisterStudent(string name, string lastName, Nullable<int> dni, Nullable<System.DateTime> birthDate, Nullable<int> phone, string email, string password, Nullable<int> idCareer, string idCondition, ObjectParameter message, ObjectParameter salida)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("name", name) :
@@ -86,12 +91,7 @@ namespace Capa_Entidades
                 new ObjectParameter("idCondition", idCondition) :
                 new ObjectParameter("idCondition", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_RegisterStudent", nameParameter, lastNameParameter, dniParameter, birthDateParameter, phoneParameter, emailParameter, passwordParameter, idCareerParameter, idConditionParameter, salida);
-        }
-    
-        public virtual ObjectResult<sp_ListingCareers_Result> sp_ListingCareers()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListingCareers_Result>("sp_ListingCareers");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegisterStudent", nameParameter, lastNameParameter, dniParameter, birthDateParameter, phoneParameter, emailParameter, passwordParameter, idCareerParameter, idConditionParameter, message, salida);
         }
     }
 }

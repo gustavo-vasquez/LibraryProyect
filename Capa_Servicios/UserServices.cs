@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,27 @@ namespace Capa_Servicios
         public List<sp_ListingCareers_Result> ListOfCareers()
         {
             return context.sp_ListingCareers().ToList();
-        }        
+        }
+
+        public bool AddStudent(Student data)
+        {
+            ObjectParameter messageParameter = new ObjectParameter("message", typeof(string));          
+            ObjectParameter resultParameter = new ObjectParameter("salida", typeof(bool));
+
+            context.sp_RegisterStudent(data.Person.Name,
+                                       data.Person.LastName,
+                                       data.Person.DNI,
+                                       data.Person.BirthDate,
+                                       data.Person.Phone,
+                                       data.Person.Email,
+                                       data.Person.Password,
+                                       data.IdCareer,
+                                       data.IdCondition,
+                                       messageParameter,
+                                       resultParameter);                       
+            
+            return Convert.ToBoolean(resultParameter.Value);
+        }
         
     }
 }
