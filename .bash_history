@@ -58,3 +58,20 @@ git checkout -b seguro
 git push library seguro
 git add .
 git status
+git add .
+git commit -m "El proyecto registra correctamente y tira un cartel si algo falla"
+git push library seguro
+git checkout master
+git status
+git push library master
+git status
+git add ,
+git add .
+git status
+git push library master:master
+git cherry-pick seguro
+git status
+git add .
+git commit -m "Registro casi completo"
+git push library master
+exit

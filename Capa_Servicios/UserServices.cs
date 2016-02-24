@@ -25,7 +25,7 @@ namespace Capa_Servicios
             return context.sp_ListingCareers().ToList();
         }
 
-        public bool AddStudent(Student data)
+        public bool AddStudent(Student data, ref string message)
         {
             ObjectParameter messageParameter = new ObjectParameter("message", typeof(string));          
             ObjectParameter resultParameter = new ObjectParameter("salida", typeof(bool));
@@ -40,7 +40,9 @@ namespace Capa_Servicios
                                        data.IdCareer,
                                        data.IdCondition,
                                        messageParameter,
-                                       resultParameter);                       
+                                       resultParameter);
+
+            message = messageParameter.Value.ToString();
             
             return Convert.ToBoolean(resultParameter.Value);
         }

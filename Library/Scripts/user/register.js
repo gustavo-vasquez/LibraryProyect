@@ -1,10 +1,13 @@
 ﻿/// <reference path="../jquery-1.9.1-vsdoc.js" />
 
 $(document).ready(function () {
+    var animation = $("#loading").html();
+
     $("#slctUser").change(function () {
         switch ($("#slctUser option:selected").val()) {        
 
-            case '1': $("#formStudent").removeClass("hide");                  
+            case '1': $("#formStudent").removeClass("hide");
+                      $("#formStudent").html(animation);
                       $("#formStudent").load("/User/Student").fadeIn();            
                       break;
 
@@ -19,3 +22,8 @@ $(document).ready(function () {
         }
     });   
 });
+
+function redirectToHome() {
+    document.body.innerHTML = '';
+    window.location.replace("/Home/Index");
+}

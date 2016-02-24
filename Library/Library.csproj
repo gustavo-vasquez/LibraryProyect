@@ -157,7 +157,9 @@
     <Content Include="Images\book-20clip.png" />
     <Content Include="Images\books.jpg" />
     <Content Include="Images\icon_top.png" />
+    <Content Include="Images\load_animation.gif" />
     <Content Include="Images\mapa_unlam.jpg" />
+    <Content Include="Images\windows.jpg" />
     <Content Include="Scripts\general\layout.js" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

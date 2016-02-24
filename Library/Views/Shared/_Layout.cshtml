@@ -14,53 +14,42 @@
     @Scripts.Render("~/Scripts/general/layout.js")    
 </head>
 
-@*<style>
-    body {
-        /* Any browser which supports CSS3 */
-        filter: blur(1px);
-        /* Firefox */
-        filter: url("blur.svg#gaussian_blur");
-        /* Webkit */
-        -webkit-filter: blur(5px);
-        /* Opera */
-        -o-filter: blur(2px);
-    }
-</style>*@
-
 <body class="container">
-    <nav id="top" class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="@Url.Action("Index","Home")" title="Biblioteca Universitaria"><img src="~/Images/library.png" class="library" /></a>
-            </div>
+    <div id="mainFrame" class="container-fluid" style="background-color: white;">
+        <nav id="top" class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")" title="Biblioteca Universitaria"><img src="~/Images/library.png" class="library" /></a>
+                </div>
 
-            <div class="collapse navbar-collapse navbar-effect" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Map","Home")">Mapa<span class="sr-only">(current)</span></a></li>
-                    <li><a href="@Url.Action("About", "Home")">Acerca de</a></li>
-                    <li><a href="@Url.Action("Books","Home")">Índice de libros</a></li>
-                    <li><a href="@Url.Action("Register","User")">Registrarse</a></li>
-                </ul>
-            @{Html.RenderPartial("~/Views/User/_Login.cshtml");}
+                <div class="collapse navbar-collapse navbar-effect" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="@Url.Action("Map","Home")">Mapa<span class="sr-only">(current)</span></a></li>
+                        <li><a href="@Url.Action("About", "Home")">Acerca de</a></li>
+                        <li><a href="@Url.Action("Books","Home")">Índice de libros</a></li>
+                        <li><a href="@Url.Action("Register","User")">Registrarse</a></li>
+                    </ul>
+                    @{Html.RenderPartial("~/Views/User/_Login.cshtml");}
+                </div>
             </div>
+        </nav>
+
+        <div id="content">
+            @RenderBody()
         </div>
-    </nav>
 
-    <div id="content">
-        @RenderBody()
-    </div>
+        <a href="#" id="goTop" class="scrollup" style="display: none;"></a>
 
-    <a href="#" id="goTop" class="scrollup" style="display: none;"></a>   
-
-    <div id="footer" class="row">
-        <hr />        
-        © Biblioteca Universitaria 2016. Todos los derechos reservados
+        <div id="footer" style="padding-top: 2%; padding-bottom: 2%">
+            <hr />
+            © Biblioteca Universitaria 2016. Todos los derechos reservados
+        </div>
     </div>
 
 

@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @Scripts.Render("~/Scripts/user/register.js")
 
 
@@ -12,21 +11,26 @@
     <hr />
     <div class="form-horizontal">
                             
-            <div class="form-group col-lg-7">
-                <label class="col-lg-2 control-label">Rango:</label>
-                <div class="col-lg-10">
-                    <select class="form-control" id="slctUser">          
-                        <option value="0" selected>Elija tipo de usuario...</option>              
-                        <option value="1">Estudiante</option>
-                        <option value="2">Empleado</option>
-                        <option value="3">Administrador</option>                     
-                    </select>
-                    <span class="help-block">NOTA: Todos los campos son obligatorios.</span>
-                </div>                
-            </div>                       
+        <div class="form-group col-lg-7">
+            <label class="col-lg-2 control-label">Rango:</label>
+            <div class="col-lg-10">
+                <select class="form-control" id="slctUser">
+                    <option value="0" selected>Elija tipo de usuario...</option>
+                    <option value="1">Estudiante</option>
+                    <option value="2">Empleado</option>
+                    <option value="3">Administrador</option>
+                </select>
+                <span class="help-block">NOTA: Todos los campos son obligatorios.</span>
+
+                <div id="loading" class="hide">
+                    <img src="../../Images/load_animation.gif" width="500" alt="load_animation" />
+                </div>
+            </div>
+        </div>
                 
-            <div id="formStudent" class="hide">
-            </div>                                                   
+        <div id="formStudent" class="hide">
+        </div>
+
     </div>    
 </div>
 

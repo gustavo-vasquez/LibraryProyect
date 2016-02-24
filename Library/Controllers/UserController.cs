@@ -8,6 +8,7 @@ using Capa_Entidades;
 using Capa_Servicios;
 using BotDetect.Web.UI.Mvc;
 using System.Globalization;
+using System.Threading;
 
 namespace Library.Controllers
 {
@@ -30,6 +31,7 @@ namespace Library.Controllers
 
         public ActionResult Student()
         {
+            Thread.Sleep(1000);
             return PartialView("_Student", new Student());
         }
 
@@ -41,25 +43,26 @@ namespace Library.Controllers
         {
             if (ModelState.IsValid)
             {
+                string message = "";
                 DateTime birth = new DateTime(idYears, idMonths, idDays);
                 birth.ToString("dd-mm-yyyy", CultureInfo.InvariantCulture);
                 data.Person.BirthDate = birth;
-                bool IsSuccess = userService.AddStudent(data);
+                bool IsSuccess = userService.AddStudent(data, ref message);
 
                 if (IsSuccess)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return Content("<div id=formStudent><script>redirectToHome();</script></div>");
                 }
                 else
                 {
-                    ViewData["ErrorMessageSP"] = "Ocurrió un error en el registro";
+                    ViewBag.ErrorProcedure = message;
                     return PartialView("_Student", data);
-                }                
+                }
             }
             else
             {
                 return PartialView("_Student", data);
-            }            
+            }
         }
     }
 }
