@@ -9,19 +9,19 @@
 @Scripts.Render("~/Scripts/user/controlGrids.js")
 
 <div class="container-fluid">
-    <h3 class="text-center text-uppercase">Libros existentes en la biblioteca</h3>    
+    <h3 class="title-font">Libros existentes en la biblioteca</h3>    
     <div class="vertical-space"></div>
     
-    <div class="row">
-        <a href="@Url.Action("Create", "Administrator")" class="btn btn-success col-lg-2">
+    <div class="">        
+        <a href="@Url.Action("Create", "Administrator")" class="btn btn-sm btn-success col-lg-2">
             <span class="glyphicon glyphicon-plus"></span>
             &nbsp;Añadir nuevo libro
         </a>                
-        <a href="@Url.Action("RegisteredUsers", "Administrator")" class="btn btn-primary col-lg-2" style="margin-left: 3%;">
+        <a href="@Url.Action("RegisteredUsers", "Administrator")" class="btn btn-sm btn-primary col-lg-2" style="margin-left: 3%;">
             <span class="glyphicon glyphicon-plus"></span>
             &nbsp;Ver usuarios
         </a>
-        <div class="well well-sm col-lg-1 col-lg-offset-1" style="font-weight: normal;">Ordenar por: </div>
+        <div class="col-lg-1 col-lg-offset-1" style="font-weight: normal;">Ordenar por: </div>
         <div class="col-lg-3">
             <select id="select" class="form-control">
                 <option>Más recientes primero</option>
@@ -32,6 +32,7 @@
             <li class="text-primary">Total libros: 100</li>
         </ul>
     </div>
+    <div class="vertical-space"></div>
     
     <hr />
 

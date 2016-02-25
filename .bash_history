@@ -75,3 +75,7 @@ git add .
 git commit -m "Registro casi completo"
 git push library master
 exit
+git add .
+git commit -m "Afinado un poco mas el estilo de la pagina y la pantalla de registro funciona ok"
+git push library master
+exit

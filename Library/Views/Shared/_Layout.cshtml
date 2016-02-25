@@ -15,7 +15,7 @@
 </head>
 
 <body class="container">
-    <div id="mainFrame" class="container-fluid" style="background-color: white;">
+    <div id="mainFrame">
         <nav id="top" class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -40,18 +40,18 @@
             </div>
         </nav>
 
-        <div id="content">
-            @RenderBody()
-        </div>
+        <div id="content" class="navbar navbar-default navbar-collapse">
+            <div id="view">
+                @RenderBody()
+            </div>
 
-        <a href="#" id="goTop" class="scrollup" style="display: none;"></a>
+            <a href="#" id="goTop" class="scrollup" style="display: none;"></a>
 
-        <div id="footer" style="padding-top: 2%; padding-bottom: 2%">
-            <hr />
-            © Biblioteca Universitaria 2016. Todos los derechos reservados
+            <div id="footer" style="padding-top: 2%; padding-bottom: 2%;">
+                <hr />
+                © Biblioteca Universitaria 2016. Todos los derechos reservados
+            </div>
         </div>
     </div>
-
-
 </body>
 </html>
