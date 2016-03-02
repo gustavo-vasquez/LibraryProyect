@@ -6,16 +6,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Capa_Entidades
 {
-    [MetadataType(typeof(StudentMetadata))]
-    public partial class Student
+    [MetadataType(typeof(EmployeeMetadata))]
+    public partial class Employee
     {
         [Required(ErrorMessage = "&diams; Debe resolver el captcha.")]
         public string CaptchaTextbox { get; set; }
     }
 
-    public class StudentMetadata
+    public class EmployeeMetadata
     {
-        [Required(ErrorMessage = "&diams; Debe elegir un tipo de estudiante.")]
-        public string IdCondition { get; set; }
+        [RegularExpression(@"^\d{1,2}$", ErrorMessage = "&diams; Campo antigüedad no válido.")]
+        public int Antique { get; set; }
     }
 }

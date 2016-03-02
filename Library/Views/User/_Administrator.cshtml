@@ -1,0 +1,106 @@
+﻿@model Capa_Entidades.Administrator
+
+@using BotDetect.Web.UI.Mvc;
+
+@{
+    ViewBag.Title = "Administrator";
+}
+
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+@Styles.Render("~/Content/user/administrator.css")
+@Scripts.Render("~/Scripts/user/administrator.js")
+
+@using (Ajax.BeginForm("Administrator", null, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "types" }, new { id = "adminForm" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset class="col-lg-7">
+
+        <div id="formFields">
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Nombre:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(a => a.Person.Name, new { @class = "form-control", placeholder = "Ingrese su nombre..." })
+                    @Html.ValidationMessageFor(a => a.Person.Name, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Apellido:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(a => a.Person.LastName, new { @class = "form-control", placeholder = "Ingrese su apellido..." })
+                    @Html.ValidationMessageFor(a => a.Person.LastName, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">DNI:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(a => a.Person.DNI, new { @class = "form-control", placeholder = "Ingrese su dni..." })
+                    @Html.ValidationMessageFor(a => a.Person.DNI, null, new { @class = "validationField" })
+                </div>
+            </div>
+
+            @{Html.RenderPartial("_BirthDate", new Library.Models.DatesList());}
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Teléfono:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(a => a.Person.Phone, new { @class = "form-control", placeholder = "Ingrese su teléfono..." })
+                    @Html.ValidationMessageFor(a => a.Person.Phone, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Email:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(a => a.Person.Email, new { @class = "form-control", placeholder = "Ingrese su email..." })
+                    @Html.ValidationMessageFor(a => a.Person.Email, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Contraseña:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(a => a.Person.Password, new { @class = "form-control", placeholder = "Ingrese su contraseña..." })
+                    @Html.ValidationMessageFor(a => a.Person.Password, null, new { @class = "validationField" })
+                </div>
+            </div>
+
+            @{ Html.RenderPartial("_Political", new Library.Models.PoliticalList()); }   
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Salario ($):</label>
+                <div class="col-lg-5">
+                    @Html.TextBoxFor(a => a.Salary, new { @class = "form-control", disabled = "", @Value = "0", style = "color: #a4a4a4 !important; font-style: italic !important;" })
+                    @Html.HiddenFor(a => a.Salary)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Validación de captcha:</label>
+                <div class="col-lg-10">
+                    <div class="col-lg-7">
+                        @{ MvcCaptcha captchaBox = new MvcCaptcha("captchaAdministrator"); }
+                        @Html.Captcha(captchaBox)
+                        @Html.TextBoxFor(a => a.CaptchaTextbox, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.CaptchaTextbox, null, new { @class = "validationField" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+}
+
+@if (IsPost && ViewBag.ErrorProcedure != null)
+{
+    <div class="fail-Indicator alert alert-dismissible alert-danger text-center">
+        <button type="button" class="close" data-dismiss="alert"><span class="glyphicon glyphicon-remove"></span></button>
+        <h4><b>¡USUARIO NO CREADO!</b></h4>
+        <h5 style="color: white;"><i>Causa:</i>&nbsp;@ViewBag.ErrorProcedure</h5>
+    </div>
+    ViewBag.ErrorProcedure = null;
+}

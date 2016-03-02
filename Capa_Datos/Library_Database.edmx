@@ -236,6 +236,38 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="sp_ListingCareers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="message" Type="varchar" Mode="InOut" />
+          <Parameter Name="userRange" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_RegisterAdministrator" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="lastName" Type="varchar" Mode="In" />
+          <Parameter Name="dni" Type="int" Mode="In" />
+          <Parameter Name="birthDate" Type="datetime" Mode="In" />
+          <Parameter Name="phone" Type="int" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="politicalGroup" Type="varchar" Mode="In" />
+          <Parameter Name="salary" Type="decimal" Mode="In" />
+          <Parameter Name="message" Type="varchar" Mode="InOut" />
+          <Parameter Name="salida" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="sp_RegisterEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="lastName" Type="varchar" Mode="In" />
+          <Parameter Name="dni" Type="int" Mode="In" />
+          <Parameter Name="birthDate" Type="datetime" Mode="In" />
+          <Parameter Name="phone" Type="int" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="antique" Type="int" Mode="In" />
+          <Parameter Name="salary" Type="decimal" Mode="In" />
+          <Parameter Name="message" Type="varchar" Mode="InOut" />
+          <Parameter Name="salida" Type="bit" Mode="InOut" />
+        </Function>
         <Function Name="sp_RegisterStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="varchar" Mode="In" />
           <Parameter Name="lastName" Type="varchar" Mode="In" />
@@ -648,6 +680,38 @@
             <Parameter Name="message" Mode="InOut" Type="String" />
             <Parameter Name="salida" Mode="InOut" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="sp_RegisterEmployee">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="dni" Mode="In" Type="Int32" />
+            <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+            <Parameter Name="phone" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="antique" Mode="In" Type="Int32" />
+            <Parameter Name="salary" Mode="In" Type="Decimal" />
+            <Parameter Name="message" Mode="InOut" Type="String" />
+            <Parameter Name="salida" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RegisterAdministrator">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="dni" Mode="In" Type="Int32" />
+            <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+            <Parameter Name="phone" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="politicalGroup" Mode="In" Type="String" />
+            <Parameter Name="salary" Mode="In" Type="Decimal" />
+            <Parameter Name="message" Mode="InOut" Type="String" />
+            <Parameter Name="salida" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Login">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="message" Mode="InOut" Type="String" />
+            <Parameter Name="userRange" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_ShowPersons_Result">
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
@@ -822,6 +886,9 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_RegisterStudent" FunctionName="LibraryUniversityModel.Store.sp_RegisterStudent" />
+          <FunctionImportMapping FunctionImportName="sp_RegisterEmployee" FunctionName="LibraryUniversityModel.Store.sp_RegisterEmployee" />
+          <FunctionImportMapping FunctionImportName="sp_RegisterAdministrator" FunctionName="LibraryUniversityModel.Store.sp_RegisterAdministrator" />
+          <FunctionImportMapping FunctionImportName="sp_Login" FunctionName="LibraryUniversityModel.Store.sp_Login" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

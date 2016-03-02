@@ -1,6 +1,4 @@
-﻿/// <reference path="../jquery-1.9.1-vsdoc.js" />
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
 $("#chkPassword").click(function () {
     if ($("#chkPassword").is(':checked')) {

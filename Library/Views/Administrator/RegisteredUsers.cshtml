@@ -12,25 +12,24 @@
     <h3 class="title-font">Listado de usuarios registrados</h3>    
     <hr />
 
-    <div class="row">        
-        <div class="well well-sm col-lg-1" style="font-weight: normal;">Ordenar por: </div>
+    <div class="">        
+        <div class="well well-sm col-lg-2" style="font-weight: normal;">Ordenar por: </div>
         @using (Html.BeginForm("RegisteredUsers", "Administrator", FormMethod.Post))
         {        
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-lg-pull-1">
                 @Html.DropDownList("filterList", ViewData["list"] as SelectList, new { @class = "form-control" })
             </div>                
-            <button type="submit" class="btn btn-sm btn-warning col-lg-1">Consultar</button>
+            <button type="submit" class="btn btn-sm btn-warning col-lg-1 col-lg-pull-1">Consultar</button>
         }
-</div>
+    </div>
+
     <div>
         <ul class="breadcrumb col-lg-3 text-center">
             <li id="totalUsers" class="text-primary"></li>
         </ul>
-    </div>
+    </div>    
 
-    <div class="vertical-space"></div>    
-
-    <div>
+    <div>        
         <style>
             .table th {
                 text-align: center;

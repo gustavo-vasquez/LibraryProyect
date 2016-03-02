@@ -1,0 +1,13 @@
+﻿.validationField {
+    color: red;
+    font-style: italic;
+}
+
+.fail-Indicator {
+    position: fixed;
+    width: 40%;
+    margin: 7% 16% auto;
+    -webkit-box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.75);
+}

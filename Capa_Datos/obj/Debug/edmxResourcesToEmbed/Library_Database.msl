@@ -131,5 +131,8 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_RegisterStudent" FunctionName="LibraryUniversityModel.Store.sp_RegisterStudent" />
+    <FunctionImportMapping FunctionImportName="sp_RegisterEmployee" FunctionName="LibraryUniversityModel.Store.sp_RegisterEmployee" />
+    <FunctionImportMapping FunctionImportName="sp_RegisterAdministrator" FunctionName="LibraryUniversityModel.Store.sp_RegisterAdministrator" />
+    <FunctionImportMapping FunctionImportName="sp_Login" FunctionName="LibraryUniversityModel.Store.sp_Login" />
   </EntityContainerMapping>
 </Mapping>

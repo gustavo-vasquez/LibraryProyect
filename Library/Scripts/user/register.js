@@ -1,26 +1,30 @@
-﻿/// <reference path="../jquery-1.9.1-vsdoc.js" />
+﻿$(document).ready(function () {
 
-$(document).ready(function () {
     var animation = $("#loading").html();
 
     $("#slctUser").change(function () {
         switch ($("#slctUser option:selected").val()) {        
 
-            case '1': $("#formStudent").removeClass("hide");
-                      $("#formStudent").html(animation);
-                      $("#formStudent").load("/User/Student").fadeIn();            
+            case '1': $("#types").removeClass("hide");
+                      $("#types").html(animation);
+                      $("#types").load("/User/Student");                       
                       break;
 
-            case '2': alert(2);
-                break;
+            case '2': $("#types").removeClass("hide");
+                      $("#types").html(animation);
+                      $("#types").load("/User/Employee");
+                      break;
 
-            case '3': alert(3);
-                break;
+            case '3': $("#types").removeClass("hide");
+                      $("#types").html(animation);
+                      $("#types").load("/User/Administrator");
+                      break;
 
-            default: $("#formStudent").addClass("hide");
-                     $("#formStudent").unload();
+            default: $("#types").addClass("hide");
+                     $("#types").unload();
+                     break;
         }
-    });   
+    });
 });
 
 function redirectToHome() {

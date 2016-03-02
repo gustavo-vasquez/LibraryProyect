@@ -93,5 +93,100 @@ namespace Capa_Entidades
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegisterStudent", nameParameter, lastNameParameter, dniParameter, birthDateParameter, phoneParameter, emailParameter, passwordParameter, idCareerParameter, idConditionParameter, message, salida);
         }
+    
+        public virtual int sp_RegisterEmployee(string name, string lastName, Nullable<int> dni, Nullable<System.DateTime> birthDate, Nullable<int> phone, string email, string password, Nullable<int> antique, Nullable<decimal> salary, ObjectParameter message, ObjectParameter salida)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("lastName", lastName) :
+                new ObjectParameter("lastName", typeof(string));
+    
+            var dniParameter = dni.HasValue ?
+                new ObjectParameter("dni", dni) :
+                new ObjectParameter("dni", typeof(int));
+    
+            var birthDateParameter = birthDate.HasValue ?
+                new ObjectParameter("birthDate", birthDate) :
+                new ObjectParameter("birthDate", typeof(System.DateTime));
+    
+            var phoneParameter = phone.HasValue ?
+                new ObjectParameter("phone", phone) :
+                new ObjectParameter("phone", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var antiqueParameter = antique.HasValue ?
+                new ObjectParameter("antique", antique) :
+                new ObjectParameter("antique", typeof(int));
+    
+            var salaryParameter = salary.HasValue ?
+                new ObjectParameter("salary", salary) :
+                new ObjectParameter("salary", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegisterEmployee", nameParameter, lastNameParameter, dniParameter, birthDateParameter, phoneParameter, emailParameter, passwordParameter, antiqueParameter, salaryParameter, message, salida);
+        }
+    
+        public virtual int sp_RegisterAdministrator(string name, string lastName, Nullable<int> dni, Nullable<System.DateTime> birthDate, Nullable<int> phone, string email, string password, string politicalGroup, Nullable<decimal> salary, ObjectParameter message, ObjectParameter salida)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("lastName", lastName) :
+                new ObjectParameter("lastName", typeof(string));
+    
+            var dniParameter = dni.HasValue ?
+                new ObjectParameter("dni", dni) :
+                new ObjectParameter("dni", typeof(int));
+    
+            var birthDateParameter = birthDate.HasValue ?
+                new ObjectParameter("birthDate", birthDate) :
+                new ObjectParameter("birthDate", typeof(System.DateTime));
+    
+            var phoneParameter = phone.HasValue ?
+                new ObjectParameter("phone", phone) :
+                new ObjectParameter("phone", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var politicalGroupParameter = politicalGroup != null ?
+                new ObjectParameter("politicalGroup", politicalGroup) :
+                new ObjectParameter("politicalGroup", typeof(string));
+    
+            var salaryParameter = salary.HasValue ?
+                new ObjectParameter("salary", salary) :
+                new ObjectParameter("salary", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegisterAdministrator", nameParameter, lastNameParameter, dniParameter, birthDateParameter, phoneParameter, emailParameter, passwordParameter, politicalGroupParameter, salaryParameter, message, salida);
+        }
+    
+        public virtual int sp_Login(string email, string password, ObjectParameter message, ObjectParameter userRange)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Login", emailParameter, passwordParameter, message, userRange);
+        }
     }
 }

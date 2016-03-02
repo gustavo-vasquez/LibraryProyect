@@ -49,6 +49,9 @@
     <Compile Include="Administrator.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
+    <Compile Include="AdministratorEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Book.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
@@ -61,6 +64,7 @@
     <Compile Include="Employee.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeEntity.cs" />
     <Compile Include="Library.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,6 +73,7 @@
     <Compile Include="Loan.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs" />
     <Compile Include="Person.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>

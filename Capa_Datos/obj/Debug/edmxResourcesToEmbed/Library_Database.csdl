@@ -336,6 +336,38 @@
       <Parameter Name="message" Mode="InOut" Type="String" />
       <Parameter Name="salida" Mode="InOut" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="sp_RegisterEmployee">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="lastName" Mode="In" Type="String" />
+      <Parameter Name="dni" Mode="In" Type="Int32" />
+      <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="phone" Mode="In" Type="Int32" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="antique" Mode="In" Type="Int32" />
+      <Parameter Name="salary" Mode="In" Type="Decimal" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="salida" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="sp_RegisterAdministrator">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="lastName" Mode="In" Type="String" />
+      <Parameter Name="dni" Mode="In" Type="Int32" />
+      <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="phone" Mode="In" Type="Int32" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="politicalGroup" Mode="In" Type="String" />
+      <Parameter Name="salary" Mode="In" Type="Decimal" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="salida" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Login">
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="userRange" Mode="InOut" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_ShowPersons_Result">
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />

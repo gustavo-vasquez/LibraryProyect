@@ -146,6 +146,7 @@
     <Compile Include="Models\CareersList.cs" />
     <Compile Include="Models\DatesList.cs" />
     <Compile Include="Models\GridTest.cs" />
+    <Compile Include="Models\PoliticalList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -153,11 +154,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\general\mapView.css" />
+    <Content Include="Content\user\administrator.css" />
+    <Content Include="Content\user\employee.css" />
+    <Content Include="Content\user\login.css" />
     <Content Include="Content\user\student.css" />
+    <Content Include="Images\img8.png" />
     <Content Include="Images\book-20clip.png" />
     <Content Include="Images\books.jpg" />
     <Content Include="Images\icon_top.png" />
-    <Content Include="Images\library-background.jpg" />
     <Content Include="Images\load_animation.gif" />
     <Content Include="Images\mapa_unlam.jpg" />
     <Content Include="Images\photography_library_books.jpg" />
@@ -170,10 +174,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\user\administrator.js" />
     <Content Include="Scripts\user\controlGrids.js" />
     <Content Include="Scripts\user\datesCombobox.js" />
+    <Content Include="Scripts\user\employee.js" />
     <Content Include="Scripts\user\myProfile.js" />
     <Content Include="Scripts\user\register.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="university.ico" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -228,6 +235,9 @@
     <Content Include="Views\User\_BirthDate.cshtml" />
     <Content Include="Views\Administrator\RegisteredUsers.cshtml" />
     <Content Include="Views\User\_Student.cshtml" />
+    <Content Include="Views\User\_Employee.cshtml" />
+    <Content Include="Views\User\_Administrator.cshtml" />
+    <Content Include="Views\User\_Political.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

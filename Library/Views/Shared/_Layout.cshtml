@@ -9,9 +9,12 @@
     <link href="~/university.ico" rel="icon" type="image/x-icon" />
     @Styles.Render("~/Content/bootstrap.paper.min.css")
     @Styles.Render("~/Content/general/layout.css")
-    @Scripts.Render("~/Scripts/jquery-1.9.1.min.js")    
+    @Scripts.Render("~/Scripts/jquery-1.9.1.min.js")
     @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Scripts/general/layout.js")    
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")    
 </head>
 
 <body class="container">
@@ -34,8 +37,10 @@
                         <li><a href="@Url.Action("About", "Home")">Acerca de</a></li>
                         <li><a href="@Url.Action("Books","Home")">Índice de libros</a></li>
                         <li><a href="@Url.Action("Register","User")">Registrarse</a></li>
-                    </ul>
-                    @{Html.RenderPartial("~/Views/User/_Login.cshtml");}
+                    </ul>                    
+                    <div id="DivLogin">
+                        @{Html.RenderPartial("~/Views/User/_Login.cshtml", new Capa_Entidades.Login());}
+                    </div>
                 </div>
             </div>
         </nav>

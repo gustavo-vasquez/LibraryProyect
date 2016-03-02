@@ -6,31 +6,30 @@
     WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "grillaFutbol");
 }
 
+@Styles.Render("~/Content/user/administrator.css")
 @Scripts.Render("~/Scripts/user/controlGrids.js")
 
 <div class="container-fluid">
     <h3 class="title-font">Libros existentes en la biblioteca</h3>    
     <div class="vertical-space"></div>
     
-    <div class="">        
+    <div>        
         <a href="@Url.Action("Create", "Administrator")" class="btn btn-sm btn-success col-lg-2">
             <span class="glyphicon glyphicon-plus"></span>
-            &nbsp;Añadir nuevo libro
+            &nbsp;Añadir libro
         </a>                
         <a href="@Url.Action("RegisteredUsers", "Administrator")" class="btn btn-sm btn-primary col-lg-2" style="margin-left: 3%;">
             <span class="glyphicon glyphicon-plus"></span>
             &nbsp;Ver usuarios
         </a>
-        <div class="col-lg-1 col-lg-offset-1" style="font-weight: normal;">Ordenar por: </div>
-        <div class="col-lg-3">
+        <label class="col-lg-2 col-lg-offset-1" style="font-weight: normal;">Ordenar por: </label>
+        <div class="col-lg-3 col-lg-pull-1">            
             <select id="select" class="form-control">
                 <option>Más recientes primero</option>
                 <option>Más antiguos primero</option>
-            </select>
-        </div>
-        <ul class="breadcrumb col-lg-2 text-center">
-            <li class="text-primary">Total libros: 100</li>
-        </ul>
+            </select>            
+        </div>        
+        <label class="breadcrumb col-lg-2 text-center count_Books text-primary"> Total libros: 100 </label>
     </div>
     <div class="vertical-space"></div>
     

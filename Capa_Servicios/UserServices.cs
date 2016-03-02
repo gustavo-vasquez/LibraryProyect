@@ -46,6 +46,65 @@ namespace Capa_Servicios
             
             return Convert.ToBoolean(resultParameter.Value);
         }
+
+        public bool AddEmployee(Employee data, ref string message)
+        {
+            ObjectParameter messageParameter = new ObjectParameter("message", typeof(string));
+            ObjectParameter resultParameter = new ObjectParameter("salida", typeof(bool));
+
+            context.sp_RegisterEmployee(
+                    data.Person.Name,
+                    data.Person.LastName,
+                    data.Person.DNI,
+                    data.Person.BirthDate,
+                    data.Person.Phone,
+                    data.Person.Email,
+                    data.Person.Password,
+                    data.Antique,
+                    data.Salary,
+                    messageParameter,
+                    resultParameter
+                );
+
+            message = messageParameter.Value.ToString();
+
+            return Convert.ToBoolean(resultParameter.Value);
+        }
+
+        public bool AddAdministrator(Administrator data, ref string message)
+        {
+            ObjectParameter messageParameter = new ObjectParameter("message", typeof(string));
+            ObjectParameter resultParameter = new ObjectParameter("salida", typeof(bool));
+
+            context.sp_RegisterAdministrator(
+                    data.Person.Name,
+                    data.Person.LastName,
+                    data.Person.DNI,
+                    data.Person.BirthDate,
+                    data.Person.Phone,
+                    data.Person.Email,
+                    data.Person.Password,
+                    data.PoliticalGroup,
+                    data.Salary,
+                    messageParameter,
+                    resultParameter
+                );
+
+            message = messageParameter.Value.ToString();
+
+            return Convert.ToBoolean(resultParameter.Value);
+        }
+
+        public int LoginUser(string email, string password, ref string message)
+        {
+            ObjectParameter messageParameter = new ObjectParameter("message", typeof(string));
+            ObjectParameter userRangeParameter = new ObjectParameter("userRange", typeof(int));
+
+            context.sp_Login(email, password, messageParameter, userRangeParameter);
+            message = messageParameter.Value.ToString();
+
+            return Convert.ToInt32(userRangeParameter.Value);
+        }
         
     }
 }

@@ -79,3 +79,8 @@ git add .
 git commit -m "Afinado un poco mas el estilo de la pagina y la pantalla de registro funciona ok"
 git push library master
 exit
+git add .
+git commit -m "Mejorado el estilo de la pagina"
+git pùsh library master
+git push library master
+exit

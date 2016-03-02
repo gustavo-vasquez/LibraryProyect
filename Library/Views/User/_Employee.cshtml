@@ -1,0 +1,113 @@
+﻿@model Capa_Entidades.Employee
+
+@using BotDetect.Web.UI.Mvc;
+
+@{
+    ViewBag.Title = "Employee";
+}
+
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+@Styles.Render("~/Content/user/employee.css")
+@Scripts.Render("~/Scripts/user/employee.js")
+
+@using (Ajax.BeginForm("Employee", null, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "types" }, new { id = "empForm" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset class="col-lg-7">
+
+        <div id="formFields">
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Nombre:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(e => e.Person.Name, new { @class = "form-control", placeholder = "Ingrese su nombre..." })
+                    @Html.ValidationMessageFor(e => e.Person.Name, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Apellido:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(e => e.Person.LastName, new { @class = "form-control", placeholder = "Ingrese su apellido..." })
+                    @Html.ValidationMessageFor(e => e.Person.LastName, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">DNI:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(e => e.Person.DNI, new { @class = "form-control", placeholder = "Ingrese su dni..." })
+                    @Html.ValidationMessageFor(e => e.Person.DNI, null, new { @class = "validationField" })
+                </div>
+            </div>
+
+            @{Html.RenderPartial("_BirthDate", new Library.Models.DatesList());}            
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Teléfono:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(e => e.Person.Phone, new { @class = "form-control", placeholder = "Ingrese su teléfono..." })
+                    @Html.ValidationMessageFor(e => e.Person.Phone, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Email:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(e => e.Person.Email, new { @class = "form-control", placeholder = "Ingrese su email..." })
+                    @Html.ValidationMessageFor(e => e.Person.Email, null, new { @class = "validationField" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Contraseña:</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(e => e.Person.Password, new { @class = "form-control", placeholder = "Ingrese su contraseña..." })
+                    @Html.ValidationMessageFor(e => e.Person.Password, null, new { @class = "validationField" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Antigüedad (años):</label>
+                <div class="col-lg-5">                    
+                    @Html.TextBoxFor(e => e.Antique, new { @class = "form-control", placeholder = "Ingrese su antigüedad...", @Value = "1", type = "number", min = "1" })                    
+                    @Html.ValidationMessageFor(e => e.Antique, null, new { @class = "validationField" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Salario ($):</label>
+                <div class="col-lg-5">
+                    @Html.TextBoxFor(e => e.Salary, new { @class = "form-control", @Value = "6500", disable = "", style = "color: #a4a4a4 !important; font-style: italic !important;" })
+                    <span class="validationField">Sueldo mínimo: $6500</span>          
+                    @Html.HiddenFor(e => e.Salary)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Validación de captcha:</label>
+                <div class="col-lg-10">
+                    <div class="col-lg-7">
+                        @{ MvcCaptcha captchaBox = new MvcCaptcha("captchaEmployee"); }
+                        @Html.Captcha(captchaBox)
+                        @Html.TextBoxFor(e => e.CaptchaTextbox, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.CaptchaTextbox, null, new { @class = "validationField" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+}
+
+@if (IsPost && ViewBag.ErrorProcedure != null)
+{
+    <div class="fail-Indicator alert alert-dismissible alert-danger text-center">
+        <button type="button" class="close" data-dismiss="alert"><span class="glyphicon glyphicon-remove"></span></button>
+        <h4><b>¡USUARIO NO CREADO!</b></h4>
+        <h5 style="color: white;"><i>Causa:</i>&nbsp;@ViewBag.ErrorProcedure</h5>
+    </div>
+    ViewBag.ErrorProcedure = null;
+}

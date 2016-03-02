@@ -1,6 +1,4 @@
-﻿/// <reference path="../jquery-1.9.1-vsdoc.js" />
-
-$("#idMonths").change(function () {
+﻿$("#idMonths").change(function () {
     if ($("#idYears option:selected").val() != "" && $("#idMonths option:selected").val() != "") {
         var lastDay = daysInMonth($("#idMonths option:selected").val(), $("#idYears option:selected").val());
         $('#idDays').find("option:not(:first)").remove();

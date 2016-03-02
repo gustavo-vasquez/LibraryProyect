@@ -10,18 +10,18 @@ namespace Library.Models
 {
     public class DatesList
     {
-        [Required(ErrorMessage = "*Elegir...")]
+        [Required(ErrorMessage = "&diams; Elegir...")]
         public int? idDays { get; set; }
 
         public IEnumerable<SelectListItem> Days { get; set; }
 
 
-        [Required(ErrorMessage = "*Elegir...")]
+        [Required(ErrorMessage = "&diams; Elegir...")]
         public int? idMonths { get; set; }
         public IEnumerable<SelectListItem> Months { get; set; }
 
 
-        [Required(ErrorMessage = "*Elegir...")]
+        [Required(ErrorMessage = "&diams; Elegir...")]
         public int? idYears { get; set; }
         public IEnumerable<SelectListItem> Years { get; set; }
 
@@ -31,7 +31,7 @@ namespace Library.Models
             int i;
             List<SelectListItem> options = new List<SelectListItem>();
 
-            options.Add(new SelectListItem() { Value = "", Text = "Día...", Selected = true });
+            //options.Add(new SelectListItem() { Value = "", Text = "Día...", Selected = true });
 
             for (i = 1; i <= 31; i++)
             {
@@ -62,7 +62,7 @@ namespace Library.Models
 
             List<SelectListItem> options = new List<SelectListItem>();
 
-            options.Add(new SelectListItem() { Value = "", Text = "Mes...", Selected = true });
+            //options.Add(new SelectListItem() { Value = "", Text = "Mes...", Selected = true });
 
             for (i = 1; i <= 12; i++)
             {
@@ -79,7 +79,7 @@ namespace Library.Models
             int i;
             List<SelectListItem> options = new List<SelectListItem>();
 
-            options.Add(new SelectListItem() { Value = "", Text = "Año...", Selected = true });
+            //options.Add(new SelectListItem() { Value = "", Text = "Año...", Selected = true });
 
             for (i = 1999; i >= 1986; i--)
             {

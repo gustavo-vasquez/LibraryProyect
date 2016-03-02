@@ -1,9 +1,6 @@
 ﻿@model Capa_Entidades.Student
 
 @using BotDetect.Web.UI.Mvc;
-@Scripts.Render("~/Scripts/jquery.validate.min.js")
-@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
-@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 
 @{
     ViewBag.Title = "Student";    
@@ -12,7 +9,18 @@
 <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
 @Styles.Render("~/Content/user/student.css")
 
-@using (Ajax.BeginForm("Student", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "formStudent" }))
+<script>
+    $(document).ready(function () {
+        $('#studForm').removeData('validator').removeData('unobtrusiveValidation');
+        $.validator.unobtrusive.parse('#studForm');
+
+        $('#CaptchaTextbox').keyup(function () {
+            $('#CaptchaTextbox').val($('#CaptchaTextbox').val().toUpperCase());
+        });
+    });
+</script>
+
+@using (Ajax.BeginForm("Student", null, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "types" }, new { id = "studForm" }))
 {
     @Html.AntiForgeryToken()
     <fieldset class="col-lg-7">

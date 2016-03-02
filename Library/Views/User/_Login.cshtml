@@ -1,14 +1,40 @@
-﻿<form class="navbar-form navbar-right nav" role="form">
+﻿@model Capa_Entidades.Login
+
+@Styles.Render("~/Content/user/login.css")
+
+<script>    
+    //$("#loginForm").ready(function () {
+
+    //    $("#loginForm").bind('invalid-form.validate', function (form, validator) {
+    //        var errors = "Error de login:\n";
+
+    //        for (var i = 0; i < validator.errorList.length; i++) {
+    //            errors = errors + "\r\n\u2794 " + validator.errorList[i].message;
+    //        }
+
+    //        console.log("entre");
+    //        alert(errors + "\r\n");
+    //    });
+
+    //});
+</script>
+
+@using (Ajax.BeginForm("Login", null, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "DivLogin" }, new { @class = "navbar-form navbar-right nav", role = "form", id = "loginForm" }))
+{
+    @Html.AntiForgeryToken()
     <div class="form-group">
-        <input type="text" class="form-control input-sm" placeholder="Email..."> |
+        @Html.TextBoxFor(l => l.email, new { @class = "form-control input-sm", placeholder = "Email..." }) |            
     </div>
     <div class="form-group">
-        <input type="text" class="form-control input-sm" placeholder="Contraseña...">
+        @Html.TextBoxFor(l => l.password, new { @class = "form-control input-sm", placeholder = "Contraseña..." })                       
     </div>
-    <div class="checkbox">
-        <label class="small">
-            <input type="checkbox"> Recordarme &nbsp;
-        </label>
-    </div>
-    <button type="submit" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</button>
-</form>
+    <div class="form-group">
+        <div class="checkbox">
+            <label class="small">
+                <input type="checkbox"> Recordarme &nbsp;
+            </label>
+        </div>
+    </div>    
+               
+    <button type="submit" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</button>        
+}

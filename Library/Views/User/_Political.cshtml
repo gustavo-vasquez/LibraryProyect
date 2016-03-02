@@ -1,0 +1,9 @@
+﻿@model Library.Models.PoliticalList
+
+<div id="divCareer" class="form-group">
+    <label class="col-lg-2 control-label">Agrupación política:</label>
+    <div class="col-lg-8">
+        @Html.DropDownListFor(p => p.nameGroup, Model.groups as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.nameGroup, null, new { @class = "validationField" })        
+    </div>
+</div>
