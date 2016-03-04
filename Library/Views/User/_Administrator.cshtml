@@ -67,8 +67,7 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">Salario ($):</label>
                 <div class="col-lg-5">
-                    @Html.TextBoxFor(a => a.Salary, new { @class = "form-control", disabled = "", @Value = "0", style = "color: #a4a4a4 !important; font-style: italic !important;" })
-                    @Html.HiddenFor(a => a.Salary)
+                    @Html.TextBoxFor(a => a.Salary, new { @class = "form-control", @Value = "10", @readonly = "readonly", style = "color: #a4a4a4 !important; font-style: italic !important;" })                    
                 </div>
             </div>
 

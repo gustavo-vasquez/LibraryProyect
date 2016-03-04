@@ -84,3 +84,7 @@ git commit -m "Mejorado el estilo de la pagina"
 git pùsh library master
 git push library master
 exit
+git add .
+git commit -m "Creo que ahora si el registro esta completo y funcional"
+git push library master
+exit
