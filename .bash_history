@@ -88,3 +88,8 @@ git add .
 git commit -m "Creo que ahora si el registro esta completo y funcional"
 git push library master
 exit
+git add .
+git commit -m "Ahora si anda el registro de administrador (maldito campo salary)"
+git config --global user.name Gustavo
+git config --global user.email vasquez.gustavo90@gmail.com
+git commit --amend --reset-author

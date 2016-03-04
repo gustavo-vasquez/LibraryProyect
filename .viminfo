@@ -36,10 +36,21 @@
 	#
 
 # File marks:
-'0  1  0  ~/.gitconfig
-'1  2  0  ~/.git/MERGE_MSG
+'0  2  14  ~/.git/COMMIT_EDITMSG
+'1  1  0  ~/.gitconfig
+'2  2  0  ~/.git/MERGE_MSG
 
 # Jumplist (newest first):
+-'  2  14  ~/.git/COMMIT_EDITMSG
+-'  1  0  ~/.git/COMMIT_EDITMSG
+-'  1  0  ~/.gitconfig
+-'  3  49  ~/.gitconfig
+-'  2  0  ~/.git/MERGE_MSG
+-'  6  35  ~/.git/MERGE_MSG
+-'  1  0  ~/.git/MERGE_MSG
+-'  2  0  ~/.git/MERGE_MSG
+-'  6  35  ~/.git/MERGE_MSG
+-'  1  0  ~/.git/MERGE_MSG
 -'  1  0  ~/.gitconfig
 -'  3  49  ~/.gitconfig
 -'  2  0  ~/.git/MERGE_MSG
@@ -50,6 +61,17 @@
 -'  1  0  ~/.git/MERGE_MSG
 
 # History of marks within files (newest to oldest):
+
+> ~/.git/COMMIT_EDITMSG
+	"	2	14
+	^	2	15
+	.	2	14
+	+	1	72
+	+	3	0
+	+	3	0
+	+	1	9
+	+	1	0
+	+	2	14
 
 > ~/.gitconfig
 	"	1	0
