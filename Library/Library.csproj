@@ -158,6 +158,8 @@
     <Content Include="Content\user\employee.css" />
     <Content Include="Content\user\login.css" />
     <Content Include="Content\user\student.css" />
+    <Content Include="Images\1457376063_user_male2.png" />
+    <Content Include="Images\oddworld.png" />
     <Content Include="Images\img8.png" />
     <Content Include="Images\book-20clip.png" />
     <Content Include="Images\books.jpg" />
@@ -205,7 +207,9 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -226,11 +230,9 @@
     <Content Include="Views\Student\MyProfile.cshtml" />
     <Content Include="Views\Student\Loans.cshtml" />
     <Content Include="Views\Student\Sanctions.cshtml" />
-    <Content Include="Views\Employee\Loans_Granted.cshtml" />
-    <Content Include="Views\Employee\Applied_Sanctions.cshtml" />
+    <Content Include="Views\Employee\LoansGranted.cshtml" />
+    <Content Include="Views\Employee\AppliedSanctions.cshtml" />
     <Content Include="Views\Administrator\ControlPanel.cshtml" />
-    <Content Include="Views\Administrator\Create.cshtml" />
-    <Content Include="Views\Administrator\Edit.cshtml" />
     <Content Include="Views\User\_Careers.cshtml" />
     <Content Include="Views\User\_BirthDate.cshtml" />
     <Content Include="Views\Administrator\RegisteredUsers.cshtml" />
@@ -238,6 +240,8 @@
     <Content Include="Views\User\_Employee.cshtml" />
     <Content Include="Views\User\_Administrator.cshtml" />
     <Content Include="Views\User\_Political.cshtml" />
+    <Content Include="Views\Administrator\CreateBook.cshtml" />
+    <Content Include="Views\Administrator\EditBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

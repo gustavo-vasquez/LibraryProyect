@@ -85,6 +85,9 @@
     <NavigationProperty Name="Students" Relationship="Self.FK_Student_IdPerson" FromRole="Person" ToRole="Student" />
     <NavigationProperty Name="Administrators" Relationship="LibraryUniversityModel.FK_Administrator1" FromRole="Person" ToRole="Administrator" />
     <NavigationProperty Name="Employees" Relationship="LibraryUniversityModel.FK_Employee1" FromRole="Person" ToRole="Employee" />
+    <Property Name="EmailSHA256" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="IdRange" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Range" Relationship="LibraryUniversityModel.FK_Person" FromRole="Person" ToRole="Range" />
   </EntityType>
   <EntityType Name="Sanction">
     <Key>
@@ -311,9 +314,6 @@
       <End Role="Student" EntitySet="Students" />
       <End Role="Sanction" EntitySet="Sanctions" />
     </AssociationSet>
-    <FunctionImport Name="sp_ShowPersons" ReturnType="Collection(LibraryUniversityModel.sp_ShowPersons_Result)">
-      <Parameter Name="filter" Mode="In" Type="String" />
-    </FunctionImport>
     <AssociationSet Name="FK_Administrator1" Association="LibraryUniversityModel.FK_Administrator1">
       <End Role="Person" EntitySet="People" />
       <End Role="Administrator" EntitySet="Administrators" />
@@ -322,17 +322,35 @@
       <End Role="Person" EntitySet="People" />
       <End Role="Employee" EntitySet="Employees" />
     </AssociationSet>
+    <EntitySet Name="Ranges" EntityType="LibraryUniversityModel.Range" />
+    <AssociationSet Name="FK_Person" Association="LibraryUniversityModel.FK_Person">
+      <End Role="Range" EntitySet="Ranges" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <FunctionImport Name="sp_GetUserInformation" ReturnType="Collection(LibraryUniversityModel.sp_GetUserInformation_Result)">
+      <Parameter Name="email" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="sp_ListingCareers" ReturnType="Collection(LibraryUniversityModel.sp_ListingCareers_Result)" />
-    <FunctionImport Name="sp_RegisterStudent">
+    <FunctionImport Name="sp_ShowPersons" ReturnType="Collection(LibraryUniversityModel.sp_ShowPersons_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Login">
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="allowLogin" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="sp_RegisterAdministrator">
       <Parameter Name="name" Mode="In" Type="String" />
       <Parameter Name="lastName" Mode="In" Type="String" />
       <Parameter Name="dni" Mode="In" Type="Int32" />
       <Parameter Name="birthDate" Mode="In" Type="DateTime" />
       <Parameter Name="phone" Mode="In" Type="Int32" />
       <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="emailEncrypted" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />
-      <Parameter Name="idCareer" Mode="In" Type="Int32" />
-      <Parameter Name="idCondition" Mode="In" Type="String" />
+      <Parameter Name="politicalGroup" Mode="In" Type="String" />
+      <Parameter Name="salary" Mode="In" Type="Decimal" />
       <Parameter Name="message" Mode="InOut" Type="String" />
       <Parameter Name="salida" Mode="InOut" Type="Boolean" />
     </FunctionImport>
@@ -343,41 +361,28 @@
       <Parameter Name="birthDate" Mode="In" Type="DateTime" />
       <Parameter Name="phone" Mode="In" Type="Int32" />
       <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="emailEncrypted" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />
       <Parameter Name="antique" Mode="In" Type="Int32" />
       <Parameter Name="salary" Mode="In" Type="Decimal" />
       <Parameter Name="message" Mode="InOut" Type="String" />
       <Parameter Name="salida" Mode="InOut" Type="Boolean" />
     </FunctionImport>
-    <FunctionImport Name="sp_RegisterAdministrator">
+    <FunctionImport Name="sp_RegisterStudent">
       <Parameter Name="name" Mode="In" Type="String" />
       <Parameter Name="lastName" Mode="In" Type="String" />
       <Parameter Name="dni" Mode="In" Type="Int32" />
       <Parameter Name="birthDate" Mode="In" Type="DateTime" />
       <Parameter Name="phone" Mode="In" Type="Int32" />
       <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="emailEncrypted" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />
-      <Parameter Name="politicalGroup" Mode="In" Type="String" />
-      <Parameter Name="salary" Mode="In" Type="Decimal" />
+      <Parameter Name="idCareer" Mode="In" Type="Int32" />
+      <Parameter Name="idCondition" Mode="In" Type="String" />
       <Parameter Name="message" Mode="InOut" Type="String" />
       <Parameter Name="salida" Mode="InOut" Type="Boolean" />
     </FunctionImport>
-    <FunctionImport Name="sp_Login">
-      <Parameter Name="email" Mode="In" Type="String" />
-      <Parameter Name="password" Mode="In" Type="String" />
-      <Parameter Name="message" Mode="InOut" Type="String" />
-      <Parameter Name="userRange" Mode="InOut" Type="Int32" />
-    </FunctionImport>
   </EntityContainer>
-  <ComplexType Name="sp_ShowPersons_Result">
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="DNI" Nullable="false" />
-    <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="23" />
-    <Property Type="DateTime" Name="RegistrationDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="Phone" Nullable="false" />
-    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
-  </ComplexType>
   <Association Name="FK_Administrator1">
     <End Type="LibraryUniversityModel.Person" Role="Person" Multiplicity="1" />
     <End Type="LibraryUniversityModel.Administrator" Role="Administrator" Multiplicity="*" />
@@ -402,8 +407,45 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Range">
+    <Key>
+      <PropertyRef Name="RangeID" />
+    </Key>
+    <Property Name="RangeID" Type="Int32" Nullable="false" />
+    <Property Name="Detail" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="People" Relationship="LibraryUniversityModel.FK_Person" FromRole="Range" ToRole="Person" />
+  </EntityType>
+  <Association Name="FK_Person">
+    <End Type="LibraryUniversityModel.Range" Role="Range" Multiplicity="1" />
+    <End Type="LibraryUniversityModel.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Range">
+        <PropertyRef Name="RangeID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="IdRange" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_GetUserInformation_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EmailSHA256" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="IdRange" Nullable="false" />
+  </ComplexType>
   <ComplexType Name="sp_ListingCareers_Result">
     <Property Type="Int32" Name="CareerID" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_ShowPersons_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="DNI" Nullable="false" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="RegistrationDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Phone" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

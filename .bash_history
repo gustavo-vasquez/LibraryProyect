@@ -93,3 +93,9 @@ git commit -m "Ahora si anda el registro de administrador (maldito campo salary)
 git config --global user.name Gustavo
 git config --global user.email vasquez.gustavo90@gmail.com
 git commit --amend --reset-author
+git status
+git add .
+git status
+git commit -m "Ahora si anda el registro de administrador (maldito campo salary)"
+git push library master
+exit

@@ -13,7 +13,7 @@ namespace Library.Controllers
         //
         // GET: /Employee/
 
-        public ActionResult Loans_Granted()
+        public ActionResult LoansGranted()
         {
             List<GridTest> listado = new List<GridTest>();
 
@@ -27,11 +27,11 @@ namespace Library.Controllers
             listado.Add(new GridTest() { posicion = 8, equipo = "Velez" });
             listado.Add(new GridTest() { posicion = 9, equipo = "Lanús" });
             listado.Add(new GridTest() { posicion = 10, equipo = "Argentinos Juniors" });
-
+            
             return View(listado);
         }
 
-        public ActionResult Applied_Sanctions()
+        public ActionResult AppliedSanctions()
         {
             List<GridTest> listado = new List<GridTest>();
 

@@ -18,17 +18,17 @@ namespace Library.Controllers
         //
         // GET: /Administrator/
 
-        public ActionResult Create()
+        public ActionResult CreateBook()
         {
             return View();
         }
 
-        public ActionResult Edit()
+        public ActionResult EditBook()
         {
             return View();
         }
 
-        public ActionResult Delete()
+        public ActionResult DeleteBook()
         {
             return View();
         }

@@ -6,66 +6,83 @@
     WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "grillaFutbol");
 }
 
-@Styles.Render("~/Content/user/administrator.css")
-@Scripts.Render("~/Scripts/user/controlGrids.js")
+@{
+    string range = ((List<string>)Session["User"])[0];
+    if (range != "Administrator")
+    {
+        <div class="container-fluid">
+            <div class="vertical-space"></div>
+            <div class="alert alert-dismissible alert-danger">                
+                <h2 class="text-center alert-link">Acceso no autorizado.</h2>
+            </div>
+            <div>
+                <img src="~/Images/oddworld.png" alt="oddworld" class="center-block" />
+            </div>
+        </div>
+    }
+    else
+    {         
+        @Styles.Render("~/Content/user/administrator.css")
+        @Scripts.Render("~/Scripts/user/controlGrids.js")
 
-<div class="container-fluid">
-    <h3 class="title-font">Libros existentes en la biblioteca</h3>    
-    <div class="vertical-space"></div>
+        <div class="container-fluid">
+            <h3 class="title-font">Libros existentes en la biblioteca</h3>    
+            <div class="vertical-space"></div>
     
-    <div>        
-        <a href="@Url.Action("Create", "Administrator")" class="btn btn-sm btn-success col-lg-2">
-            <span class="glyphicon glyphicon-plus"></span>
-            &nbsp;Añadir libro
-        </a>                
-        <a href="@Url.Action("RegisteredUsers", "Administrator")" class="btn btn-sm btn-primary col-lg-2" style="margin-left: 3%;">
-            <span class="glyphicon glyphicon-plus"></span>
-            &nbsp;Ver usuarios
-        </a>
-        <label class="col-lg-2 col-lg-offset-1" style="font-weight: normal;">Ordenar por: </label>
-        <div class="col-lg-3 col-lg-pull-1">            
-            <select id="select" class="form-control">
-                <option>Más recientes primero</option>
-                <option>Más antiguos primero</option>
-            </select>            
-        </div>        
-        <label class="breadcrumb col-lg-2 text-center count_Books text-primary"> Total libros: 100 </label>
-    </div>
-    <div class="vertical-space"></div>
+        <div>        
+            <a href="@Url.Action("CreateBook", "Administrator")" class="btn btn-sm btn-success col-lg-2">
+                <span class="glyphicon glyphicon-plus"></span>
+                &nbsp;Añadir libro
+            </a>                
+            <a href="@Url.Action("RegisteredUsers", "Administrator")" class="btn btn-sm btn-primary col-lg-2" style="margin-left: 3%;">
+                <span class="glyphicon glyphicon-plus"></span>
+                &nbsp;Ver usuarios
+            </a>
+            <label class="col-lg-2 col-lg-offset-1" style="font-weight: normal;">Ordenar por: </label>
+            <div class="col-lg-3 col-lg-pull-1">            
+                <select id="select" class="form-control">
+                    <option>Más recientes primero</option>
+                    <option>Más antiguos primero</option>
+                </select>            
+            </div>        
+            <label class="breadcrumb col-lg-2 text-center count_Books text-primary"> Total libros: 100 </label>
+        </div>
+        <div class="vertical-space"></div>
     
-    <hr />
+        <hr />
 
-    <div>
-        <style>
-            .table th {
-                text-align: center;
-            }
-        </style>
+        <div>
+            <style>
+                .table th {
+                    text-align: center;
+                }
+            </style>
 
-        <div class="col-lg-7">
-            @grilla.GetHtml(
-        htmlAttributes: new { id = "grillaFutbol" },
-        tableStyle: "table table-hover active table-bordered text-center",
-        headerStyle: "success",
-        fillEmptyRows: true,
-        mode: WebGridPagerModes.All,
-        firstText: "<< Primero",
-        previousText: "< Anterior",
-        nextText: "Siguiente >",
-        lastText: "Último >>",
+            <div class="col-lg-7">
+                @grilla.GetHtml(
+                htmlAttributes: new { id = "grillaFutbol" },
+                tableStyle: "table table-hover active table-bordered text-center",
+                headerStyle: "success",
+                fillEmptyRows: true,
+                mode: WebGridPagerModes.All,
+                firstText: "<< Primero",
+                previousText: "< Anterior",
+                nextText: "Siguiente >",
+                lastText: "Último >>",
 
-        columns: new[]
-        {
-            grilla.Column("posicion", canSort: false, header: "Posiciones"),
-            grilla.Column("equipo", canSort: false, header: "Equipos"),
-            grilla.Column(
-                header: "Acciones",
-                format: @<text>
-                                <a href="#"><span class="glyphicon glyphicon-pencil"></span> Editar</a>&nbsp;&nbsp;&nbsp;
-                                <a href="#"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>
-                        </text>)
-        })
+                columns: new[]
+                {
+                    grilla.Column("posicion", canSort: false, header: "Posiciones"),
+                    grilla.Column("equipo", canSort: false, header: "Equipos"),
+                    grilla.Column(
+                        header: "Acciones",
+                        format: @<text>
+                                    <a href="#"><span class="glyphicon glyphicon-pencil"></span> Editar</a>&nbsp;&nbsp;&nbsp;
+                                    <a href="#"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>
+                                </text>)
+                })
+            </div>
         </div>
     </div>
-
-</div>
+    }
+}

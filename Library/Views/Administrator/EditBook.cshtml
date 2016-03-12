@@ -1,9 +1,25 @@
 ﻿@{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "EditBook";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid">
+@{
+    string range = ((List<string>)Session["User"])[0];
+    if (range != "Administrator")
+    {
+        <div class="container-fluid">
+            <div class="vertical-space"></div>
+            <div class="alert alert-dismissible alert-danger">
+                <h2 class="text-center alert-link">Acceso no autorizado.</h2>
+            </div>
+            <div>
+                <img src="~/Images/oddworld.png" alt="oddworld" class="center-block" />
+            </div>
+        </div>
+    }
+    else
+    {
+    <div class="container-fluid">
     <h2 class="title-font">Editar información</h2>
 
     <form class="form-horizontal">
@@ -62,4 +78,6 @@
     <div class="vertical-space"></div>
     <img src="~/Images/book-20clip.png" width="500" alt="book_ilustration" class="img-responsive center-block" />
 
-</div>
+    </div>
+    }
+}

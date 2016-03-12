@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,16 +20,65 @@ namespace Library.Controllers
 
         //
         // GET: /User/
-
+        
         public ActionResult Register()
         {
             return View();
         }
 
-        //public ActionResult Login()
-        //{
-        //    return PartialView("_Login", new Login());
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Login data)
+        {
+            string message = "";
+
+            if(ModelState.IsValid)
+            {                 
+                bool allowLogin = userService.LoginAccess(data, ref message);
+
+                if (allowLogin)
+                {                                  
+                    Session["User"] = userService.SetSessionInformation(data.email);
+                    if (data.rememberMe)
+                    {
+                        HttpCookie userCookie = new HttpCookie("libraryUniCookie");
+                        userCookie.Domain = "localhost";
+                        userCookie.Expires = DateTime.Now.AddDays(15);
+                        userCookie.Path = "/";
+                        userCookie.Secure = false;
+                        userCookie.Value = userService.EncryptSHA256(data.email);
+                        Response.Cookies.Add(userCookie);
+                    }
+
+                    return Content("<script>location.reload();</script>");
+                }
+                else
+                {
+                    ViewBag.LoginError = message;
+                    return PartialView("_Login", data);
+                }
+                        
+            }
+            else
+            {
+                ViewBag.LoginError = message;
+                return PartialView("_Login", data);
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+
+            if (Request.Cookies.AllKeys.Contains("libraryUniCookie"))
+            {
+                HttpCookie cookie = Request.Cookies["libraryUniCookie"];
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookie);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
 
         public ActionResult Student()
         {

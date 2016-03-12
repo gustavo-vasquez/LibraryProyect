@@ -6,39 +6,58 @@
     WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "grillaFutbol");
 }
 
-<div class="container-fluid">
-    <h3 class="title-font">Historial de préstamos</h3>
+@{
+    string range = ((List<string>)Session["User"])[0];
+    if (range != "Student")
+    {
+        <div class="container-fluid">
+            <div class="vertical-space"></div>
+            <div class="alert alert-dismissible alert-danger">
+                <h2 class="text-center alert-link">Acceso no autorizado.</h2>
+            </div>
+            <div>
+                <img src="~/Images/oddworld.png" alt="oddworld" class="center-block" />
+            </div>
+        </div>
+    }
+    else
+    {
+        
+    <div class="container-fluid">
+        <h3 class="title-font">Historial de préstamos</h3>
 
-    <div class="col-lg-6">
-        <select class="form-control" id="select">
-            <option>Más recientes primero</option>
-            <option>Más antiguos primero</option>
-        </select>
+        <div class="col-lg-6">
+            <select class="form-control" id="select">
+                <option>Más recientes primero</option>
+                <option>Más antiguos primero</option>
+            </select>
+        </div>
+        <div class="vertical-space"></div>
+
+        <style>
+            .table th {
+                text-align: center;
+            }
+        </style>
+
+        <div class="col-lg-7">
+            @grilla.GetHtml(
+                htmlAttributes: new { id="grillaFutbol" },
+                tableStyle: "table table-hover active table-bordered text-center",
+                headerStyle: "success",
+                fillEmptyRows: true,
+                mode: WebGridPagerModes.All,
+                firstText: "<< Primero",
+                previousText: "< Anterior",
+                nextText: "Siguiente >",
+                lastText: "Último >>",                 
+
+                columns: new[]
+                {
+                    grilla.Column("posicion", canSort: false, header: "Posiciones"),
+                    grilla.Column("equipo", canSort: false, header: "Equipos"),
+                })
+        </div>
     </div>
-    <div class="vertical-space"></div>
-
-    <style>
-        .table th {
-            text-align: center;
-        }
-    </style>
-
-    <div class="col-lg-7">
-        @grilla.GetHtml(
-        htmlAttributes: new { id="grillaFutbol" },
-        tableStyle: "table table-hover active table-bordered text-center",
-        headerStyle: "success",
-        fillEmptyRows: true,
-        mode: WebGridPagerModes.All,
-        firstText: "<< Primero",
-        previousText: "< Anterior",
-        nextText: "Siguiente >",
-        lastText: "Último >>",                 
-
-        columns: new[]
-        {
-            grilla.Column("posicion", canSort: false, header: "Posiciones"),
-            grilla.Column("equipo", canSort: false, header: "Equipos"),
-        })
-    </div>
-</div>
+    }
+}

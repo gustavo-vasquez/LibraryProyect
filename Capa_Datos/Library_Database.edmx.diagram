@@ -28,6 +28,8 @@
         <AssociationConnector Association="LibraryUniversityModel.FK_Sanction_IdStudent" ManuallyRouted="false" />
         <AssociationConnector Association="LibraryUniversityModel.FK_Administrator1" />
         <AssociationConnector Association="LibraryUniversityModel.FK_Employee1" />
+        <EntityTypeShape EntityType="LibraryUniversityModel.Range" Width="1.5" PointX="0.75" PointY="4.125" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Person" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

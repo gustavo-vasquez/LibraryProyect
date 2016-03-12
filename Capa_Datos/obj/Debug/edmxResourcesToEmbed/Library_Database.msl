@@ -65,6 +65,8 @@
     <EntitySetMapping Name="People">
       <EntityTypeMapping TypeName="LibraryUniversityModel.Person">
         <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="IdRange" ColumnName="IdRange" />
+          <ScalarProperty Name="EmailSHA256" ColumnName="EmailSHA256" />
           <ScalarProperty Name="PersonID" ColumnName="PersonID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -109,6 +111,34 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Ranges">
+      <EntityTypeMapping TypeName="LibraryUniversityModel.Range">
+        <MappingFragment StoreEntitySet="Range">
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="RangeID" ColumnName="RangeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetUserInformation" FunctionName="LibraryUniversityModel.Store.sp_GetUserInformation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LibraryUniversityModel.sp_GetUserInformation_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailSHA256" ColumnName="EmailSHA256" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IdRange" ColumnName="IdRange" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ListingCareers" FunctionName="LibraryUniversityModel.Store.sp_ListingCareers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LibraryUniversityModel.sp_ListingCareers_Result">
+          <ScalarProperty Name="CareerID" ColumnName="CareerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_ShowPersons" FunctionName="LibraryUniversityModel.Store.sp_ShowPersons">
       <ResultMapping>
         <ComplexTypeMapping TypeName="LibraryUniversityModel.sp_ShowPersons_Result">
@@ -122,17 +152,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_ListingCareers" FunctionName="LibraryUniversityModel.Store.sp_ListingCareers">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LibraryUniversityModel.sp_ListingCareers_Result">
-          <ScalarProperty Name="CareerID" ColumnName="CareerID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_RegisterStudent" FunctionName="LibraryUniversityModel.Store.sp_RegisterStudent" />
-    <FunctionImportMapping FunctionImportName="sp_RegisterEmployee" FunctionName="LibraryUniversityModel.Store.sp_RegisterEmployee" />
-    <FunctionImportMapping FunctionImportName="sp_RegisterAdministrator" FunctionName="LibraryUniversityModel.Store.sp_RegisterAdministrator" />
     <FunctionImportMapping FunctionImportName="sp_Login" FunctionName="LibraryUniversityModel.Store.sp_Login" />
+    <FunctionImportMapping FunctionImportName="sp_RegisterAdministrator" FunctionName="LibraryUniversityModel.Store.sp_RegisterAdministrator" />
+    <FunctionImportMapping FunctionImportName="sp_RegisterEmployee" FunctionName="LibraryUniversityModel.Store.sp_RegisterEmployee" />
+    <FunctionImportMapping FunctionImportName="sp_RegisterStudent" FunctionName="LibraryUniversityModel.Store.sp_RegisterStudent" />
   </EntityContainerMapping>
 </Mapping>

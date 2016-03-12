@@ -3,119 +3,139 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Scripts.Render("~/Scripts/user/profile.js")
 
-<div class="container-fluid">
-    <h3 class="title-font">Mi perfil</h3>    
-
-    <form class="form-horizontal">
-        <fieldset class="col-lg-7">
-            <legend></legend>                        
-            <div id="formFields">
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Nombre:</label>
-                    <div class="col-lg-10">
-                        <input disabled type="text" class="form-control" id="inputEmail" placeholder="Ingrese su nombre..." autocomplete="off">
-                        <span class="glyphicon glyphicon-exclamation-sign" style="color: darkcyan;"></span>
-                        <label style="color: darkcyan;"><small>&nbsp;El nombre no puede cambiarse.</small></label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Apellido:</label>
-                    <div class="col-lg-10">
-                        <input disabled type="text" class="form-control" placeholder="Ingrese su apellido..." autocomplete="off">
-                        <span class="glyphicon glyphicon-exclamation-sign" style="color: darkcyan;"></span>
-                        <label style="color: darkcyan;"><small>&nbsp;El apellido no puede cambiarse.</small></label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">DNI:</label>
-                    <div class="col-lg-10">
-                        <input disabled type="text" class="form-control" id="inputEmail" placeholder="Ingrese su dni..." autocomplete="off">
-                        <span class="glyphicon glyphicon-exclamation-sign" style="color: darkcyan;"></span>
-                        <label style="color: darkcyan;"><small>&nbsp;El DNI no puede cambiarse.</small></label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Fecha de nacimiento:</label>
-                    <div class="col-lg-10 form-horizontal form-inline">
-                        <input type="text" class="form-control" maxlength="2" style="width: 80px;" placeholder="DD" autocomplete="off">
-                        <input type="text" class="form-control" maxlength="2" style="width: 80px;" placeholder="MM" autocomplete="off">
-                        <input type="text" class="form-control" maxlength="4" style="width: 80px;" placeholder="AAAA" autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Teléfono:</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su teléfono..." autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Email:</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su email..." autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Contraseña actual:</label>
-                    <div class="col-lg-10">                        
-                        <input disabled type="text" class="form-control" id="inputPassword" placeholder="Contraseña actual..." autocomplete="off">
-                        <small><input id="chkPassword" type="checkbox" class="checkbox-inline" /> ¿Cambiar contraseña?</small>
-                    </div>                    
-                </div>
-                                
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Contraseña nueva:</label>
-                    <div class="col-lg-10">
-                        <input disabled type="text" class="form-control" id="inputNewPassword" placeholder="Contraseña nueva..." autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Repetir contraseña nueva:</label>
-                    <div class="col-lg-10">
-                        <input disabled type="text" class="form-control" id="inputRePassword" placeholder="Repetir contraseña..." autocomplete="off">
-                    </div>
-                </div>
-
-                <div id="divCareer" class="form-group">
-                    <label class="col-lg-2 control-label">Carrera:</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su carrera universitaria..." autocomplete="off">
-                    </div>
-                </div>
-
-                <div id="divCondition" class="form-group">
-                    <label class="col-lg-2 control-label">Condición:</label>
-                    <div class="col-lg-10">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                Nuevo ingresante
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                Estudiante recibido
-                            </label>
-                        </div>
-                    </div>
-                </div>                                                
-
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="reset" class="btn btn-default">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
-                </div>
+@{
+    string range = ((List<string>)Session["User"])[0];
+    if (range != "Student")
+    {
+        <div class="container-fluid">
+            <div class="vertical-space"></div>
+            <div class="alert alert-dismissible alert-danger">
+                <h2 class="text-center alert-link">Acceso no autorizado.</h2>
             </div>
-        </fieldset>
-    </form>
-</div>
+            <div>
+                <img src="~/Images/oddworld.png" alt="oddworld" class="center-block" />
+            </div>
+        </div>
+    }
+    else
+    {
+
+    @Scripts.Render("~/Scripts/user/profile.js")
+
+    <div class="container-fluid">
+        <h3 class="title-font">Mi perfil</h3>    
+
+        <form class="form-horizontal">
+            <fieldset class="col-lg-7">
+                <legend></legend>                        
+                <div id="formFields">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Nombre:</label>
+                        <div class="col-lg-10">
+                            <input disabled type="text" class="form-control" id="inputEmail" placeholder="Ingrese su nombre..." autocomplete="off">
+                            <span class="glyphicon glyphicon-exclamation-sign" style="color: darkcyan;"></span>
+                            <label style="color: darkcyan;"><small>&nbsp;El nombre no puede cambiarse.</small></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Apellido:</label>
+                        <div class="col-lg-10">
+                            <input disabled type="text" class="form-control" placeholder="Ingrese su apellido..." autocomplete="off">
+                            <span class="glyphicon glyphicon-exclamation-sign" style="color: darkcyan;"></span>
+                            <label style="color: darkcyan;"><small>&nbsp;El apellido no puede cambiarse.</small></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">DNI:</label>
+                        <div class="col-lg-10">
+                            <input disabled type="text" class="form-control" id="inputEmail" placeholder="Ingrese su dni..." autocomplete="off">
+                            <span class="glyphicon glyphicon-exclamation-sign" style="color: darkcyan;"></span>
+                            <label style="color: darkcyan;"><small>&nbsp;El DNI no puede cambiarse.</small></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Fecha de nacimiento:</label>
+                        <div class="col-lg-10 form-horizontal form-inline">
+                            <input type="text" class="form-control" maxlength="2" style="width: 80px;" placeholder="DD" autocomplete="off">
+                            <input type="text" class="form-control" maxlength="2" style="width: 80px;" placeholder="MM" autocomplete="off">
+                            <input type="text" class="form-control" maxlength="4" style="width: 80px;" placeholder="AAAA" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Teléfono:</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su teléfono..." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Email:</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su email..." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Contraseña actual:</label>
+                        <div class="col-lg-10">                        
+                            <input disabled type="text" class="form-control" id="inputPassword" placeholder="Contraseña actual..." autocomplete="off">
+                            <small><input id="chkPassword" type="checkbox" class="checkbox-inline" /> ¿Cambiar contraseña?</small>
+                        </div>                    
+                    </div>
+                                
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Contraseña nueva:</label>
+                        <div class="col-lg-10">
+                            <input disabled type="text" class="form-control" id="inputNewPassword" placeholder="Contraseña nueva..." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Repetir contraseña nueva:</label>
+                        <div class="col-lg-10">
+                            <input disabled type="text" class="form-control" id="inputRePassword" placeholder="Repetir contraseña..." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div id="divCareer" class="form-group">
+                        <label class="col-lg-2 control-label">Carrera:</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Ingrese su carrera universitaria..." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div id="divCondition" class="form-group">
+                        <label class="col-lg-2 control-label">Condición:</label>
+                        <div class="col-lg-10">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                    Nuevo ingresante
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                    Estudiante recibido
+                                </label>
+                            </div>
+                        </div>
+                    </div>                                                
+
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    }
+}

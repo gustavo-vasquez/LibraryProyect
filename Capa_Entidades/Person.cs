@@ -30,11 +30,14 @@ namespace Capa_Entidades
         public int Phone { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string EmailSHA256 { get; set; }
+        public int IdRange { get; set; }
     
         public virtual Administrator Administrator { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<Administrator> Administrators { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual Range Range { get; set; }
     }
 }
