@@ -99,3 +99,26 @@ git status
 git commit -m "Ahora si anda el registro de administrador (maldito campo salary)"
 git push library master
 exit
+git status
+git add .
+git status
+git commit -m "Login y registro funcional totalmente"
+git push library master
+checkout seguro
+git branch
+git -b seguro
+git checkout seguro
+git checkout master
+git checkout master
+git commit -m "No se"
+git add .
+git commit -m "No se"
+git checkout master
+git push library master:seguro
+git push library :seguro
+git push library secure
+git checkout -b secure
+git push library secure
+git checkout master
+git status
+exit

@@ -11,6 +11,7 @@ using BotDetect.Web.UI.Mvc;
 using System.Globalization;
 using System.Threading;
 using Library.Models;
+using System.Data.SqlClient;
 
 namespace Library.Controllers
 {
@@ -30,38 +31,49 @@ namespace Library.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Login data)
         {
-            string message = "";
+            try 
+            { 
+                string message = "";
 
-            if(ModelState.IsValid)
-            {                 
-                bool allowLogin = userService.LoginAccess(data, ref message);
+                if(ModelState.IsValid)
+                {                 
+                    bool allowLogin = userService.LoginAccess(data, ref message);
 
-                if (allowLogin)
-                {                                  
-                    Session["User"] = userService.SetSessionInformation(data.email);
-                    if (data.rememberMe)
-                    {
-                        HttpCookie userCookie = new HttpCookie("libraryUniCookie");
-                        userCookie.Domain = "localhost";
-                        userCookie.Expires = DateTime.Now.AddDays(15);
-                        userCookie.Path = "/";
-                        userCookie.Secure = false;
-                        userCookie.Value = userService.EncryptSHA256(data.email);
-                        Response.Cookies.Add(userCookie);
+                    if (allowLogin)
+                    {                                  
+                        Session["User"] = userService.SetSessionInformation(data.email);
+                        if (data.rememberMe)
+                        {
+                            HttpCookie userCookie = new HttpCookie("libraryUniCookie");
+                            userCookie.Domain = "localhost";
+                            userCookie.Expires = DateTime.Now.AddDays(15);
+                            userCookie.Path = "/";
+                            userCookie.Secure = false;
+                            userCookie.Value = userService.EncryptSHA256(data.email);
+                            Response.Cookies.Add(userCookie);
+                        }
+
+                        return Content("<script>location.reload();</script>");
                     }
-
-                    return Content("<script>location.reload();</script>");
+                    else
+                    {
+                        ViewBag.LoginError = message;
+                        return PartialView("_Login", data);
+                    }
+                        
                 }
                 else
                 {
-                    ViewBag.LoginError = message;
-                    return PartialView("_Login", data);
+                    throw new Exception();
                 }
-                        
             }
-            else
+            catch(Exception ex)
             {
-                ViewBag.LoginError = message;
+                if (ex is SqlException)
+                {
+                    return Content("<script>alert(" + ex.InnerException.Message + ");</script>");
+                }
+
                 return PartialView("_Login", data);
             }
         }
