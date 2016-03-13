@@ -57,8 +57,7 @@ namespace Library.Controllers
                     }
                     else
                     {
-                        ViewBag.LoginError = message;
-                        return PartialView("_Login", data);
+                        throw new Exception();
                     }
                         
                 }
@@ -69,9 +68,10 @@ namespace Library.Controllers
             }
             catch(Exception ex)
             {
-                if (ex is SqlException)
+                if (ex.InnerException is SqlException)
                 {
-                    return Content("<script>alert(" + ex.InnerException.Message + ");</script>");
+                    ViewBag.LoginError = "<script>alert('[X] " + ex.InnerException.Message + "');</script>";
+                    return PartialView("_Login", data);
                 }
 
                 return PartialView("_Login", data);

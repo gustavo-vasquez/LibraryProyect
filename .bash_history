@@ -122,3 +122,7 @@ git push library secure
 git checkout master
 git status
 exit
+git add .
+git commit -m "ahora los archivos bootstrap y jquery validate estan en bundles(ahora tratando de manejar excepciones)"
+git push library master
+exit

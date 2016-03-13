@@ -39,7 +39,15 @@ namespace Capa_Servicios
             ObjectParameter messageParameter = new ObjectParameter("message", typeof(string));
             ObjectParameter allowLogin = new ObjectParameter("allowLogin", typeof(bool));
 
-            context.sp_Login(data.email, data.password, messageParameter, allowLogin);
+            try
+            {
+                context.sp_Login(data.email, data.password, messageParameter, allowLogin);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
             message = messageParameter.Value.ToString();
 
             return Convert.ToBoolean(allowLogin.Value);
