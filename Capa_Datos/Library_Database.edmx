@@ -20,7 +20,7 @@
           </Key>
           <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Autor" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Author" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PublicationDate" Type="datetime" Nullable="false" />
           <Property Name="Edition" Type="varchar" MaxLength="20" Nullable="false" />
@@ -393,13 +393,13 @@
           </Key>
           <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Autor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PublicationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Edition" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Sanctions" Relationship="Self.FK_Sanction_IdBook" FromRole="Book" ToRole="Sanction" />
           <NavigationProperty Name="StockBook" Relationship="Self.FK_StockBook" FromRole="Book" ToRole="StockBook" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Career">
           <Key>
@@ -843,9 +843,9 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="LibraryUniversityModel.Book">
               <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Autor" ColumnName="Autor" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PublicationDate" ColumnName="PublicationDate" />
                 <ScalarProperty Name="Edition" ColumnName="Edition" />

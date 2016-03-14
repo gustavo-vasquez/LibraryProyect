@@ -55,6 +55,7 @@
     <Compile Include="Book.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="BookEntity.cs" />
     <Compile Include="Career.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>

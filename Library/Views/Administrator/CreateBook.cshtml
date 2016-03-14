@@ -1,10 +1,30 @@
-﻿@{
+﻿@model Capa_Entidades.Book
+
+@{
     ViewBag.Title = "CreateBook";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @{
+    if (Session["User"] == null)
+    {
+        <script>alert("LA SESIÓN EXPIRÓ.");</script>
+        @Html.Action("Index", "Home");        
+    }
+ 
+    @Styles.Render("~/Content/themes/base/all.css")
+    @Scripts.Render("~/Scripts/jquery-ui-1.11.4.min.js")
+    @Scripts.Render("~/Scripts/administrator/datepicker.js")
+    
+    <style>
+        .validationField {
+            color: red;
+            font-style: italic;
+        }
+    </style>
+    
     string range = ((List<string>)Session["User"])[0];
+    
     if (range != "Administrator")
     {
         <div class="container-fluid">
@@ -22,7 +42,8 @@
     <div class="container-fluid">
         <h2 class="title-font">Ingrese datos del libro</h2>
 
-        <form class="form-horizontal">
+        @using (Html.BeginForm("CreateBook", "Administrator", FormMethod.Post, new { @class = "form-horizontal"}))
+        {        
             <fieldset>
                 <legend></legend>
 
@@ -30,14 +51,16 @@
                     <div class="form-group col-lg-6">
                         <label class="col-lg-2 control-label">Título:</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Título del libro..." autocomplete="off">
+                            @Html.TextBoxFor(b => b.Title, new { @class = "form-control", placeholder = "Título del libro..." })
+                            @Html.ValidationMessageFor(b => b.Title, null, new { @class = "validationField" })                            
                         </div>
                     </div>
 
                     <div class="form-group col-lg-6">
                         <label class="col-lg-2 control-label">Descripción:</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputPassword" placeholder="Descripción del libro..." autocomplete="off">
+                            @Html.TextBoxFor(b => b.Description, new { @class = "form-control", placeholder = "Descripción del libro..." })                            
+                            @Html.ValidationMessageFor(b => b.Description, null, new { @class = "validationField" })                            
                         </div>
                     </div>
                 </div>
@@ -46,35 +69,53 @@
                     <div class="form-group col-lg-6">
                         <label class="col-lg-2 control-label">Autor:</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Autor del libro..." autocomplete="off">
+                            @Html.TextBoxFor(b => b.Author, new { @class = "form-control", placeholder = "Autor del libro..." })    
+                            @Html.ValidationMessageFor(b => b.Author, null, new { @class = "validationField" })                             
                         </div>
                     </div>
 
                     <div class="form-group col-lg-6">
                         <label class="col-lg-2 control-label">Fecha de publicación:</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputPassword" placeholder="Fecha del libro..." autocomplete="off">
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(b => b.PublicationDate, new { @id = "datepicker", @class = "form-control", @readonly = "readonly", placeholder = "DD/MM/AAAA" })                            
+                        </div>
+                        <div class="col-lg-pull-1">                            
+                            <img id="iconPicker" src="~/Images/1458001251_calendar.png" alt="calendar_icon" height="50" />
                         </div>
                     </div>
                 </div>
 
-            <div class="row">
-                <div class="form-group col-lg-6">
-                    <label class="col-lg-2 control-label">Edición:</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputEmail" placeholder="Edición del libro..." autocomplete="off">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-2 control-label">Edición:</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(b => b.Edition, new { @class = "form-control", placeholder = "Nombre de la edición..." })                        
+                            @Html.ValidationMessageFor(b => b.Edition, null, new { @class = "validationField" })                            
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-2 control-label">Materia:</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(b => b.Subject, new { @class = "form-control", placeholder = "Materia del libro..." })                        
+                            @Html.ValidationMessageFor(b => b.Subject, null, new { @class = "validationField" })                            
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group col-lg-6">
-                    <label class="col-lg-2 control-label">Área:</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputPassword" placeholder="Área del libro..." autocomplete="off">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-2 control-label">Stock:</label>
+                        <div class="col-lg-2">
+                            @Html.TextBoxFor(b => b.Stock, new { @class = "form-control", type = "number", max = "20", min = "1", @Value = "1" })                        
+                        </div>
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn btn-info">Crear nuevo libro</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            </fieldset>
-        </form>
+            </fieldset>        
+        }
         <div class="vertical-space"></div>
         <img src="~/Images/book-20clip.png" width="500" alt="book_ilustration" class="img-responsive center-block" />
 

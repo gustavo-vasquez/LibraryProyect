@@ -14,9 +14,9 @@
     <EntitySetMapping Name="Books">
       <EntityTypeMapping TypeName="LibraryUniversityModel.Book">
         <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="Author" ColumnName="Author" />
           <ScalarProperty Name="BookID" ColumnName="BookID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Autor" ColumnName="Autor" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="PublicationDate" ColumnName="PublicationDate" />
           <ScalarProperty Name="Edition" ColumnName="Edition" />

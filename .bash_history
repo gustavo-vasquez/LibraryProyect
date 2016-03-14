@@ -126,3 +126,7 @@ git add .
 git commit -m "ahora los archivos bootstrap y jquery validate estan en bundles(ahora tratando de manejar excepciones)"
 git push library master
 exit
+git add .
+git commit -m "Ahora Login tira los errores en un alert. Use manejo de excepciones y el raiserror en el store"
+git push library master
+exit

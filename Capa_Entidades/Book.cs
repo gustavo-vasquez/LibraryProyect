@@ -21,11 +21,11 @@ namespace Capa_Entidades
     
         public int BookID { get; set; }
         public string Title { get; set; }
-        public string Autor { get; set; }
         public string Description { get; set; }
         public System.DateTime PublicationDate { get; set; }
         public string Edition { get; set; }
         public string Subject { get; set; }
+        public string Author { get; set; }
     
         public virtual ICollection<Sanction> Sanctions { get; set; }
         public virtual StockBook StockBook { get; set; }

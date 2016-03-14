@@ -15,7 +15,7 @@
     </Key>
     <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Autor" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Author" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="PublicationDate" Type="datetime" Nullable="false" />
     <Property Name="Edition" Type="varchar" MaxLength="20" Nullable="false" />
