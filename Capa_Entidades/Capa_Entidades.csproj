@@ -94,6 +94,9 @@
     <Compile Include="sp_ListingCareers_Result.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_ShowBooks_Result.cs">
+      <DependentUpon>LibraryEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_ShowPersons_Result.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>

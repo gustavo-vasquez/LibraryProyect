@@ -130,3 +130,8 @@ git add .
 git commit -m "Ahora Login tira los errores en un alert. Use manejo de excepciones y el raiserror en el store"
 git push library master
 exit
+git add .
+git status
+git commit -m "Instale el jquery ui y hay avances en la página de crear libro"
+git push library master
+exit

@@ -13,3 +13,4 @@
 /// <reference path="user/administrator.js" />
 /// <reference path="jquery-ui-1.11.4.js" />
 /// <reference path="administrator/datepicker.js" />
+/// <reference path="administrator/editbook.js" />

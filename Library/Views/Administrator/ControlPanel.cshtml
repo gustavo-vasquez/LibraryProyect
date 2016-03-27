@@ -1,12 +1,18 @@
-﻿@model IEnumerable<Library.Models.GridTest>
+﻿@model IEnumerable<Capa_Entidades.sp_ShowBooks_Result>
 
 @{
-    ViewBag.Title = "ControlPanel";
+    ViewBag.Title = "Panel de control";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "grillaFutbol");
+    WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "BooksGrid");    
 }
 
 @{
+    if (Session["User"] == null)
+    {
+        <script>alert("LA SESIÓN EXPIRÓ.");</script>
+        @Html.Action("Index", "Home");        
+    }
+    
     string range = ((List<string>)Session["User"])[0];
     if (range != "Administrator")
     {
@@ -23,10 +29,15 @@
     else
     {         
         @Styles.Render("~/Content/user/administrator.css")
-        @Scripts.Render("~/Scripts/user/controlGrids.js")
+        <script>
+            $(document).ready(function () {
+                var rowCount = $("#booksGrid >tbody >tr").length;
+                $("#totalBooks").html("Total libros: " + "<b>" + rowCount + "</b>");
+            })
+        </script>
 
         <div class="container-fluid">
-            <h3 class="title-font">Libros existentes en la biblioteca</h3>    
+            <h1 class="title-font">Libros existentes en la biblioteca</h1>    
             <div class="vertical-space"></div>
     
         <div>        
@@ -44,8 +55,8 @@
                     <option>Más recientes primero</option>
                     <option>Más antiguos primero</option>
                 </select>            
-            </div>        
-            <label class="breadcrumb col-lg-2 text-center count_Books text-primary"> Total libros: 100 </label>
+            </div>
+            <label id="totalBooks" class="breadcrumb col-lg-2 text-center count_Books text-primary"></label>
         </div>
         <div class="vertical-space"></div>
     
@@ -58,29 +69,37 @@
                 }
             </style>
 
-            <div class="col-lg-7">
+            <div class="col-lg-12">
                 @grilla.GetHtml(
-                htmlAttributes: new { id = "grillaFutbol" },
+                htmlAttributes: new { id = "booksGrid" },
                 tableStyle: "table table-hover active table-bordered text-center",
-                headerStyle: "success",
-                fillEmptyRows: true,
+                headerStyle: "success",                
+                fillEmptyRows: false,
                 mode: WebGridPagerModes.All,
                 firstText: "<< Primero",
                 previousText: "< Anterior",
                 nextText: "Siguiente >",
                 lastText: "Último >>",
 
-                columns: new[]
-                {
-                    grilla.Column("posicion", canSort: false, header: "Posiciones"),
-                    grilla.Column("equipo", canSort: false, header: "Equipos"),
-                    grilla.Column(
-                        header: "Acciones",
-                        format: @<text>
-                                    <a href="#"><span class="glyphicon glyphicon-pencil"></span> Editar</a>&nbsp;&nbsp;&nbsp;
-                                    <a href="#"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>
-                                </text>)
-                })
+                columns: grilla.Columns(                                
+                                grilla.Column("Title", canSort: false, header: "Título"),
+                                grilla.Column("Author", canSort: false, header: "Autor"),
+                                grilla.Column("Description", canSort: false, header: "Descripción"),
+                                grilla.Column("PublicationDate", canSort: false, header: "Publicación", format: (item) => string.Format("{0:dd/MM/yyyy}", item.PublicationDate)),
+                                grilla.Column("Edition", canSort: false, header: "Edición"),
+                                grilla.Column("Subject", canSort: false, header: "Materia"),
+                                grilla.Column("Stock", canSort: false, header: "Ejemplares"),
+                                grilla.Column("BookID", canSort: false, header: "Acciones",
+                                        format: @<text>
+                                                    <a href="@Url.Action("EditBook", new { id = @item.BookID })">
+                                                        <span class="glyphicon glyphicon-pencil"></span> Editar</a>&nbsp;&nbsp;&nbsp;
+
+                                                    <a href="@Url.Action("DeleteBook", new { id = @item.BookID })">
+                                                        <span class="glyphicon glyphicon-remove"></span> Borrar</a>
+                                                </text>     
+                                )
+                         )
+                 )
             </div>
         </div>
     </div>

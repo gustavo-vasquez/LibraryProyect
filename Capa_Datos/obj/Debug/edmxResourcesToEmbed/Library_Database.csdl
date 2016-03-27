@@ -18,7 +18,7 @@
     <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="PublicationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PublicationDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Edition" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Sanctions" Relationship="Self.FK_Sanction_IdBook" FromRole="Book" ToRole="Sanction" />
@@ -75,7 +75,7 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DNI" Type="Int32" Nullable="false" />
-    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Phone" Type="Int32" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -327,13 +327,29 @@
       <End Role="Range" EntitySet="Ranges" />
       <End Role="Person" EntitySet="People" />
     </AssociationSet>
+    <FunctionImport Name="sp_CreateBook">
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="author" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="publicationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="edition" Mode="In" Type="String" />
+      <Parameter Name="subject" Mode="In" Type="String" />
+      <Parameter Name="stock" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_EditBook">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="author" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="publicationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="edition" Mode="In" Type="String" />
+      <Parameter Name="subject" Mode="In" Type="String" />
+      <Parameter Name="stock" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="sp_GetUserInformation" ReturnType="Collection(LibraryUniversityModel.sp_GetUserInformation_Result)">
       <Parameter Name="email" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_ListingCareers" ReturnType="Collection(LibraryUniversityModel.sp_ListingCareers_Result)" />
-    <FunctionImport Name="sp_ShowPersons" ReturnType="Collection(LibraryUniversityModel.sp_ShowPersons_Result)">
-      <Parameter Name="filter" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="sp_Login">
       <Parameter Name="email" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />
@@ -382,6 +398,10 @@
       <Parameter Name="message" Mode="InOut" Type="String" />
       <Parameter Name="salida" Mode="InOut" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="sp_ShowBooks" ReturnType="Collection(LibraryUniversityModel.sp_ShowBooks_Result)" />
+    <FunctionImport Name="sp_ShowPersons" ReturnType="Collection(LibraryUniversityModel.sp_ShowPersons_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_Administrator1">
     <End Type="LibraryUniversityModel.Person" Role="Person" Multiplicity="1" />
@@ -428,22 +448,32 @@
     </ReferentialConstraint>
   </Association>
   <ComplexType Name="sp_GetUserInformation_Result">
+    <Property Type="Int32" Name="IdRange" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="EmailSHA256" Nullable="false" MaxLength="500" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="IdRange" Nullable="false" />
   </ComplexType>
   <ComplexType Name="sp_ListingCareers_Result">
     <Property Type="Int32" Name="CareerID" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
   </ComplexType>
+  <ComplexType Name="sp_ShowBooks_Result">
+    <Property Type="Int32" Name="BookID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="PublicationDate" Nullable="false" Precision="16" />
+    <Property Type="String" Name="Edition" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Subject" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="Stock" Nullable="false" />
+  </ComplexType>
   <ComplexType Name="sp_ShowPersons_Result">
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="DNI" Nullable="false" />
-    <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="16" />
     <Property Type="DateTime" Name="RegistrationDate" Nullable="false" Precision="23" />
     <Property Type="Int32" Name="Phone" Nullable="false" />
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />

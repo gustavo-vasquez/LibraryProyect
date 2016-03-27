@@ -40,6 +40,76 @@ namespace Capa_Entidades
         public DbSet<Student> Students { get; set; }
         public DbSet<Range> Ranges { get; set; }
     
+        public virtual int sp_CreateBook(string title, string author, string description, Nullable<System.DateTime> publicationDate, string edition, string subject, Nullable<int> stock)
+        {
+            var titleParameter = title != null ?
+                new ObjectParameter("title", title) :
+                new ObjectParameter("title", typeof(string));
+    
+            var authorParameter = author != null ?
+                new ObjectParameter("author", author) :
+                new ObjectParameter("author", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var publicationDateParameter = publicationDate.HasValue ?
+                new ObjectParameter("publicationDate", publicationDate) :
+                new ObjectParameter("publicationDate", typeof(System.DateTime));
+    
+            var editionParameter = edition != null ?
+                new ObjectParameter("edition", edition) :
+                new ObjectParameter("edition", typeof(string));
+    
+            var subjectParameter = subject != null ?
+                new ObjectParameter("subject", subject) :
+                new ObjectParameter("subject", typeof(string));
+    
+            var stockParameter = stock.HasValue ?
+                new ObjectParameter("stock", stock) :
+                new ObjectParameter("stock", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CreateBook", titleParameter, authorParameter, descriptionParameter, publicationDateParameter, editionParameter, subjectParameter, stockParameter);
+        }
+    
+        public virtual int sp_EditBook(Nullable<int> id, string title, string author, string description, Nullable<System.DateTime> publicationDate, string edition, string subject, Nullable<int> stock)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("title", title) :
+                new ObjectParameter("title", typeof(string));
+    
+            var authorParameter = author != null ?
+                new ObjectParameter("author", author) :
+                new ObjectParameter("author", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var publicationDateParameter = publicationDate.HasValue ?
+                new ObjectParameter("publicationDate", publicationDate) :
+                new ObjectParameter("publicationDate", typeof(System.DateTime));
+    
+            var editionParameter = edition != null ?
+                new ObjectParameter("edition", edition) :
+                new ObjectParameter("edition", typeof(string));
+    
+            var subjectParameter = subject != null ?
+                new ObjectParameter("subject", subject) :
+                new ObjectParameter("subject", typeof(string));
+    
+            var stockParameter = stock.HasValue ?
+                new ObjectParameter("stock", stock) :
+                new ObjectParameter("stock", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EditBook", idParameter, titleParameter, authorParameter, descriptionParameter, publicationDateParameter, editionParameter, subjectParameter, stockParameter);
+        }
+    
         public virtual ObjectResult<sp_GetUserInformation_Result> sp_GetUserInformation(string email)
         {
             var emailParameter = email != null ?
@@ -52,15 +122,6 @@ namespace Capa_Entidades
         public virtual ObjectResult<sp_ListingCareers_Result> sp_ListingCareers()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListingCareers_Result>("sp_ListingCareers");
-        }
-    
-        public virtual ObjectResult<sp_ShowPersons_Result> sp_ShowPersons(string filter)
-        {
-            var filterParameter = filter != null ?
-                new ObjectParameter("filter", filter) :
-                new ObjectParameter("filter", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ShowPersons_Result>("sp_ShowPersons", filterParameter);
         }
     
         public virtual int sp_Login(string email, string password, ObjectParameter message, ObjectParameter allowLogin)
@@ -209,6 +270,20 @@ namespace Capa_Entidades
                 new ObjectParameter("idCondition", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegisterStudent", nameParameter, lastNameParameter, dniParameter, birthDateParameter, phoneParameter, emailParameter, emailEncryptedParameter, passwordParameter, idCareerParameter, idConditionParameter, message, salida);
+        }
+    
+        public virtual ObjectResult<sp_ShowBooks_Result> sp_ShowBooks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ShowBooks_Result>("sp_ShowBooks");
+        }
+    
+        public virtual ObjectResult<sp_ShowPersons_Result> sp_ShowPersons(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ShowPersons_Result>("sp_ShowPersons", filterParameter);
         }
     }
 }

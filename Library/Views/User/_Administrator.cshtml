@@ -77,6 +77,7 @@
                     <div class="col-lg-7">
                         @{ MvcCaptcha captchaBox = new MvcCaptcha("captchaAdministrator"); }
                         @Html.Captcha(captchaBox)
+                        <br />
                         @Html.TextBoxFor(a => a.CaptchaTextbox, new { @class = "form-control" })
                         @Html.ValidationMessageFor(a => a.CaptchaTextbox, null, new { @class = "validationField" })
                     </div>

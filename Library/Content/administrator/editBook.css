@@ -1,0 +1,20 @@
+﻿input[type="text"]:disabled {
+    font-style: italic;
+    color: #cbc6c6;
+}
+
+.validationField {
+    color: red;
+    font-style: italic;
+}
+
+.legend-checkbox {
+    cursor: pointer;
+    font-weight: normal;
+    margin-top: 10px;
+}
+
+.legend-radio {
+    cursor: pointer;
+    font-weight: normal;
+}

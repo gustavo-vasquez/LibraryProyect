@@ -8,12 +8,14 @@ using System.Data.Objects;
 using Library.Models;
 using Capa_Entidades;
 using Capa_Servicios;
+using System.Data.SqlClient;
 
 namespace Library.Controllers
 {
     public class AdministratorController : Controller
     {
         static UserServices userService = new UserServices();
+        static AdministratorServices adminService = new AdministratorServices();
 
         //
         // GET: /Administrator/
@@ -23,9 +25,68 @@ namespace Library.Controllers
             return View();
         }
 
-        public ActionResult EditBook()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateBook(Book data)
         {
-            return View();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    adminService.CreateNewBook(data);
+                    return RedirectToAction("ControlPanel", "Administrator");
+                }
+
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is SqlException)
+                {
+                    ViewBag.ErrorBook = ex.InnerException.Message;
+                    return View(data);
+                }
+                    
+                return View(data);
+            }
+                        
+        }
+
+        public ActionResult EditBook(int id)
+        {
+            return View(adminService.SearchBook(id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditBook(int id, Book data, bool onlyStock, int modifyStock, string plusOrMinus)
+        {
+            try
+            {                
+                if (onlyStock)
+                {
+                    adminService.EditStockData(id, modifyStock, plusOrMinus);
+                    return RedirectToAction("ControlPanel");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    adminService.EditBookData(id, data, modifyStock, plusOrMinus);
+                    return RedirectToAction("ControlPanel");
+                }
+
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is SqlException)
+                {
+                    ViewBag.EditError = ex.InnerException.Message;
+                    return View(data);
+                }
+
+                return View(data);
+            }
         }
 
         public ActionResult DeleteBook()
@@ -35,20 +96,7 @@ namespace Library.Controllers
 
         public ActionResult ControlPanel()
         {
-            List<GridTest> listado = new List<GridTest>();
-
-            listado.Add(new GridTest() { posicion = 1, equipo = "River Plate" });
-            listado.Add(new GridTest() { posicion = 2, equipo = "San Lorenzo" });
-            listado.Add(new GridTest() { posicion = 3, equipo = "Independiente" });
-            listado.Add(new GridTest() { posicion = 4, equipo = "Newell's" });
-            listado.Add(new GridTest() { posicion = 5, equipo = "Rosario Central" });
-            listado.Add(new GridTest() { posicion = 6, equipo = "Estudiantes" });
-            listado.Add(new GridTest() { posicion = 7, equipo = "Banfield" });
-            listado.Add(new GridTest() { posicion = 8, equipo = "Velez" });
-            listado.Add(new GridTest() { posicion = 9, equipo = "Lanús" });
-            listado.Add(new GridTest() { posicion = 10, equipo = "Argentinos Juniors" });
-
-            return View(listado);
+            return View(adminService.GetBooksList());
         }
 
         public ActionResult RegisteredUsers()

@@ -7,6 +7,12 @@
 }
 
 @{
+    if (Session["User"] == null)
+    {
+        <script>alert("LA SESIÓN EXPIRÓ.");</script>
+        @Html.Action("Index", "Home");
+    }
+    
     string range = ((List<string>)Session["User"])[0];
     if (range != "Administrator")
     {
@@ -26,11 +32,18 @@
     @Scripts.Render("~/Scripts/user/controlGrids.js")
 
     <div class="container-fluid">
-        <h3 class="title-font">Listado de usuarios registrados</h3>    
+        <div class="row">            
+            <h1 class="title-font col-lg-11">
+                <button onclick="location.href = '@Url.Action("ControlPanel")';" class="btn btn-default col-lg-1">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </button>
+                Listado de usuarios registrados
+            </h1>
+        </div>
         <hr />
 
         <div class="">        
-            <div class="well well-sm col-lg-2" style="font-weight: normal;">Ordenar por: </div>
+            <div class="breadcrumb col-lg-2" style="font-weight: normal;">Ordenar por: </div>
             @using (Html.BeginForm("RegisteredUsers", "Administrator", FormMethod.Post))
             {        
                 <div class="col-lg-3 col-lg-pull-1">
@@ -70,7 +83,7 @@
                     grilla.Column("Name", canSort: false, header: "Nombre"),
                     grilla.Column("LastName", canSort: false, header: "Apellido"),
                     grilla.Column("DNI", canSort: false, header: "Nº documento"),
-                    grilla.Column("BirthDate", canSort: false, header: "Fecha de nacimiento"),
+                    grilla.Column("BirthDate", canSort: false, header: "Año nacimiento", format: (item) => string.Format("{0:dd MMM yyyy}", item.BirthDate)),
                     grilla.Column("RegistrationDate", canSort: false, header: "Fecha de registro"),
                     grilla.Column("Phone", canSort: false, header: "Teléfono"),            
                     grilla.Column("Email", canSort: false, header: "Correo electrónico")         

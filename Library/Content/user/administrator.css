@@ -1,6 +1,7 @@
 ﻿.count_Books {
     float: right;
     margin-top: -40px;
+    font-weight: normal !important;
 }
 
 .validationField {

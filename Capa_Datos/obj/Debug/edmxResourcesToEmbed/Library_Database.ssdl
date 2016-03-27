@@ -17,7 +17,7 @@
     <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Author" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="PublicationDate" Type="datetime" Nullable="false" />
+    <Property Name="PublicationDate" Type="smalldatetime" Nullable="false" />
     <Property Name="Edition" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Subject" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
@@ -64,7 +64,7 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DNI" Type="int" Nullable="false" />
-    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="BirthDate" Type="smalldatetime" Nullable="false" />
     <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
     <Property Name="Phone" Type="int" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
@@ -251,6 +251,25 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_CreateBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="title" Type="varchar" Mode="In" />
+    <Parameter Name="author" Type="varchar" Mode="In" />
+    <Parameter Name="description" Type="varchar" Mode="In" />
+    <Parameter Name="publicationDate" Type="datetime" Mode="In" />
+    <Parameter Name="edition" Type="varchar" Mode="In" />
+    <Parameter Name="subject" Type="varchar" Mode="In" />
+    <Parameter Name="stock" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_EditBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="title" Type="varchar" Mode="In" />
+    <Parameter Name="author" Type="varchar" Mode="In" />
+    <Parameter Name="description" Type="varchar" Mode="In" />
+    <Parameter Name="publicationDate" Type="datetime" Mode="In" />
+    <Parameter Name="edition" Type="varchar" Mode="In" />
+    <Parameter Name="subject" Type="varchar" Mode="In" />
+    <Parameter Name="stock" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetUserInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="email" Type="varchar" Mode="In" />
   </Function>
@@ -303,6 +322,7 @@
     <Parameter Name="message" Type="varchar" Mode="InOut" />
     <Parameter Name="salida" Type="bit" Mode="InOut" />
   </Function>
+  <Function Name="sp_ShowBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_ShowPersons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="filter" Type="varchar" Mode="In" />
   </Function>

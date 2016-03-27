@@ -99,6 +99,7 @@
                     <div class="col-lg-7">
                         @{ MvcCaptcha captchaBox = new MvcCaptcha("captchaStudent"); }
                         @Html.Captcha(captchaBox)
+                        <br />
                         @Html.TextBoxFor(s => s.CaptchaTextbox, new { @class = "form-control" })
                         @Html.ValidationMessageFor(s => s.CaptchaTextbox, null, new { @class = "validationField" })
                     </div>     
