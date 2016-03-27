@@ -135,3 +135,4 @@ git status
 git commit -m "Instale el jquery ui y hay avances en la página de crear libro"
 git push library master
 exit
+git status
