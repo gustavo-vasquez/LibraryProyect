@@ -86,5 +86,12 @@ namespace Capa_Servicios
 
             return currentStock;
         }
+
+        public List<sp_SortBooks_Result> SortBooks(string filter)
+        {
+            List<sp_SortBooks_Result> result = context.sp_SortBooks(filter).ToList();
+
+            return result;
+        }
     }
 }

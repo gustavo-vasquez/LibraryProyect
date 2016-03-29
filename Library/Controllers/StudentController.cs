@@ -5,17 +5,48 @@ using System.Web;
 using System.Web.Mvc;
 
 using Library.Models;
+using Capa_Servicios;
 
 namespace Library.Controllers
 {
     public class StudentController : Controller
     {
+        static StudentServices studentService = new StudentServices();
+
         //
         // GET: /Student/
 
         public ActionResult MyProfile()
         {
             return View();
+        }
+                
+        public ActionResult ViewResults(string q, string cat)
+        {
+            if (Session["User"] != null)
+            {
+                string range = ((List<string>)Session["User"])[0];
+                if (range != "Student")
+                {
+                    Response.StatusCode = 403;
+                    return null;
+                }
+            }
+
+            switch (cat)
+            {
+                case "T":
+                    return View(studentService.SearchQuery(q, cat));
+                case "A":
+                    return View(studentService.SearchQuery(q, cat));             
+            }
+
+            return View();
+        }
+
+        public ActionResult Transaction(int id)
+        {
+            return View(studentService.BookInformation(id));
         }
 
         public ActionResult Loans()

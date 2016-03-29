@@ -285,5 +285,27 @@ namespace Capa_Entidades
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ShowPersons_Result>("sp_ShowPersons", filterParameter);
         }
+    
+        public virtual ObjectResult<sp_SortBooks_Result> sp_SortBooks(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SortBooks_Result>("sp_SortBooks", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_SearchInBooks_Result> sp_SearchInBooks(string query, string filter)
+        {
+            var queryParameter = query != null ?
+                new ObjectParameter("query", query) :
+                new ObjectParameter("query", typeof(string));
+    
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SearchInBooks_Result>("sp_SearchInBooks", queryParameter, filterParameter);
+        }
     }
 }

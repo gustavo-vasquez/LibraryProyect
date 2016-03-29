@@ -94,10 +94,16 @@
     <Compile Include="sp_ListingCareers_Result.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_SearchInBooks_Result.cs">
+      <DependentUpon>LibraryEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_ShowBooks_Result.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ShowPersons_Result.cs">
+      <DependentUpon>LibraryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SortBooks_Result.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="StockBook.cs">

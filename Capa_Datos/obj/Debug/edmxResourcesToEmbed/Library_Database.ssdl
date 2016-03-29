@@ -322,8 +322,15 @@
     <Parameter Name="message" Type="varchar" Mode="InOut" />
     <Parameter Name="salida" Type="bit" Mode="InOut" />
   </Function>
+  <Function Name="sp_SearchInBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="query" Type="varchar" Mode="In" />
+    <Parameter Name="filter" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="sp_ShowBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_ShowPersons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_SortBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="filter" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="LibraryUniversityModelStoreContainer">

@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Capa_Entidades.sp_ShowBooks_Result>
+﻿@model IEnumerable<Capa_Entidades.sp_SortBooks_Result>
 
 @{
     ViewBag.Title = "Panel de control";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "BooksGrid");    
+    WebGrid grilla = new WebGrid(Model, canPage: false, ajaxUpdateContainerId: "BooksGrid");    
 }
 
 @{
-    if (Session["User"] == null)
+    if (Session["User"] == null && Request.Cookies["libraryUniCookie"] != null)
     {
         <script>alert("LA SESIÓN EXPIRÓ.");</script>
         @Html.Action("Index", "Home");        
@@ -29,34 +29,37 @@
     else
     {         
         @Styles.Render("~/Content/user/administrator.css")
-        <script>
-            $(document).ready(function () {
-                var rowCount = $("#booksGrid >tbody >tr").length;
-                $("#totalBooks").html("Total libros: " + "<b>" + rowCount + "</b>");
-            })
-        </script>
 
         <div class="container-fluid">
             <h1 class="title-font">Libros existentes en la biblioteca</h1>    
             <div class="vertical-space"></div>
     
-        <div>        
-            <a href="@Url.Action("CreateBook", "Administrator")" class="btn btn-sm btn-success col-lg-2">
-                <span class="glyphicon glyphicon-plus"></span>
-                &nbsp;Añadir libro
-            </a>                
-            <a href="@Url.Action("RegisteredUsers", "Administrator")" class="btn btn-sm btn-primary col-lg-2" style="margin-left: 3%;">
-                <span class="glyphicon glyphicon-plus"></span>
-                &nbsp;Ver usuarios
-            </a>
-            <label class="col-lg-2 col-lg-offset-1" style="font-weight: normal;">Ordenar por: </label>
-            <div class="col-lg-3 col-lg-pull-1">            
-                <select id="select" class="form-control">
-                    <option>Más recientes primero</option>
-                    <option>Más antiguos primero</option>
-                </select>            
+        <div class="row col-lg-12">
+            <div class="col-lg-2">
+                <a href="@Url.Action("CreateBook", "Administrator")" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    &nbsp;Añadir libro
+                </a>
+            </div>               
+            <div class="col-lg-2">
+                <a href="@Url.Action("RegisteredUsers", "Administrator")" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    &nbsp;Ver usuarios
+                </a>
             </div>
-            <label id="totalBooks" class="breadcrumb col-lg-2 text-center count_Books text-primary"></label>
+            <div class="col-lg-push-1">
+                <div class="breadcrumb col-lg-2" style="font-weight: normal;">Ordenar por: </div>
+                @using (Html.BeginForm("ControlPanel", "Administrator", FormMethod.Post))
+                {
+                    <div class="col-lg-3 col-lg-pull-1">
+                        @Html.DropDownList("filterList", ViewData["list"] as SelectList, new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-warning col-lg-1 col-lg-pull-1"><span class="glyphicon glyphicon-triangle-right"></span></button>
+                }
+            </div>
+            <div class="col-lg-6">
+                <label class="breadcrumb text-center count_Books text-primary">Total libros: <b>@Model.Count()</b></label>
+            </div>
         </div>
         <div class="vertical-space"></div>
     
@@ -71,7 +74,7 @@
 
             <div class="col-lg-12">
                 @grilla.GetHtml(
-                htmlAttributes: new { id = "booksGrid" },
+                htmlAttributes: new { id = "BooksGrid" },
                 tableStyle: "table table-hover active table-bordered text-center",
                 headerStyle: "success",                
                 fillEmptyRows: false,
@@ -92,8 +95,8 @@
                                 grilla.Column("BookID", canSort: false, header: "Acciones",
                                         format: @<text>
                                                     <a href="@Url.Action("EditBook", new { id = @item.BookID })">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Editar</a>&nbsp;&nbsp;&nbsp;
-
+                                                        <span class="glyphicon glyphicon-pencil"></span> Editar</a>
+                                                    <br />
                                                     <a href="@Url.Action("DeleteBook", new { id = @item.BookID })">
                                                         <span class="glyphicon glyphicon-remove"></span> Borrar</a>
                                                 </text>     

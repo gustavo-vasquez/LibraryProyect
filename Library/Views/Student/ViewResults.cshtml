@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Capa_Entidades.sp_SearchInBooks_Result>
+
+@{
+    ViewBag.Title = "Resultados de la búsqueda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    li:last-child {
+        list-style-type: none;
+    }
+</style>
+
+@{
+    <div class="vertical-space"></div>
+    <div class="container-fluid">
+        <div class="col-lg-10 col-lg-push-1">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h2 class="panel-title"><b>Resultado de la búsqueda:</b></h2>
+                </div>
+                @if (Model.Count() < 1)
+                {
+                    <div class="panel-body">
+                        <h2 class="text-center"><b>No se encontraron resultados.</b></h2>
+                        <a href="@Url.Action("Index", "Home")" class="text-center"><h3><b>Haga una nueva búsqueda</b></h3></a>
+                    </div>
+                }
+                else
+                {
+                    foreach (var book in Model)
+                    {
+                    <div class="panel-body">
+                        <div class="row container-fluid">
+                            <ul class="col-lg-6">
+                                <li>
+                                    <p><b>Título: </b>@book.Title</p>
+                                </li>
+                                <li>
+                                    <p><b>Autor: </b>@book.Author</p>
+                                </li>
+                                <li>
+                                    <p><b>Descripción: </b>@book.Description</p>
+                                </li>
+                                <li>
+                                    <p><b>Fecha de publicación: </b>@book.PublicationDate.ToString("dd/MM/yyyy")</p>
+                                </li>
+                                <li>
+                                    <p><b>Edición: </b>@book.Edition</p>
+                                </li>
+                                <li>
+                                    <p><b>Materia: </b>@book.Subject</p>
+                                </li>
+                                <li>
+                                    <a href="~/Student/Transaction?id=@book.BookID" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-share-alt"></span> Solicitar préstamo</a>
+                                </li>
+                            </ul>
+                            <ul class="col-lg-6">
+                                <li class="list-group-item">
+                                    <h2 class="text-center">Ejemplares disponibles:</h2>
+                                    <h2 class="text-center"><b>@book.Stock</b></h2>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -3,17 +3,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+    $(document).ready(function () { 
+        $("#term").keyup(function () {
+            var $this = $(this);
+            window.setTimeout(function () {            
+                $("[name=q]").val($this.val());
+            }, 0);
+        });
+
+        $('#term').bind("enterKey", function (e) {
+            $('#myModal').modal('toggle');
+        });
+        $('#term').keyup(function (e) {
+            if (e.keyCode == 13) {
+                $(this).trigger("enterKey");
+            }
+        });
+    });
+</script>
+
 <div class="container-fluid">
     <div class="vertical-space"></div>
-    <div class="jumbotron text-center">
-        <h1>Biblioteca Universitaria</h1>
-        <p>¡Bienvenido! Escriba el libro que desee buscar para obtener un préstamo por tres días.</p>
+    <div class="text-center">
+        <h1 style="font-size: 54px;"><b>Biblioteca Universitaria</b></h1>
+        <p style="font-size: 24px;">¡Bienvenido! Escriba el libro que desee buscar para obtener un préstamo por tres días.</p>
         <div class="vertical-space"></div>
-        <form role="search">
+        <div class="form-group has-success col-lg-12 center-block">
+            <input id="term" type="text" class="form-control input-lg" placeholder="Escribir título o autor del libro... (vacío para ver todos)" autofocus>
+            <br />
             <div class="form-group col-lg-12 center-block">
-                <input type="text" class="form-control input-lg" placeholder="Escribir título o autor del libro..." autofocus>
+                <div class="col-lg-6">
+                    @using (Html.BeginForm("ViewResults", "Student", FormMethod.Get, new { id = "FormTitle", @class = "center-block", role = "search" }))
+                    {                                                
+                        <input type="hidden" name="q" />
+                        <input type="hidden" name="cat" value="T" />                        
+                        <button type="submit" class="btn btn-lg btn-default btn-block"><span class="glyphicon glyphicon-search"></span> Buscar por título </button>
+                    }
+                </div>
+
+                <div class="col-lg-6">
+                    @using (Html.BeginForm("ViewResults", "Student", FormMethod.Get, new { id = "FormAuthor", @class = "center-block", role = "search" }))
+                    {   
+                        <input type="hidden" name="q" />                     
+                        <input type="hidden" name="cat" value="A" />                        
+                        <button type="submit" class="btn btn-lg btn-default btn-block"><span class="glyphicon glyphicon-search"></span> Buscar por autor </button>
+                    }
+                </div>
             </div>
-            <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-search"></span> Buscar </button>
-        </form>      
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>*@
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">BUSCAR LIBROS</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Especifique los términos de su búsqueda:</p>
+                        <p>¿Desea buscar según el título o el autor del libro? En caso de no haber ingresado ningún texto se visualizarán todos los libros.</p>
+                    </div>
+                    <div class="modal-footer">
+                        @using (Html.BeginForm("ViewResults", "Student", FormMethod.Get, new { id = "FormTitle", @class = "center-block", role = "search" }))
+                        {
+                            <input type="hidden" name="q" />
+                            <input type="hidden" name="cat" value="T" />
+                            <div class="col-lg-4 col-lg-push-2">
+                                <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></span> Buscar por título</button>
+                            </div>
+                        }
+
+                        @using (Html.BeginForm("ViewResults", "Student", FormMethod.Get, new { id = "FormAuthor", @class = "center-block", role = "search" }))
+                        {
+                            <input type="hidden" name="q" />
+                            <input type="hidden" name="cat" value="A" />
+                            <div class="col-lg-4 col-lg-push-2">
+                                <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></span> Buscar por autor</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>

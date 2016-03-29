@@ -22,7 +22,7 @@ namespace Capa_Entidades
 
         [Required(ErrorMessage = "&diams; Debe ingresar un autor.")]
         [StringLength(50, ErrorMessage = "&diams; Máximo 20 caracteres.")]
-        [RegularExpression("[a-zA-Z ñáéíóü]+", ErrorMessage = "&diams; Campo autor sólo permite letras.")]
+        [RegularExpression("[a-zA-Z. ñáéíóü]+", ErrorMessage = "&diams; Campo autor sólo permite letras.")]
         public string Author { get; set; }
 
         [Required(ErrorMessage = "&diams; Debe ingresar una descripción.")]

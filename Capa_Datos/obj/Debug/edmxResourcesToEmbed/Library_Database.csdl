@@ -402,6 +402,13 @@
     <FunctionImport Name="sp_ShowPersons" ReturnType="Collection(LibraryUniversityModel.sp_ShowPersons_Result)">
       <Parameter Name="filter" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="sp_SortBooks" ReturnType="Collection(LibraryUniversityModel.sp_SortBooks_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SearchInBooks" ReturnType="Collection(LibraryUniversityModel.sp_SearchInBooks_Result)">
+      <Parameter Name="query" Mode="In" Type="String" />
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_Administrator1">
     <End Type="LibraryUniversityModel.Person" Role="Person" Multiplicity="1" />
@@ -477,5 +484,25 @@
     <Property Type="DateTime" Name="RegistrationDate" Nullable="false" Precision="23" />
     <Property Type="Int32" Name="Phone" Nullable="false" />
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_SortBooks_Result">
+    <Property Type="Int32" Name="BookID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="PublicationDate" Nullable="false" Precision="16" />
+    <Property Type="String" Name="Edition" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Subject" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="Stock" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_SearchInBooks_Result">
+    <Property Type="Int32" Name="BookID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="PublicationDate" Nullable="false" Precision="16" />
+    <Property Type="String" Name="Edition" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Subject" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="Stock" Nullable="false" />
   </ComplexType>
 </Schema>

@@ -156,6 +156,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\administrator\editBook.css" />
     <Content Include="Content\general\mapView.css" />
+    <Content Include="Content\student\transaction.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -211,6 +212,7 @@
     <Content Include="Content\user\student.css" />
     <Content Include="Images\1457376063_user_male2.png" />
     <Content Include="Images\1458001251_calendar.png" />
+    <Content Include="Images\homer-screaming.png" />
     <Content Include="Images\oddworld.png" />
     <Content Include="Images\img8.png" />
     <Content Include="Images\book-20clip.png" />
@@ -218,6 +220,7 @@
     <Content Include="Images\icon_top.png" />
     <Content Include="Images\load_animation.gif" />
     <Content Include="Images\mapa_unlam.jpg" />
+    <Content Include="Images\open_book.jpg" />
     <Content Include="Images\photography_library_books.jpg" />
     <Content Include="Scripts\administrator\datepicker.js" />
     <Content Include="Scripts\administrator\editBook.js" />
@@ -298,6 +301,9 @@
     <Content Include="Views\User\_Political.cshtml" />
     <Content Include="Views\Administrator\CreateBook.cshtml" />
     <Content Include="Views\Administrator\EditBook.cshtml" />
+    <Content Include="Views\Student\ViewResults.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Student\Transaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

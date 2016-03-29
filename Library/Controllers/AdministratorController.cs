@@ -96,7 +96,37 @@ namespace Library.Controllers
 
         public ActionResult ControlPanel()
         {
-            return View(adminService.GetBooksList());
+            var list = new SelectList(new[]
+                           {
+                               new { value = "asc", text = "Más antigüos primero" },
+                               new { value = "desc", text = "Más recientes primero" },
+                               new { value = "stockDesc", text = "Cant. ejemplares descendente" },
+                               new { value = "stockAsc", text = "Cant. ejemplares ascendente" },
+                               new { value = "publiDesc", text = "Fecha de publicación más nueva" },
+                               new { value = "publiAsc", text = "Fecha de publicación más vieja" },                               
+                           }, "value", "text", "recent");
+            ViewData["list"] = list;
+            List<sp_SortBooks_Result> listOfBooks = adminService.SortBooks("asc");
+
+            return View(listOfBooks);
+        }
+
+        [HttpPost]
+        public ActionResult ControlPanel(string filterList)
+        {
+            var list = new SelectList(new[]
+                           {
+                               new { value = "asc", text = "Más antigüos primero" },
+                               new { value = "desc", text = "Más recientes primero" },
+                               new { value = "stockDesc", text = "Cant. ejemplares descendente" },
+                               new { value = "stockAsc", text = "Cant. ejemplares ascendente" },
+                               new { value = "publiDesc", text = "Fecha de publicación más nueva" },
+                               new { value = "publiAsc", text = "Fecha de publicación más vieja" },                               
+                           }, "value", "text", "recent");
+            ViewData["list"] = list;
+            List<sp_SortBooks_Result> listOfBooks = adminService.SortBooks(filterList);
+
+            return View(listOfBooks);
         }
 
         public ActionResult RegisteredUsers()
@@ -111,7 +141,7 @@ namespace Library.Controllers
                                new { value = "Employee", text = "Empleado" },
                                new { value = "Student", text = "Estudiante" },
                            }, "value", "text", "recent");
-            ViewData["list"] = list;            
+            ViewData["list"] = list;
 
             List<sp_ShowPersons_Result> listOfUsers = userService.ListOfPersons("recent");
             return View(listOfUsers);
