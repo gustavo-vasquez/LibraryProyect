@@ -49,6 +49,14 @@ namespace Library.Controllers
             return View(studentService.BookInformation(id));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Transaction()
+        {
+            Session["Solicitude"] = true;
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult Loans()
         {
             List<GridTest> listado = new List<GridTest>();

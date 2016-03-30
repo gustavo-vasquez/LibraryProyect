@@ -5,12 +5,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if(Session["User"] == null)
+{
+    <script>
+        $(document).ready(function () {            
+            $('#modalNoSession').modal('show');
+
+            $(document).on('click', '#backLink', function () {
+                history.go(-1);
+            });
+        });
+    </script>
+    
+        <!-- Modal -->
+    <div id="modalNoSession" class="modal" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">                    
+                    <h4 class="modal-title text-center">IMPOSIBLE REALIZAR TRANSACCIÓN</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Primero tienes que loguearte para realizar solicitudes de préstamo.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0);" id="backLink" class="btn btn-danger">Volver atrás</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
 @Styles.Render("~/Content/student/transaction.css")
 
 <div class="container-fluid decorative" >    
     <div class="vertical-space"></div>
     <div class="col-lg-6 col-lg-push-3 well">
-        <form class="form-horizontal">
+        @using (Html.BeginForm("Transaction", "Student", FormMethod.Post, new { id = "FormTransaction", @class = "form-horizontal", role = "form" }))
+        {         
+            @Html.AntiForgeryToken()
             <fieldset>
                 <legend><b>¿Está seguro que desea obtener un préstamo del siguiente libro?</b></legend>
                 <div class="form-group">
@@ -61,7 +96,7 @@
                         <button type="submit" class="btn btn-success">Confirmar petición</button>
                     </div>
                 </div>
-            </fieldset>
-        </form>
+            </fieldset>        
+        }
     </div>
 </div>
