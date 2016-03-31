@@ -17,6 +17,7 @@ namespace Capa_Entidades
         public Book()
         {
             this.Sanctions = new HashSet<Sanction>();
+            this.LoanRequests = new HashSet<LoanRequest>();
         }
     
         public int BookID { get; set; }
@@ -29,5 +30,6 @@ namespace Capa_Entidades
     
         public virtual ICollection<Sanction> Sanctions { get; set; }
         public virtual StockBook StockBook { get; set; }
+        public virtual ICollection<LoanRequest> LoanRequests { get; set; }
     }
 }

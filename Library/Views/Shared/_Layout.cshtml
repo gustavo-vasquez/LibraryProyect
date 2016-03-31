@@ -78,8 +78,9 @@
                                              @name @lastName 
                                         </span>
                                     </li>                   
-                                    <li><a href="@Url.Action("AppliedSanctions", "Employee")"><span class="glyphicon glyphicon-eye-close"></span> Sanciones aplicadas</a></li>
-                                    <li><a href="@Url.Action("LoansGranted", "Employee")"><span class="glyphicon glyphicon-thumbs-up"></span> Préstamos otorgados</a></li>                                    
+                                    <li><a href="@Url.Action("AppliedSanctions", "Employee")"><span class="glyphicon glyphicon-eye-close"></span> Sanciones</a></li>
+                                    <li><a href="@Url.Action("LoansGranted", "Employee")"><span class="glyphicon glyphicon-thumbs-up"></span> Préstamos</a></li>
+                                    @{ Html.RenderPartial("~/Views/Employee/_Notifications.cshtml", new Capa_Servicios.EmployeeServices().GetNotifications()); }
                                     <li><a href="@Url.Action("Logout","User")"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
                                 </ul>
                             </div>

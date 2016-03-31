@@ -30,7 +30,10 @@
         <AssociationConnector Association="LibraryUniversityModel.FK_Employee1" />
         <EntityTypeShape EntityType="LibraryUniversityModel.Range" Width="1.5" PointX="0.75" PointY="4.125" />
         <AssociationConnector Association="LibraryUniversityModel.FK_Person" />
-      </Diagram>
+        <EntityTypeShape EntityType="LibraryUniversityModel.LoanRequest" Width="1.5" PointX="11.25" PointY="8.25" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_LoanRequest_IdBook" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_LoanRequest_IdStudent" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

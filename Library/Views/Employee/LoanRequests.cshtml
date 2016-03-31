@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Capa_Entidades.sp_GetRequestsList_Result>
+
+@{
+    ViewBag.Title = "Solicitudes de préstamo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grilla = new WebGrid(Model, canPage: false, ajaxUpdateContainerId: "listOfRequests");
+}
+
+
+@{
+    if (Session["User"] == null)
+    {
+        <script>alert("LA SESIÓN EXPIRÓ.");</script>
+        @Html.Action("Index", "Home");
+    }
+
+    string range = ((List<string>)Session["User"])[0];
+    if (range != "Employee")
+    {
+        <div class="container-fluid">
+            <div class="vertical-space"></div>
+            <div class="alert alert-dismissible alert-danger">
+                <h2 class="text-center alert-link">Acceso no autorizado.</h2>
+            </div>
+            <div>
+                <img src="~/Images/oddworld.png" alt="oddworld" class="center-block" />
+            </div>
+        </div>
+    }
+    else
+    {        
+        <div class="container-fluid">
+            <div class="row">
+                <h1 class="title-font col-lg-11">
+                    <button onclick="location.href = '@Url.Action("ControlPanel")';" class="btn btn-default col-lg-1">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </button>
+                    Solicitudes de préstamo de libros
+                </h1>
+            </div>
+            <hr />
+
+            <div class="">
+                <div class="breadcrumb col-lg-2" style="font-weight: normal;">Ordenar por: </div>                
+                    <div class="col-lg-3 col-lg-pull-1">
+                        Hola
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-warning col-lg-1 col-lg-pull-1">Consultar</button>                
+            </div>
+
+            <div>
+                <ul class="breadcrumb col-lg-3 text-center">
+                    <li id="totalUsers" class="text-primary">Total pendientes: @Model.Count()</li>
+                </ul>
+            </div>
+
+            <div>
+                <style>
+                    .table th {
+                        text-align: center;
+                    }
+                </style>
+
+                <div>
+                @grilla.GetHtml(
+                htmlAttributes: new { id = "listOfRequests" },
+                tableStyle: "table table-hover active table-bordered text-center",
+                headerStyle: "success",
+                fillEmptyRows: false,
+                mode: WebGridPagerModes.All,
+                firstText: "<< Primero",
+                previousText: "< Anterior",
+                nextText: "Siguiente >",
+                lastText: "Último >>",
+
+                columns: new[]
+                {
+                    grilla.Column("LoanRequestID", canSort: false, header: "ID Pedido"),
+                    grilla.Column("Duration", canSort: false, header: "Duración"),
+                    grilla.Column("StartDate", canSort: false, header: "Fecha Inicio"),
+                    grilla.Column("EndDate", canSort: false, header: "Fecha Fin"),
+                    grilla.Column("IdBook", canSort: false, header: "ID Libro"),
+                    grilla.Column("Title", canSort: false, header: "Título"),
+                    grilla.Column("Author", canSort: false, header: "Autor"),
+                    grilla.Column("IdStudent", canSort: false, header: "ID Estudiante"),
+                    grilla.Column("Email", canSort: false, header: "Email"),
+                    grilla.Column("LoanRequestID", canSort: false, header: "",
+                                        format: @<text>
+                                                    <a class="btn btn-sm btn-success" href="@Url.Action("EditBook", new { id = @item.LoanRequestID })">
+                                                        APROBAR</a>                                                    
+                                                </text>     
+                                )
+                })
+                </div>
+            </div>
+        </div>
+    }
+}

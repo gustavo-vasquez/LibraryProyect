@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 using Library.Models;
 using Capa_Servicios;
+using System.Data.SqlClient;
+using Capa_Entidades;
 
 namespace Library.Controllers
 {
@@ -51,10 +53,25 @@ namespace Library.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Transaction()
+        public ActionResult Transaction(Book data)
         {
-            Session["Solicitude"] = true;
-            return RedirectToAction("Index", "Home");
+            try
+            {
+                string idStudent = ((List<string>)Session["User"])[3];
+                studentService.SendLoanRequest(idStudent, data.BookID);
+                TempData["Solicitude"] = true;
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                if(ex.InnerException is SqlException)
+                {
+                    ViewBag.BookRequestError = ex.InnerException.Message;
+                    return View("Transaction", data);
+                }
+
+                return View("Transaction", data);
+            }                        
         }
 
         public ActionResult Loans()

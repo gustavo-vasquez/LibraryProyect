@@ -38,6 +38,35 @@
     </div>
 }
 
+@if (ViewBag.BookRequestError != null)
+{
+    <script>
+        $(document).ready(function () {
+            $('#modalError').modal('show');
+        });
+    </script>
+    
+    <!-- Modal -->
+    <div id="modalError" class="modal" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">IMPOSIBLE REALIZAR TRANSACCIÓN</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center"><b>RAZÓN: @ViewBag.BookRequestError</b></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-danger">Volver a la página principal</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
 @Styles.Render("~/Content/student/transaction.css")
 
 <div class="container-fluid decorative" >    
@@ -89,10 +118,11 @@
                     <div class="col-lg-9">
                         <span class="help-block">Una vez se haya efectuado el préstamo, DEBE ser devuelto en el plazo de 3 días. De lo contrario, se le penalizará con 1 día sin poder solicitar libros.</span>
                     </div>
-                </div>                
+                </div>
+                @Html.HiddenFor(b => b.BookID)
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                        <button class="btn btn-danger" onclick="history.go(-1);">Cancelar</button>
                         <button type="submit" class="btn btn-success">Confirmar petición</button>
                     </div>
                 </div>

@@ -144,3 +144,7 @@ git status
 git commit -m "Avance bastante en la busqueda de libros de la portada y la pantalla de transaccion"
 git push library master
 exit
+git add .
+git commit -m "Mas avances con la transaccion"
+git push library master
+exit

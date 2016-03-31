@@ -60,6 +60,17 @@
           <Property Name="IdStudent" Type="int" Nullable="false" />
           <Property Name="IdEmployee" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="LoanRequest">
+          <Key>
+            <PropertyRef Name="LoanRequestID" />
+          </Key>
+          <Property Name="LoanRequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="IdBook" Type="int" Nullable="false" />
+          <Property Name="IdStudent" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="PersonID" />
@@ -156,6 +167,30 @@
               <PropertyRef Name="StudentID" />
             </Principal>
             <Dependent Role="Loan">
+              <PropertyRef Name="IdStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanRequest_IdBook">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="LoanRequest" Type="Self.LoanRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="LoanRequest">
+              <PropertyRef Name="IdBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanRequest_IdStudent">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="LoanRequest" Type="Self.LoanRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="LoanRequest">
               <PropertyRef Name="IdStudent" />
             </Dependent>
           </ReferentialConstraint>
@@ -275,6 +310,7 @@
           <Parameter Name="subject" Type="varchar" Mode="In" />
           <Parameter Name="stock" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_GetRequestsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetUserInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="email" Type="varchar" Mode="In" />
         </Function>
@@ -331,6 +367,13 @@
           <Parameter Name="query" Type="varchar" Mode="In" />
           <Parameter Name="filter" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_SearchStudentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SendLoanRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBook" Type="int" Mode="In" />
+          <Parameter Name="idStudent" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_ShowBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_ShowPersons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="filter" Type="varchar" Mode="In" />
@@ -345,6 +388,7 @@
           <EntitySet Name="Condition" EntityType="Self.Condition" Schema="Library" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="Library" store:Type="Tables" />
           <EntitySet Name="Loan" EntityType="Self.Loan" Schema="Library" store:Type="Tables" />
+          <EntitySet Name="LoanRequest" EntityType="Self.LoanRequest" Schema="Library" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="Library" store:Type="Tables" />
           <EntitySet Name="Range" EntityType="Self.Range" Schema="Library" store:Type="Tables" />
           <EntitySet Name="Sanction" EntityType="Self.Sanction" Schema="Library" store:Type="Tables" />
@@ -365,6 +409,14 @@
           <AssociationSet Name="FK_Loan_IdStudent" Association="Self.FK_Loan_IdStudent">
             <End Role="Student" EntitySet="Student" />
             <End Role="Loan" EntitySet="Loan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanRequest_IdBook" Association="Self.FK_LoanRequest_IdBook">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="LoanRequest" EntitySet="LoanRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanRequest_IdStudent" Association="Self.FK_LoanRequest_IdStudent">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="LoanRequest" EntitySet="LoanRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_Person" Association="Self.FK_Person">
             <End Role="Range" EntitySet="Range" />
@@ -427,6 +479,7 @@
           <NavigationProperty Name="Sanctions" Relationship="Self.FK_Sanction_IdBook" FromRole="Book" ToRole="Sanction" />
           <NavigationProperty Name="StockBook" Relationship="Self.FK_StockBook" FromRole="Book" ToRole="StockBook" />
           <Property Name="Author" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LoanRequests" Relationship="LibraryUniversityModel.FK_LoanRequest_IdBook" FromRole="Book" ToRole="LoanRequest" />
         </EntityType>
         <EntityType Name="Career">
           <Key>
@@ -529,6 +582,7 @@
           <NavigationProperty Name="Loans" Relationship="Self.FK_Loan_IdStudent" FromRole="Student" ToRole="Loan" />
           <NavigationProperty Name="Person" Relationship="Self.FK_Student_IdPerson" FromRole="Student" ToRole="Person" />
           <NavigationProperty Name="Sanctions" Relationship="Self.FK_Sanction_IdStudent" FromRole="Student" ToRole="Sanction" />
+          <NavigationProperty Name="LoanRequests" Relationship="LibraryUniversityModel.FK_LoanRequest_IdStudent" FromRole="Student" ToRole="LoanRequest" />
         </EntityType>
         <Association Name="FK_Administrator">
           <End Role="Person" Type="Self.Person" Multiplicity="1" />
@@ -812,6 +866,23 @@
             <Parameter Name="query" Mode="In" Type="String" />
             <Parameter Name="filter" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="LoanRequests" EntityType="LibraryUniversityModel.LoanRequest" />
+          <AssociationSet Name="FK_LoanRequest_IdBook" Association="LibraryUniversityModel.FK_LoanRequest_IdBook">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="LoanRequest" EntitySet="LoanRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanRequest_IdStudent" Association="LibraryUniversityModel.FK_LoanRequest_IdStudent">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="LoanRequest" EntitySet="LoanRequests" />
+          </AssociationSet>
+          <FunctionImport Name="sp_SendLoanRequest">
+            <Parameter Name="idBook" Mode="In" Type="Int32" />
+            <Parameter Name="idStudent" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SearchStudentID" ReturnType="Collection(Int32)">
+          <Parameter Name="email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetRequestsList" ReturnType="Collection(LibraryUniversityModel.sp_GetRequestsList_Result)" />
         </EntityContainer>
         <Association Name="FK_Administrator1">
           <End Type="LibraryUniversityModel.Person" Role="Person" Multiplicity="1" />
@@ -908,7 +979,55 @@
           <Property Type="String" Name="Subject" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="Stock" Nullable="false" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="LoanRequest">
+          <Key>
+            <PropertyRef Name="LoanRequestID" />
+          </Key>
+          <Property Name="LoanRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdBook" Type="Int32" Nullable="false" />
+          <Property Name="IdStudent" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="LibraryUniversityModel.FK_LoanRequest_IdBook" FromRole="LoanRequest" ToRole="Book" />
+          <NavigationProperty Name="Student" Relationship="LibraryUniversityModel.FK_LoanRequest_IdStudent" FromRole="LoanRequest" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_LoanRequest_IdBook">
+          <End Type="LibraryUniversityModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="LibraryUniversityModel.LoanRequest" Role="LoanRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="LoanRequest">
+              <PropertyRef Name="IdBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanRequest_IdStudent">
+          <End Type="LibraryUniversityModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="LibraryUniversityModel.LoanRequest" Role="LoanRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="LoanRequest">
+              <PropertyRef Name="IdStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetRequestsList_Result">
+          <Property Type="Int32" Name="LoanRequestID" Nullable="false" />
+          <Property Type="Int32" Name="Duration" Nullable="false" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdBook" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Author" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="IdStudent" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1110,6 +1229,36 @@
                 <ScalarProperty Name="Edition" ColumnName="Edition" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="LoanRequests">
+            <EntityTypeMapping TypeName="LibraryUniversityModel.LoanRequest">
+              <MappingFragment StoreEntitySet="LoanRequest">
+                <ScalarProperty Name="IdStudent" ColumnName="IdStudent" />
+                <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="LoanRequestID" ColumnName="LoanRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_SendLoanRequest" FunctionName="LibraryUniversityModel.Store.sp_SendLoanRequest" />
+          <FunctionImportMapping FunctionImportName="sp_SearchStudentID" FunctionName="LibraryUniversityModel.Store.sp_SearchStudentID" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetRequestsList" FunctionName="LibraryUniversityModel.Store.sp_GetRequestsList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LibraryUniversityModel.sp_GetRequestsList_Result">
+                <ScalarProperty Name="LoanRequestID" ColumnName="LoanRequestID" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="IdStudent" ColumnName="IdStudent" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

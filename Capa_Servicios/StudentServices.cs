@@ -22,5 +22,19 @@ namespace Capa_Servicios
             var book = context.Books.FirstOrDefault(b => b.BookID == id);
             return book;
         }
+
+        public void SendLoanRequest(string email, int idBook)
+        {
+            try
+            {
+                var user = context.People.FirstOrDefault(u => u.Email == email);
+                var student = context.Students.FirstOrDefault(s => s.IdPerson == user.PersonID);
+                context.sp_SendLoanRequest(idBook, student.StudentID);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }            
+        }
     }
 }

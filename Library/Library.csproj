@@ -304,6 +304,8 @@
     <Content Include="Views\Student\ViewResults.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
     <Content Include="Views\Student\Transaction.cshtml" />
+    <Content Include="Views\Employee\_Notifications.cshtml" />
+    <Content Include="Views\Employee\LoanRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

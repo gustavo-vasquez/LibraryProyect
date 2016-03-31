@@ -5,13 +5,26 @@ using System.Web;
 using System.Web.Mvc;
 
 using Library.Models;
+using Capa_Servicios;
 
 namespace Library.Controllers
 {
     public class EmployeeController : Controller
     {
+        static EmployeeServices employeeService = new EmployeeServices();
+
         //
         // GET: /Employee/
+
+        public ActionResult Notifications()
+        {
+            return PartialView("_Notifications", employeeService.GetNotifications());
+        }
+
+        public ActionResult LoanRequests()
+        {
+            return View(employeeService.GetLoanRequestsList());
+        }
 
         public ActionResult LoansGranted()
         {

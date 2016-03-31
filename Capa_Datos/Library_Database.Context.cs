@@ -39,6 +39,7 @@ namespace Capa_Entidades
         public DbSet<StockBook> StockBooks { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Range> Ranges { get; set; }
+        public DbSet<LoanRequest> LoanRequests { get; set; }
     
         public virtual int sp_CreateBook(string title, string author, string description, Nullable<System.DateTime> publicationDate, string edition, string subject, Nullable<int> stock)
         {
@@ -306,6 +307,33 @@ namespace Capa_Entidades
                 new ObjectParameter("filter", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SearchInBooks_Result>("sp_SearchInBooks", queryParameter, filterParameter);
+        }
+    
+        public virtual int sp_SendLoanRequest(Nullable<int> idBook, Nullable<int> idStudent)
+        {
+            var idBookParameter = idBook.HasValue ?
+                new ObjectParameter("idBook", idBook) :
+                new ObjectParameter("idBook", typeof(int));
+    
+            var idStudentParameter = idStudent.HasValue ?
+                new ObjectParameter("idStudent", idStudent) :
+                new ObjectParameter("idStudent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SendLoanRequest", idBookParameter, idStudentParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_SearchStudentID(string email)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_SearchStudentID", emailParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetRequestsList_Result> sp_GetRequestsList()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetRequestsList_Result>("sp_GetRequestsList");
         }
     }
 }

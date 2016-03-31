@@ -55,6 +55,17 @@
     <Property Name="IdStudent" Type="int" Nullable="false" />
     <Property Name="IdEmployee" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="LoanRequest">
+    <Key>
+      <PropertyRef Name="LoanRequestID" />
+    </Key>
+    <Property Name="LoanRequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="IdBook" Type="int" Nullable="false" />
+    <Property Name="IdStudent" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Person">
     <Key>
       <PropertyRef Name="PersonID" />
@@ -151,6 +162,30 @@
         <PropertyRef Name="StudentID" />
       </Principal>
       <Dependent Role="Loan">
+        <PropertyRef Name="IdStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoanRequest_IdBook">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="LoanRequest" Type="Self.LoanRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="LoanRequest">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoanRequest_IdStudent">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="LoanRequest" Type="Self.LoanRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="LoanRequest">
         <PropertyRef Name="IdStudent" />
       </Dependent>
     </ReferentialConstraint>
@@ -270,6 +305,7 @@
     <Parameter Name="subject" Type="varchar" Mode="In" />
     <Parameter Name="stock" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetRequestsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetUserInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="email" Type="varchar" Mode="In" />
   </Function>
@@ -326,6 +362,13 @@
     <Parameter Name="query" Type="varchar" Mode="In" />
     <Parameter Name="filter" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="sp_SearchStudentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_SendLoanRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idBook" Type="int" Mode="In" />
+    <Parameter Name="idStudent" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_ShowBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_ShowPersons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="filter" Type="varchar" Mode="In" />
@@ -340,6 +383,7 @@
     <EntitySet Name="Condition" EntityType="Self.Condition" Schema="Library" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="Library" store:Type="Tables" />
     <EntitySet Name="Loan" EntityType="Self.Loan" Schema="Library" store:Type="Tables" />
+    <EntitySet Name="LoanRequest" EntityType="Self.LoanRequest" Schema="Library" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="Library" store:Type="Tables" />
     <EntitySet Name="Range" EntityType="Self.Range" Schema="Library" store:Type="Tables" />
     <EntitySet Name="Sanction" EntityType="Self.Sanction" Schema="Library" store:Type="Tables" />
@@ -360,6 +404,14 @@
     <AssociationSet Name="FK_Loan_IdStudent" Association="Self.FK_Loan_IdStudent">
       <End Role="Student" EntitySet="Student" />
       <End Role="Loan" EntitySet="Loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoanRequest_IdBook" Association="Self.FK_LoanRequest_IdBook">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="LoanRequest" EntitySet="LoanRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoanRequest_IdStudent" Association="Self.FK_LoanRequest_IdStudent">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="LoanRequest" EntitySet="LoanRequest" />
     </AssociationSet>
     <AssociationSet Name="FK_Person" Association="Self.FK_Person">
       <End Role="Range" EntitySet="Range" />

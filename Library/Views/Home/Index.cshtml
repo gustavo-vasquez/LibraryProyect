@@ -4,7 +4,13 @@
 }
 
 <script>
-    $(document).ready(function () { 
+    $(document).ready(function () {
+        if ($("Notification").show()) {
+            $("#Notification").fadeTo(4000, 500).slideUp(500, function () {
+                $("#Notification").alert('close');
+            })
+        }
+
         $("#term").keyup(function () {
             var $this = $(this);
             window.setTimeout(function () {            
@@ -24,13 +30,12 @@
 </script>
 
 
-@if (Session["Solicitude"] != null && (bool)Session["Solicitude"])
+@if (TempData["Solicitude"] != null && (bool)TempData["Solicitude"])
 { 
-    <div class="alert alert-dismissible alert-warning">
+    <div id="Notification" class="alert alert-dismissible alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong><span class="glyphicon glyphicon-ok"></span> Solicitud enviada.</strong> Ahora debe esperar a que su pedido sea aprobado y posteriormente pasar a buscar el libro a la biblioteca.
-    </div>
-    Session.Remove("Solicitude");
+    </div>    
     
     <div class="container-fluid">
     <div class="vertical-space"></div>

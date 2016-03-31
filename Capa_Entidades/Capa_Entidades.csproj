@@ -74,6 +74,9 @@
     <Compile Include="Loan.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoanRequest.cs">
+      <DependentUpon>LibraryEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs" />
     <Compile Include="Person.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
@@ -86,6 +89,9 @@
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Sanction.cs">
+      <DependentUpon>LibraryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetRequestsList_Result.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_GetUserInformation_Result.cs">
