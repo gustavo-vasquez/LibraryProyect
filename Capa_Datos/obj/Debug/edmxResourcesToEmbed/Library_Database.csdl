@@ -25,6 +25,7 @@
     <NavigationProperty Name="StockBook" Relationship="Self.FK_StockBook" FromRole="Book" ToRole="StockBook" />
     <Property Name="Author" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="LoanRequests" Relationship="LibraryUniversityModel.FK_LoanRequest_IdBook" FromRole="Book" ToRole="LoanRequest" />
+    <NavigationProperty Name="Loans" Relationship="LibraryUniversityModel.FK_Loan_IdBook" FromRole="Book" ToRole="Loan" />
   </EntityType>
   <EntityType Name="Career">
     <Key>
@@ -67,6 +68,9 @@
     <Property Name="IdEmployee" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_Loan_IdEmployee" FromRole="Loan" ToRole="Employee" />
     <NavigationProperty Name="Student" Relationship="Self.FK_Loan_IdStudent" FromRole="Loan" ToRole="Student" />
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="LibraryUniversityModel.FK_Loan_IdBook" FromRole="Loan" ToRole="Book" />
+    <Property Name="Returned" Type="Boolean" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -428,6 +432,19 @@
       <Parameter Name="email" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_GetRequestsList" ReturnType="Collection(LibraryUniversityModel.sp_GetRequestsList_Result)" />
+    <AssociationSet Name="FK_Loan_IdBook" Association="LibraryUniversityModel.FK_Loan_IdBook">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Loan" EntitySet="Loans" />
+    </AssociationSet>
+    <FunctionImport Name="sp_ApproveLoan">
+      <Parameter Name="idLoanRequest" Mode="In" Type="Int32" />
+      <Parameter Name="idEmployee" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetLoansHistory" ReturnType="Collection(LibraryUniversityModel.sp_GetLoansHistory_Result)" />
+    <FunctionImport Name="sp_LoansForStudent" ReturnType="Collection(LibraryUniversityModel.sp_LoansForStudent_Result)" />
+    <FunctionImport Name="sp_MarkBook">
+      <Parameter Name="IdLoan" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_Administrator1">
     <End Type="LibraryUniversityModel.Person" Role="Person" Multiplicity="1" />
@@ -571,5 +588,41 @@
     <Property Type="String" Name="Author" Nullable="false" MaxLength="20" />
     <Property Type="Int32" Name="IdStudent" Nullable="false" />
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <Association Name="FK_Loan_IdBook">
+    <End Type="LibraryUniversityModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="LibraryUniversityModel.Loan" Role="Loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Loan">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_GetLoansHistory_Result">
+    <Property Type="Int32" Name="LoanID" Nullable="false" />
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IdBook" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="IdStudent" Nullable="false" />
+    <Property Type="String" Name="emailStudent" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="IdEmployee" Nullable="false" />
+    <Property Type="String" Name="emailEmployee" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Returned" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_LoansForStudent_Result">
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="emailEmployee" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

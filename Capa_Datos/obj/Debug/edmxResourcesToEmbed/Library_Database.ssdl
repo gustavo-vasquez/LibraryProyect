@@ -52,8 +52,10 @@
     <Property Name="Duration" Type="int" Nullable="false" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
     <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="IdBook" Type="int" Nullable="false" />
     <Property Name="IdStudent" Type="int" Nullable="false" />
     <Property Name="IdEmployee" Type="int" Nullable="false" />
+    <Property Name="Returned" Type="bit" />
   </EntityType>
   <EntityType Name="LoanRequest">
     <Key>
@@ -139,6 +141,18 @@
       </Principal>
       <Dependent Role="Employee">
         <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_IdBook">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Loan">
+        <PropertyRef Name="IdBook" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -286,6 +300,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_ApproveLoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idLoanRequest" Type="int" Mode="In" />
+    <Parameter Name="idEmployee" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_CreateBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="title" Type="varchar" Mode="In" />
     <Parameter Name="author" Type="varchar" Mode="In" />
@@ -305,16 +323,21 @@
     <Parameter Name="subject" Type="varchar" Mode="In" />
     <Parameter Name="stock" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetLoansHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetRequestsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetUserInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="email" Type="varchar" Mode="In" />
   </Function>
   <Function Name="sp_ListingCareers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_LoansForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="email" Type="varchar" Mode="In" />
     <Parameter Name="password" Type="varchar" Mode="In" />
     <Parameter Name="message" Type="varchar" Mode="InOut" />
     <Parameter Name="allowLogin" Type="bit" Mode="InOut" />
+  </Function>
+  <Function Name="sp_MarkBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdLoan" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_RegisterAdministrator" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="name" Type="varchar" Mode="In" />
@@ -396,6 +419,10 @@
     <AssociationSet Name="FK_Employee" Association="Self.FK_Employee">
       <End Role="Person" EntitySet="Person" />
       <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_IdBook" Association="Self.FK_Loan_IdBook">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="Loan" EntitySet="Loan" />
     </AssociationSet>
     <AssociationSet Name="FK_Loan_IdEmployee" Association="Self.FK_Loan_IdEmployee">
       <End Role="Employee" EntitySet="Employee" />

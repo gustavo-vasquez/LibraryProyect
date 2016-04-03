@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using Library.Models;
 using Capa_Servicios;
+using System.Data.SqlClient;
 
 namespace Library.Controllers
 {
@@ -26,22 +27,45 @@ namespace Library.Controllers
             return View(employeeService.GetLoanRequestsList());
         }
 
-        public ActionResult LoansGranted()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LoanRequests(int requestID)
         {
-            List<GridTest> listado = new List<GridTest>();
+            try
+            {
+                var employee = ((List<string>)Session["User"])[3];
+                employeeService.ApproveLoan(requestID, employee);
+                return View(employeeService.GetLoanRequestsList());
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is SqlException)
+                {
+                    ViewBag.ApproveError = ex.InnerException.Message;
+                    employeeService.RejectLoan(requestID, ex.InnerException.Message);
+                    return View(employeeService.GetLoanRequestsList());
+                }
 
-            listado.Add(new GridTest() { posicion = 1, equipo = "River Plate" });
-            listado.Add(new GridTest() { posicion = 2, equipo = "San Lorenzo" });
-            listado.Add(new GridTest() { posicion = 3, equipo = "Independiente" });
-            listado.Add(new GridTest() { posicion = 4, equipo = "Newell's" });
-            listado.Add(new GridTest() { posicion = 5, equipo = "Rosario Central" });
-            listado.Add(new GridTest() { posicion = 6, equipo = "Estudiantes" });
-            listado.Add(new GridTest() { posicion = 7, equipo = "Banfield" });
-            listado.Add(new GridTest() { posicion = 8, equipo = "Velez" });
-            listado.Add(new GridTest() { posicion = 9, equipo = "Lanús" });
-            listado.Add(new GridTest() { posicion = 10, equipo = "Argentinos Juniors" });
-            
-            return View(listado);
+                return View(employeeService.GetLoanRequestsList());
+            }
+        }
+
+        public ActionResult LoansGranted()
+        {                        
+            return View(employeeService.GetLoansHistory());
+        }
+
+        [HttpGet]
+        public ActionResult MarkAsReturned(int id)
+        {
+            return PartialView("_MarkAsReturned", id);
+        }
+
+        [HttpPost]
+        public ActionResult MarkAsReturned(int? id, int mark)
+        {
+            employeeService.MarkAsReturned(mark);
+            return RedirectToAction("LoansGranted", "Employee", employeeService.GetLoansHistory());
         }
 
         public ActionResult AppliedSanctions()

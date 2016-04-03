@@ -1,0 +1,43 @@
+﻿@model Int32
+
+@Styles.Render("~/Content/bootstrap.min.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<script>
+    $(document).ready(function () {
+        $('#modalBookReturned').modal('show');
+
+        $(document).on('click', '#refreshLink', function () {
+            location.href = "/Employee/LoansGranted";
+        });
+    });
+</script>
+
+<!-- Modal -->
+<div id="modalBookReturned" class="modal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">CONFIRMAR ACCIÓN</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">¿Está seguro que desea marcar el libro como devuelto?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-6">
+                    <form action="/Employee/MarkAsReturned" method="post">
+                        <input type="hidden" name="mark" value="@Model" />
+                        <button type="submit" class="btn btn-success">Sí</button>
+                    </form>
+                </div>
+                <div class="col-lg-1">
+                    <a href="javascript:void(0);" id="refreshLink" class="btn btn-danger">No</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

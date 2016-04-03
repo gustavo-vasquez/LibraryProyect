@@ -33,6 +33,7 @@
         <EntityTypeShape EntityType="LibraryUniversityModel.LoanRequest" Width="1.5" PointX="11.25" PointY="8.25" />
         <AssociationConnector Association="LibraryUniversityModel.FK_LoanRequest_IdBook" />
         <AssociationConnector Association="LibraryUniversityModel.FK_LoanRequest_IdStudent" />
+        <AssociationConnector Association="LibraryUniversityModel.FK_Loan_IdBook" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

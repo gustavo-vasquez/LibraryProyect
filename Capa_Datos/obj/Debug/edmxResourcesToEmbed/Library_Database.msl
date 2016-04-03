@@ -53,6 +53,8 @@
     <EntitySetMapping Name="Loans">
       <EntityTypeMapping TypeName="LibraryUniversityModel.Loan">
         <MappingFragment StoreEntitySet="Loan">
+          <ScalarProperty Name="Returned" ColumnName="Returned" />
+          <ScalarProperty Name="IdBook" ColumnName="IdBook" />
           <ScalarProperty Name="LoanID" ColumnName="LoanID" />
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -229,5 +231,39 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ApproveLoan" FunctionName="LibraryUniversityModel.Store.sp_ApproveLoan" />
+    <FunctionImportMapping FunctionImportName="sp_GetLoansHistory" FunctionName="LibraryUniversityModel.Store.sp_GetLoansHistory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LibraryUniversityModel.sp_GetLoansHistory_Result">
+          <ScalarProperty Name="LoanID" ColumnName="LoanID" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="IdStudent" ColumnName="IdStudent" />
+          <ScalarProperty Name="emailStudent" ColumnName="emailStudent" />
+          <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+          <ScalarProperty Name="emailEmployee" ColumnName="emailEmployee" />
+          <ScalarProperty Name="Returned" ColumnName="Returned" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_LoansForStudent" FunctionName="LibraryUniversityModel.Store.sp_LoansForStudent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LibraryUniversityModel.sp_LoansForStudent_Result">
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="emailEmployee" ColumnName="emailEmployee" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_MarkBook" FunctionName="LibraryUniversityModel.Store.sp_MarkBook" />
   </EntityContainerMapping>
 </Mapping>

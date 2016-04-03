@@ -85,14 +85,45 @@
                     grilla.Column("IdStudent", canSort: false, header: "ID Estudiante"),
                     grilla.Column("Email", canSort: false, header: "Email"),
                     grilla.Column("LoanRequestID", canSort: false, header: "",
-                                        format: @<text>
-                                                    <a class="btn btn-sm btn-success" href="@Url.Action("EditBook", new { id = @item.LoanRequestID })">
-                                                        APROBAR</a>                                                    
+                                        format: @<text>                                                    
+                                                    <form action="/Employee/LoanRequests" method="post">                     
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="requestID" value="@item.LoanRequestID" />
+                                                        <button type="submit" class="btn btn-sm btn-success">APROBAR</button>
+                                                    </form>
                                                 </text>     
                                 )
                 })
                 </div>
             </div>
         </div>
+        if(ViewBag.ApproveError != null)
+        {
+            <script>
+                $(document).ready(function () {            
+                    $('#modalNoApprove').modal('toggle');
+                });
+            </script>
+            
+            <!-- Modal -->
+            <div id="modalNoApprove" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">                    
+                            <h4 class="modal-title text-center">IMPOSIBLE APROBAR PRÉSTAMO</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">@ViewBag.ApproveError</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:void(0);" id="backLink" data-dismiss="modal" class="btn btn-danger">Cerrar</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
     }
 }

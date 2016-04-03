@@ -20,8 +20,11 @@ namespace Capa_Entidades
         public System.DateTime EndDate { get; set; }
         public int IdStudent { get; set; }
         public int IdEmployee { get; set; }
+        public int IdBook { get; set; }
+        public Nullable<bool> Returned { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Student Student { get; set; }
+        public virtual Book Book { get; set; }
     }
 }

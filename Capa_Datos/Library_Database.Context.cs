@@ -335,5 +335,37 @@ namespace Capa_Entidades
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetRequestsList_Result>("sp_GetRequestsList");
         }
+    
+        public virtual int sp_ApproveLoan(Nullable<int> idLoanRequest, Nullable<int> idEmployee)
+        {
+            var idLoanRequestParameter = idLoanRequest.HasValue ?
+                new ObjectParameter("idLoanRequest", idLoanRequest) :
+                new ObjectParameter("idLoanRequest", typeof(int));
+    
+            var idEmployeeParameter = idEmployee.HasValue ?
+                new ObjectParameter("idEmployee", idEmployee) :
+                new ObjectParameter("idEmployee", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ApproveLoan", idLoanRequestParameter, idEmployeeParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetLoansHistory_Result> sp_GetLoansHistory()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLoansHistory_Result>("sp_GetLoansHistory");
+        }
+    
+        public virtual ObjectResult<sp_LoansForStudent_Result> sp_LoansForStudent()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LoansForStudent_Result>("sp_LoansForStudent");
+        }
+    
+        public virtual int sp_MarkBook(Nullable<int> idLoan)
+        {
+            var idLoanParameter = idLoan.HasValue ?
+                new ObjectParameter("IdLoan", idLoan) :
+                new ObjectParameter("IdLoan", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_MarkBook", idLoanParameter);
+        }
     }
 }

@@ -1,0 +1,25 @@
+﻿<script>
+    $(document).ready(function () {
+        $('#modalError').modal('show');
+    });
+</script>
+
+<!-- Modal -->
+<div id="modalError" class="modal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">IMPOSIBLE REALIZAR TRANSACCIÓN</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center"><b>RAZÓN: @ViewBag.BookRequestError</b></p>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-danger">Volver a la página principal</a>
+            </div>
+        </div>
+
+    </div>
+</div>

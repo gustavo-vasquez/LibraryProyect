@@ -1,9 +1,9 @@
-﻿@model IEnumerable<Library.Models.GridTest>
+﻿@model IEnumerable<Capa_Entidades.sp_GetLoansHistory_Result>
 
 @{
     ViewBag.Title = "Préstamos otorgados";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    WebGrid grilla = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "grillaFutbol");
+    WebGrid grilla = new WebGrid(Model, canPage: false, ajaxUpdateContainerId: "LoansGrid");
 }
 
 
@@ -23,42 +23,58 @@
     }
     else
     {
+        <div class="container-fluid">
+                <h1 class="title-font">Historial de préstamos otorgados por la biblioteca</h1>            
     
-    <div class="container-fluid">
-        <h1 class="title-font">Préstamos otorgados</h1>
+            <hr />
 
-        <div class="col-lg-6">
-            <select class="form-control" id="select">
-                <option>Más recientes primero</option>
-                <option>Más antiguos primero</option>
-            </select>
-        </div>
-        <div class="vertical-space"></div>
+            <div>
+                <style>
+                    .table th {
+                        text-align: center;
+                    }
+                </style>
 
-        <style>
-            .table th {
-                text-align: center;
-            }
-        </style>
+                <div class="col-lg-12">
+                    @grilla.GetHtml(
+                    htmlAttributes: new { id = "LoansGrid" },
+                    tableStyle: "table table-hover active table-bordered text-center",
+                    headerStyle: "success",                
+                    fillEmptyRows: false,
+                    mode: WebGridPagerModes.All,
+                    firstText: "<< Primero",
+                    previousText: "< Anterior",
+                    nextText: "Siguiente >",
+                    lastText: "Último >>",
 
-        <div class="col-lg-7">
-            @grilla.GetHtml(
-                htmlAttributes: new { id = "grillaFutbol" },
-                tableStyle: "table table-hover active table-bordered text-center",
-                headerStyle: "success",
-                fillEmptyRows: true,
-                mode: WebGridPagerModes.All,
-                firstText: "<< Primero",
-                previousText: "< Anterior",
-                nextText: "Siguiente >",
-                lastText: "Último >>",
-
-                columns: new[]
-                {
-                    grilla.Column("posicion", canSort: false, header: "Posiciones"),
-                    grilla.Column("equipo", canSort: false, header: "Equipos"),
-                })
-        </div>
-    </div>
+                    columns: grilla.Columns(
+                                            grilla.Column("LoanID", canSort: false, header: "ID Préstamo"),
+                                            grilla.Column("Duration", canSort: false, header: "Duración"),
+                                            grilla.Column("StartDate", canSort: false, header: "Fecha Inicio"),
+                                            grilla.Column("EndDate", canSort: false, header: "Fecha Fin"),
+                                            grilla.Column("IdBook", canSort: false, header: "ID Libro"),
+                                            grilla.Column("Title", canSort: false, header: "Título"),
+                                            grilla.Column("Author", canSort: false, header: "Autor"),
+                                            grilla.Column("IdStudent", canSort: false, header: "ID Estudiante"),
+                                            grilla.Column("emailStudent", canSort: false, header: "Email Estudiante"),
+                                            grilla.Column("IdEmployee", canSort: false, header: "ID Empleado"),
+                                            grilla.Column("emailEmployee", canSort: false, header: "Email Empleado"),
+                                            grilla.Column("Returned", canSort: false, header: "¿Devuelto?",
+                                                            format: @<text> @if (@item.Returned == true)
+                                                                            {
+                                                                                <label class="label label-default">Ya ha sido devuelto</label>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("MarkAsReturned", new { id = @item.LoanID })" class="btn btn-xs btn-success">
+                                                                                Marcar como devuelto</a>
+                                                                            }
+                                                                    </text>
+                                                         )                                            
+                                            )
+                      )
+                </div>
+            </div>
+        </div>    
     }
 }

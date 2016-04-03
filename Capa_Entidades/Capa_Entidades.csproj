@@ -91,6 +91,9 @@
     <Compile Include="Sanction.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_GetLoansHistory_Result.cs">
+      <DependentUpon>LibraryEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_GetRequestsList_Result.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
@@ -98,6 +101,9 @@
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ListingCareers_Result.cs">
+      <DependentUpon>LibraryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_LoansForStudent_Result.cs">
       <DependentUpon>LibraryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_SearchInBooks_Result.cs">

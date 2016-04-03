@@ -10,6 +10,14 @@ namespace Capa_Servicios
     {
         private LibraryUniversityEntities context = new LibraryUniversityEntities();
 
+        public bool CheckSanctionOfStudent(string email)
+        {
+            var person = context.People.FirstOrDefault(p => p.Email == email);
+            var student = context.Students.FirstOrDefault(s => s.IdPerson == person.PersonID);
+
+            return student.Sanctioned;
+        }
+
         public List<sp_SearchInBooks_Result> SearchQuery(string query, string filter)
         {
             var result = context.sp_SearchInBooks(query, filter).ToList();
@@ -35,6 +43,11 @@ namespace Capa_Servicios
             {
                 throw ex;
             }            
+        }
+
+        public List<sp_LoansForStudent_Result> GetLoansForStudent()
+        {
+            return context.sp_LoansForStudent().ToList();
         }
     }
 }

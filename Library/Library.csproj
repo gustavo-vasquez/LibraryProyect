@@ -147,6 +147,7 @@
     <Compile Include="Models\CareersList.cs" />
     <Compile Include="Models\DatesList.cs" />
     <Compile Include="Models\GridTest.cs" />
+    <Compile Include="Models\MarkBook.cs" />
     <Compile Include="Models\PoliticalList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -306,6 +307,8 @@
     <Content Include="Views\Student\Transaction.cshtml" />
     <Content Include="Views\Employee\_Notifications.cshtml" />
     <Content Include="Views\Employee\LoanRequests.cshtml" />
+    <Content Include="Views\Employee\_ConfirmApproval.cshtml" />
+    <Content Include="Views\Employee\_MarkAsReturned.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

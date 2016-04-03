@@ -5,6 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+    $(document).ready(function () {
+        if($("button[name=available]").is(":disabled"))
+        {
+            alert("Usted está sancionado, por lo tanto, no puede solicitar préstamo de ningún libro hasta que no termine su período de sanción.");            
+        }
+    });
+</script>
+
 <style>
     li:last-child {
         list-style-type: none;
@@ -52,7 +61,14 @@
                                     <p><b>Materia: </b>@book.Subject</p>
                                 </li>
                                 <li>
-                                    <a href="~/Student/Transaction?id=@book.BookID" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-share-alt"></span> Solicitar préstamo</a>
+                                    @if (!(bool)ViewData["SanctionedStudent"] && @book.Stock > 0)
+                                    {
+                                        <a href="~/Student/Transaction?id=@book.BookID" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-share-alt"></span> Solicitar préstamo</a>
+                                    }
+                                    else
+                                    {
+                                        <button name="available" class="btn btn-sm btn-danger" disabled><span class="glyphicon glyphicon-share-alt"></span> NO DISPONIBLE</button>
+                                    }
                                 </li>
                             </ul>
                             <ul class="col-lg-6">
